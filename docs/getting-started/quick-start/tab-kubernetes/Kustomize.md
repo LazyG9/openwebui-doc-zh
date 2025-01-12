@@ -30,4 +30,4 @@ Kustomize 允许您自定义 Kubernetes YAML 配置。
 
 ## 访问 WebUI
 
-设置端口转发或负载均衡，以便从集群外部访问 Open WebUI。
+设置端口转发或负载均衡以从集群外部访问 Open WebUI。

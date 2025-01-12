@@ -24,4 +24,4 @@ Podman 是一个无守护进程的容器引擎，用于开发、管理和运行 
 --network=slirp4netns:allow_host_loopback=true
 ```
 
-有关高级配置，请参阅 Podman [文档](https://podman.io/)。
+有关高级配置，请参考 Podman [文档](https://podman.io/)。

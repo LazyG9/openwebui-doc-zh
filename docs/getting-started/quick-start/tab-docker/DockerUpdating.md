@@ -10,7 +10,7 @@
 docker run --rm --volume /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once open-webui
 ```
 
-_（如果您的容器名称不同，请将 `open-webui` 替换为您的容器名称。）_
+_(如果您的容器名称不同，请将 `open-webui` 替换为您的容器名称。)_
 
 ### 选项 2：手动更新
 

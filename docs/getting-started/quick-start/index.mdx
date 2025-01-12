@@ -22,14 +22,14 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
 
 :::info **关于用户角色和隐私的重要说明：**
 
-- **管理员创建：** Open WebUI 上创建的第一个账户获得**管理员权限**，控制用户管理和系统设置。
-- **用户注册：** 后续注册的用户以**待审核**状态开始，需要管理员批准才能访问。
-- **隐私和数据安全：** **所有您的数据**，包括登录详情，都**本地存储**在您的设备上。Open WebUI 确保**严格的保密性**和**无外部请求**，以增强隐私和安全性。
-  - **所有模型默认为私有。** 模型必须通过群组显式共享或设为公开。如果模型分配给群组，只有该群组的成员才能看到它。如果模型设为公开，实例上的任何人都可以看到它。
+- **管理员创建：** Open WebUI 上创建的第一个账户将获得**管理员权限**，可以控制用户管理和系统设置。
+- **用户注册：** 后续注册的用户初始状态为**待审核**，需要管理员批准才能访问。
+- **隐私和数据安全：** **所有数据**，包括登录详情，都**本地存储**在您的设备上。Open WebUI 确保**严格的保密性**和**无外部请求**，以增强隐私和安全性。
+  - **所有模型默认为私有。** 模型必须通过群组显式共享或设为公开。如果模型分配给某个群组，只有该群组的成员才能看到它。如果模型设为公开，实例中的任何人都可以看到它。
 
 :::
 
-在下面选择您喜欢的安装方法：
+在下面选择您偏好的安装方式：
 
 - **Docker：** **官方支持并推荐大多数用户使用**
 - **Python：** 适用于低资源环境或想要手动设置的用户
@@ -68,14 +68,6 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
   </TabItem>
   <TabItem value="python" label="Python">
     <Tabs>
-      {/* <TabItem value="uvx" label="uvx">
-        <div className='mt-5'>
-          <Uvx />
-        </div>
-        <PythonUpdating />
-      </TabItem> */}
-
-
       <TabItem value="conda" label="Conda">
         <div className='mt-5'>
           <Conda />
@@ -94,9 +86,9 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
 
       <TabItem value="development" label="开发">
         <div className='mt-5'>
-          <h3>开发设置</h3>
+          <h3>开发环境设置</h3>
           <p>
-            对于想要贡献的开发者，请查看<a href="/getting-started/advanced-topics">高级主题</a>中的开发指南。
+            对于想要贡献代码的开发者，请查看<a href="/getting-started/advanced-topics">高级主题</a>中的开发指南。
           </p>
         </div>
       </TabItem>
@@ -123,17 +115,17 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
       <TabItem value="pinokio-computer" label="Pinokio.computer">
         ### Pinokio.computer 安装
 
-        有关通过 Pinokio.computer 安装，请访问他们的网站：
+        如需通过 Pinokio.computer 安装，请访问他们的网站：
 
         [https://pinokio.computer/](https://pinokio.computer/)
 
-        此安装方法的支持通过他们的网站提供。
+        此安装方式的支持通过他们的网站提供。
       </TabItem>
     </Tabs>
 
     ### 其他第三方集成
 
-    *（随着第三方集成的可用性添加相关信息。）*
+    *(随着第三方集成的可用性增加而添加信息。)*
   </TabItem>
 </Tabs>
 
@@ -141,13 +133,13 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
 
 安装完成后，访问：
 
-- [http://localhost:3000](http://localhost:3000) 访问 OpenWebUI。
-- 或者使用 Python 部署时访问 [http://localhost:8080/](http://localhost:8080/)。
+- [http://localhost:3000](http://localhost:3000) 来访问 OpenWebUI。
+- 或者在使用 Python 部署时访问 [http://localhost:8080/](http://localhost:8080/)。
 
-您现在可以开始使用 OpenWebUI 了！
+现在您可以开始使用 OpenWebUI 了！
 
 ## 将 OpenWebUI 与 Ollama 一起使用
-如果您将 OpenWebUI 与 Ollama 一起使用，请务必查看我们的 [Ollama 入门指南](/getting-started/quick-start/starting-with-ollama)，了解如何使用 Open WebUI 管理您的 Ollama 实例。
+如果您正在将 OpenWebUI 与 Ollama 一起使用，请务必查看我们的 [Ollama 入门指南](/getting-started/quick-start/starting-with-ollama)，了解如何使用 Open WebUI 管理您的 Ollama 实例。
 
 ## 加入社区
 
@@ -156,4 +148,4 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
 - [Open WebUI Discord](https://discord.gg/5rJgQTnV4s)
 - [GitHub Issues](https://github.com/open-webui/open-webui/issues)
 
-及时了解最新功能、故障排除提示和公告！
+获取最新功能、故障排除提示和公告！

@@ -1,68 +1,66 @@
 ---
 sidebar_position: 300 
-title: "🔄 更新 Open WebUI"
+title: "🔄 系统更新指南"
 ---
 
+## Open WebUI 更新问题排查
 
+要将本地 Docker 部署的 Open WebUI 更新到最新版本，你可以选择使用 **Watchtower** 自动更新或手动更新容器。下面介绍这两种更新方式的具体操作步骤。
 
-## 为什么我的 Open WebUI 没有更新？
+### 手动更新步骤
 
-要将本地 Docker 安装的 Open WebUI 更新到最新版本，您可以使用 **Watchtower** 或手动更新容器。按照以下步骤之一进行操作，指导您更新现有的 Open WebUI 镜像。
+1. **停止并移除当前容器**：
 
-### 手动更新
-
-1. **停止并删除当前容器**：
-
-   这将停止正在运行的容器并将其删除，但不会删除存储在 Docker 卷中的数据。（如果您的容器名称不同，请在整个更新过程中将 `open-webui` 替换为您的容器名称。）
+   执行以下命令会停止并移除当前运行的容器，但不会删除 Docker 卷中的数据。（注意：如果你的容器名称不是 `open-webui`，请将命令中的容器名替换为实际名称）
 
 ```bash
 docker rm -f open-webui
 ```
 
-2. **拉取最新的 Docker 镜像**：
+2. **获取最新版本镜像**：
 
-   这将更新 Docker 镜像，但不会更新正在运行的容器或其数据。
+   下面的命令将拉取最新的 Docker 镜像（注意：这不会影响现有容器和数据）
 
 ```bash
 docker pull ghcr.io/open-webui/open-webui:main
 ```
 
+:::warning
+**⚠️ 数据清理（谨慎操作！）**
 
-:::info
-**删除 Docker 卷中的任何现有数据（除非绝对必要，否则不建议！）**。如果不需要，请完全跳过此步骤并继续最后一步：
+如果你确实需要清除所有数据重新开始，可以删除 Docker 卷。请注意，这将永久删除所有聊天记录和配置数据！如果不需要清除数据，请直接跳到下一步。
 
-   如果您想从头开始，可以删除 Docker 卷中的现有数据。请小心，因为这将删除所有聊天历史记录和其他数据。
-
-   数据存储在名为 `open-webui` 的 Docker 卷中。您可以使用以下命令删除它：
-
+删除数据卷的命令：
 ```bash
 docker volume rm open-webui
 ```
 :::
 
-3. **使用更新的镜像和附加的现有卷重新启动容器**：
+3. **启动更新后的容器**：
 
-   如果您没有删除现有数据，这将使用更新的镜像和现有数据启动容器。如果您删除了现有数据，这将使用更新的镜像和一个新的空卷启动容器。**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**
+   使用以下命令启动新容器。如果保留了原有数据卷，你的所有数据都会保持不变。
+
+   > 💡 提示：如果需要 Nvidia GPU 支持，请在命令中添加 `--gpus all` 参数
 
 ```bash
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
-## 使用 Watchtower 自动更新 Open WebUI
+## 使用 Watchtower 实现自动更新
 
-您可以使用 [Watchtower](https://containrrr.dev/watchtower/) 自动化 Open WebUI 的更新过程。以下是三个选项：
+[Watchtower](https://containrrr.dev/watchtower/) 是一个自动化 Docker 容器更新的工具。以下是三种配置方式：
 
-### 选项 1：一次性更新
+### 方案一：执行一次性更新
 
-您可以运行 Watchtower 作为一次性更新，停止当前容器，拉取最新镜像，并使用更新的镜像和附加的现有卷启动新容器（**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**）：
+适用于需要手动触发更新的场景：
 
 ```bash
 docker run --rm --volume /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once open-webui
 ```
 
-### 选项 2：将 Watchtower 作为单独的容器运行
+### 方案二：独立监控容器
 
-您可以将 Watchtower 作为单独的容器运行，监视和更新您的 Open WebUI 容器：
+设置一个独立的 Watchtower 容器来监控更新：
 
 ```bash
 docker run -d --name watchtower \
@@ -70,11 +68,11 @@ docker run -d --name watchtower \
   containrrr/watchtower -i 300 open-webui
 ```
 
-这将以分离模式启动 Watchtower，每 5 分钟监视一次您的 Open WebUI 容器是否有更新。
+这将创建一个后台运行的 Watchtower 容器，每 5 分钟检查一次更新。
 
-### 选项 3：将 Watchtower 与 `docker-compose.yml` 文件集成
+### 方案三：Docker Compose 集成
 
-您还可以将 Watchtower 与您的 `docker-compose.yml` 文件集成，以自动更新 Open WebUI（**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**）：
+通过 `docker-compose.yml` 配置自动更新：
 
 ```yml
 version: '3'
@@ -98,14 +96,14 @@ volumes:
   open-webui:
 ```
 
-在此示例中，Watchtower 与 `docker-compose.yml` 文件集成，每 5 分钟监视一次 Open WebUI 容器是否有更新。
+此配置会自动每 5 分钟检查一次更新。
 
-## Docker 卷中的持久数据
+## 数据存储说明
 
-数据存储在名为 `open-webui` 的 Docker 卷中。卷的路径不能直接访问，但您可以使用以下命令检查卷：
+所有用户数据都存储在名为 `open-webui` 的 Docker 卷中。虽然卷的路径不能直接访问，但可以通过以下命令查看详细信息：
 
 ```bash
 docker volume inspect open-webui
 ```
 
-这将显示卷的详细信息，包括挂载点，通常位于 `/var/lib/docker/volumes/open-webui/_data`。
+该命令会显示卷的详细信息，包括存储位置（通常在 `/var/lib/docker/volumes/open-webui/_data`）。

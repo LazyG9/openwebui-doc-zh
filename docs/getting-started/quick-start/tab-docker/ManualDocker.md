@@ -18,14 +18,14 @@ docker pull ghcr.io/open-webui/open-webui:main
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
-### 重要标志说明
+### 重要标志
 
 - **卷映射 (`-v open-webui:/app/backend/data`)**: 确保数据持久存储。这可以防止容器重启时数据丢失。
 - **端口映射 (`-p 3000:8080`)**: 在本地机器的 3000 端口上暴露 WebUI。
 
 ### 使用 GPU 支持
 
-对于 Nvidia GPU 支持，在 `docker run` 命令中添加 `--gpus all`：
+要支持 Nvidia GPU，在 `docker run` 命令中添加 `--gpus all`：
 
 ```bash
 docker run -d -p 3000:8080 --gpus all -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:cuda
@@ -41,7 +41,7 @@ docker run -d -p 3000:8080 -e WEBUI_AUTH=False -v open-webui:/app/backend/data -
 ```
 
 :::warning
-在进行此更改后，您将无法在单用户模式和多账户模式之间切换。
+在进行此更改后，您无法在单用户模式和多账户模式之间切换。
 :::
 
 #### 高级配置：连接到不同服务器上的 Ollama
