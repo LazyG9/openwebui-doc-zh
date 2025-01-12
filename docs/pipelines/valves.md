@@ -1,15 +1,15 @@
 ---
 sidebar_position: 3
-title: "⚙️ 阀门"
+title: "⚙️ Valves（阀门）"
 ---
 
-# 阀门
+# Valves（阀门）
 
-阀门是为每个管道设置的输入变量。阀门被设置为 `Pipeline` 类的子类，并作为 `Pipeline` 类的 `__init__` 方法的一部分进行初始化。
+Valves（阀门）是为每个Pipeline设置的输入变量。Valves被设置为`Pipeline`类的子类，并在`Pipeline`类的`__init__`方法中进行初始化。
 
-在向管道添加阀门时，需要确保管理员可以在 Web UI 中重新配置阀门。有几个选项可供选择：
+当向Pipeline添加Valves时，你需要确保管理员能够在Web界面中重新配置这些Valves。这里提供几种实现方式：
 
-- 使用 `os.getenv()` 设置管道要使用的环境变量，以及在未设置环境变量时使用的默认值。示例如下：
+- 使用`os.getenv()`来设置Pipeline所需的环境变量，并为未设置的环境变量提供默认值。示例代码如下：
 
 ```
 self.valves = self.Valves(
@@ -21,7 +21,7 @@ self.valves = self.Valves(
 )
 ```
 
-- 将阀门设置为 `Optional` 类型，这样即使没有为阀门设置值，管道也能加载。
+- 将Valve设置为`Optional`类型，这样即使某个Valve没有设置值，Pipeline也能正常加载。示例代码如下：
 
 ```
 class Pipeline:
@@ -30,5 +30,5 @@ class Pipeline:
         max_turns: Optional[int] = None
 ```
 
-如果你没有提供在 Web UI 中更新阀门的方法，在尝试将管道添加到 Web UI 后，你会在 Pipelines 服务器日志中看到以下错误：
-`WARNING:root:No Pipeline class found in <pipeline name>`
+如果你没有提供在Web界面中更新Valves的方法，当你尝试将Pipeline添加到Web界面时，会在Pipelines服务器日志中看到如下警告：
+`WARNING:root:No Pipeline class found in <pipeline name>`（警告：在<pipeline名称>中未找到Pipeline类）
