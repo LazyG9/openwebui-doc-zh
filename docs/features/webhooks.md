@@ -6,31 +6,31 @@ title: "🪝 Webhook 集成"
 概述
 --------
 
-Open WebUI 提供了 webhook 功能，允许你在新用户注册到你的实例时自动接收通知。这是通过向 Open WebUI 提供一个 webhook URL 来实现的，当新用户账户创建时，系统会向该 URL 发送通知。
+Open WebUI 提供了 webhook 功能，可以在新用户注册到您的实例时自动接收通知。这是通过向 Open WebUI 提供一个 webhook URL 来实现的，当新用户账户创建时，系统会向该 URL 发送通知。
 
-在 Open WebUI 中配置 Webhooks
+在 Open WebUI 中配置 Webhook
 ---------------------------------
 
-你需要从支持 webhooks 的外部服务（如 Discord 频道或 Slack 工作区）获取一个 webhook URL。这个 URL 将用于接收来自 Open WebUI 的通知。
+您需要从支持 webhook 的外部服务（如 Discord 频道或 Slack 工作区）获取一个 webhook URL。这个 URL 将用于接收来自 Open WebUI 的通知。
 
-在 Open WebUI 中配置 webhooks 有两种方式：
+在 Open WebUI 中配置 webhook 有两种方式：
 
-### 方式 1：通过管理界面配置
+### 方式一：通过管理界面配置
 
-1. 以管理员身份登录到你的 Open WebUI 实例。
-2. 导航到`管理面板`。
-3. 点击顶部的`设置`标签。
-4. 从那里，导航到管理面板中的`常规`部分。
-5. 找到`Webhook URL`字段并输入 webhook URL。
+1. 以管理员身份登录到您的 Open WebUI 实例。
+2. 导航至 `管理面板`。
+3. 点击顶部的 `设置` 标签。
+4. 从那里，导航到管理面板中的 `常规` 部分。
+5. 找到 `Webhook URL` 字段并输入 webhook URL。
 6. 保存更改。
 
-### 方式 2：通过环境变量配置
+### 方式二：通过环境变量配置
 
-另外，你也可以通过设置 `WEBHOOK_URL` 环境变量来配置 webhook URL。有关 Open WebUI 中环境变量的更多信息，请参见[环境变量配置](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration/#webhook_url)。
+另外，您也可以通过设置 `WEBHOOK_URL` 环境变量来配置 webhook URL。有关 Open WebUI 中环境变量的更多信息，请参见 [环境变量配置](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration/#webhook_url)。
 
-### 步骤 3：验证 Webhook
+### 步骤三：验证 Webhook
 
-要验证 webhook 是否正常工作，请在 Open WebUI 中创建一个新用户账户。如果 webhook 配置正确，你应该会在指定的 webhook URL 收到通知。
+要验证 webhook 是否正常工作，请在 Open WebUI 中创建一个新用户账户。如果 webhook 配置正确，您应该会在指定的 webhook URL 收到通知。
 
 Webhook 负载格式
 ----------------------
@@ -41,7 +41,7 @@ Open WebUI 发送的 webhook 负载是纯文本格式，包含关于新用户账
 New user signed up: <username>
 ```
 
-例如，如果一个名为"Tim"的用户注册，发送的负载将是：
+例如，如果一个名为 "Tim" 的用户注册，发送的负载将是：
 
 ```
 New user signed up: Tim
