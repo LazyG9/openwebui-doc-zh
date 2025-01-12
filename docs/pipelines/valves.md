@@ -31,4 +31,4 @@ class Pipeline:
 ```
 
 如果你没有提供在Web界面中更新Valves的方法，当你尝试将Pipeline添加到Web界面时，会在Pipelines服务器日志中看到如下警告：
-`WARNING:root:No Pipeline class found in <pipeline name>`（警告：在<pipeline名称>中未找到Pipeline类）
+`WARNING:root:No Pipeline class found in <pipeline name>  （警告：在<pipeline名称>中未找到Pipeline类）`
