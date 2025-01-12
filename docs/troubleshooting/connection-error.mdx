@@ -1,71 +1,71 @@
 ---
 sidebar_position: 0
-title: "🚧 Server Connectivity Issues"
+title: "🚧 服务器连接问题"
 ---
 
-We're here to help you get everything set up and running smoothly. Below, you'll find step-by-step instructions tailored for different scenarios to solve common connection issues with Ollama and external servers like Hugging Face.
+我们将帮助你顺利完成所有设置和运行。下面，你将找到针对不同场景的分步说明，以解决与 Ollama 和 Hugging Face 等外部服务器的常见连接问题。
 
-## 🌟 Connection to Ollama Server
+## 🌟 连接到 Ollama 服务器
 
-### 🚀 Accessing Ollama from Open WebUI
+### 🚀 从 Open WebUI 访问 Ollama
 
-Struggling to connect to Ollama from Open WebUI? It could be because Ollama isn’t listening on a network interface that allows external connections. Let’s sort that out:
+从 Open WebUI 连接到 Ollama 时遇到困难？这可能是因为 Ollama 没有监听允许外部连接的网络接口。让我们来解决这个问题：
 
-1. **Configure Ollama to Listen Broadly** 🎧:
-   Set `OLLAMA_HOST` to `0.0.0.0` to make Ollama listen on all network interfaces.
+1. **配置 Ollama 以广泛监听** 🎧：
+   将 `OLLAMA_HOST` 设置为 `0.0.0.0` 以使 Ollama 监听所有网络接口。
 
-2. **Update Environment Variables**:
-   Ensure that the `OLLAMA_HOST` is accurately set within your deployment environment.
+2. **更新环境变量**：
+   确保在部署环境中正确设置了 `OLLAMA_HOST`。
 
-3. **Restart Ollama**🔄:
-   A restart is needed for the changes to take effect.
+3. **重启 Ollama**🔄：
+   需要重启才能使更改生效。
 
-💡 After setting up, verify that Ollama is accessible by visiting the WebUI interface.
+💡 设置完成后，通过访问 WebUI 界面验证 Ollama 是否可访问。
 
-For more detailed instructions on configuring Ollama, please refer to the [Ollama's Official Documentation](https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux).
+有关配置 Ollama 的更详细说明，请参阅 [Ollama 官方文档](https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux)。
 
-### 🐳 Docker Connection Error
+### 🐳 Docker 连接错误
 
-If you're seeing a connection error when trying to access Ollama, it might be because the WebUI docker container can't talk to the Ollama server running on your host. Let’s fix that:
+如果在尝试访问 Ollama 时看到连接错误，可能是因为 WebUI docker 容器无法与主机上运行的 Ollama 服务器通信。让我们来修复这个问题：
 
-1. **Adjust the Network Settings** 🛠️:
-   Use the `--network=host` flag in your Docker command. This links your container directly to your host’s network.
+1. **调整网络设置** 🛠️：
+   在 Docker 命令中使用 `--network=host` 标志。这会将你的容器直接连接到主机的网络。
 
-2. **Change the Port**:
-   Remember that the internal port changes from 3000 to 8080.
+2. **更改端口**：
+   请记住，内部端口从 3000 更改为 8080。
 
-**Example Docker Command**:
+**Docker 命令示例**：
 ```bash
 docker run -d --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
-🔗 After running the above, your WebUI should be available at `http://localhost:8080`.
+🔗 运行上述命令后，你的 WebUI 应该可以在 `http://localhost:8080` 访问。
 
-## 🔒 SSL Connection Issue with Hugging Face
+## 🔒 与 Hugging Face 的 SSL 连接问题
 
-Encountered an SSL error? It could be an issue with the Hugging Face server. Here's what to do:
+遇到 SSL 错误？这可能是 Hugging Face 服务器的问题。以下是解决方法：
 
-1. **Check Hugging Face Server Status**:
-   Verify if there's a known outage or issue on their end.
+1. **检查 Hugging Face 服务器状态**：
+   验证他们那边是否有已知的宕机或问题。
 
-2. **Switch Endpoint**:
-   If Hugging Face is down, switch the endpoint in your Docker command.
+2. **切换端点**：
+   如果 Hugging Face 宕机，在 Docker 命令中切换端点。
 
-**Example Docker Command for Connected Issues**:
+**连接问题的 Docker 命令示例**：
 ```bash
 docker run -d -p 3000:8080 -e HF_ENDPOINT=https://hf-mirror.com/ --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-## 🍏 Podman on MacOS
+## 🍏 MacOS 上的 Podman
 
-Running on MacOS with Podman? Here’s how to ensure connectivity:
+在 MacOS 上使用 Podman？以下是确保连接的方法：
 
-1. **Enable Host Loopback**:
-   Use `--network slirp4netns:allow_host_loopback=true` in your command.
+1. **启用主机回环**：
+   在命令中使用 `--network slirp4netns:allow_host_loopback=true`。
 
-2. **Set OLLAMA_BASE_URL**:
-   Ensure it points to `http://host.containers.internal:11434`.
+2. **设置 OLLAMA_BASE_URL**：
+   确保它指向 `http://host.containers.internal:11434`。
 
-**Example Podman Command**:
+**Podman 命令示例**：
 ```bash
 podman run -d --network slirp4netns:allow_host_loopback=true -p 3000:8080 -e OLLAMA_BASE_URL=http://host.containers.internal:11434 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```

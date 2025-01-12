@@ -1,7 +1,7 @@
 ---
 sidebar_position: 0
 slug: /
-title: 🏡 Home
+title: 🏡 主页
 hide_title: true
 ---
 
@@ -10,8 +10,7 @@ import { SponsorList } from "@site/src/components/SponsorList";
 
 # Open WebUI
 
-
-**Open WebUI is an [extensible](https://docs.openwebui.com/features/plugin/), feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline.** It supports various LLM runners like **Ollama** and **OpenAI-compatible APIs**, with **built-in inference engine** for RAG, making it a **powerful AI deployment solution**.
+**Open WebUI 是一个[可扩展的](https://docs.openwebui.com/features/plugin/)、功能丰富且用户友好的自托管 AI 平台，专为完全离线运行而设计。** 它支持多种 LLM 运行器，如 **Ollama** 和 **OpenAI 兼容的 API**，并具有用于 RAG 的**内置推理引擎**，使其成为**强大的 AI 部署解决方案**。
 
 ![GitHub stars](https://img.shields.io/github/stars/open-webui/open-webui?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/open-webui/open-webui?style=social)
@@ -24,119 +23,117 @@ import { SponsorList } from "@site/src/components/SponsorList";
 [![Discord](https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white)](https://discord.gg/5rJgQTnV4s)
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/tjbck)
 
-![Open WebUI Demo](/img/demo.gif)
+![Open WebUI 演示](/img/demo.gif)
 
+## 使用 Docker 快速开始 🐳
 
-## Quick Start with Docker 🐳
-
-**If Ollama is on your computer**, use this command:
+**如果 Ollama 在您的计算机上**，请使用以下命令：
 
 ```bash
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-**To run Open WebUI with Nvidia GPU support**, use this command:
+**要使用 Nvidia GPU 支持运行 Open WebUI**，请使用以下命令：
 
 ```bash
 docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
-### Open WebUI Bundled with Ollama
+### 与 Ollama 捆绑的 Open WebUI
 
-This installation method uses a single container image that bundles Open WebUI with Ollama, allowing for a streamlined setup via a single command. Choose the appropriate command based on your hardware setup:
+这种安装方法使用单个容器镜像，将 Open WebUI 与 Ollama 捆绑在一起，通过单个命令实现简化的设置。根据您的硬件设置选择适当的命令：
 
-- **With GPU Support**:
-  Utilize GPU resources by running the following command:
+- **使用 GPU 支持**：
+  通过运行以下命令利用 GPU 资源：
 
   ```bash
   docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
-- **For CPU Only**:
-  If you're not using a GPU, use this command instead:
+- **仅使用 CPU**：
+  如果您不使用 GPU，请使用以下命令：
 
   ```bash
   docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
-Both commands facilitate a built-in, hassle-free installation of both Open WebUI and Ollama, ensuring that you can get everything up and running swiftly.
+这两个命令都提供了 Open WebUI 和 Ollama 的内置、无障碍安装，确保您能够快速启动并运行所有功能。
 
-After installation, you can access Open WebUI at [http://localhost:3000](http://localhost:3000). Enjoy! 😄
+安装完成后，您可以通过 [http://localhost:3000](http://localhost:3000) 访问 Open WebUI。祝您使用愉快！😄
 
-### Using the Dev Branch 🌙
+### 使用开发分支 🌙
 
 :::warning
-The `:dev` branch contains the latest unstable features and changes. Use it at your own risk as it may have bugs or incomplete features.
+`:dev` 分支包含最新的不稳定功能和更改。使用时请自行承担风险，因为它可能包含错误或不完整的功能。
 :::
 
-If you want to try out the latest bleeding-edge features and are okay with occasional instability, you can use the `:dev` tag like this:
+如果您想尝试最新的前沿功能，并且可以接受偶尔的不稳定性，可以使用 `:dev` 标签，如下所示：
 
 ```bash
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:dev
 ```
 
-### Updating Open WebUI
+### 更新 Open WebUI
 
-To update Open WebUI container easily, follow these steps:
+要轻松更新 Open WebUI 容器，请按照以下步骤操作：
 
-#### Manual Update
-Use [Watchtower](https://containrrr.dev/watchtower) to update your Docker container manually:
+#### 手动更新
+使用 [Watchtower](https://containrrr.dev/watchtower) 手动更新您的 Docker 容器：
 ```bash
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once open-webui
 ```
 
-#### Automatic Updates
-Keep your container updated automatically every 5 minutes:
+#### 自动更新
+每 5 分钟自动更新您的容器：
 ```bash
 docker run -d --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --interval 300 open-webui
 ```
 
-🔧 **Note**: Replace `open-webui` with your container name if it's different.
+🔧 **注意**：如果您的容器名称不同，请将 `open-webui` 替换为您的容器名称。
 
-## Manual Installation
+## 手动安装
 
-### Installation with `pip`
+### 使用 `pip` 安装
 
-For users installing Open WebUI with Python's package manager `pip`, **it is strongly recommended to use Python runtime managers like `uv` or `conda`**. These tools help manage Python environments effectively and avoid conflicts. 
+对于使用 Python 包管理器 `pip` 安装 Open WebUI 的用户，**强烈建议使用 `uv` 或 `conda` 等 Python 运行时管理器**。这些工具有助于有效管理 Python 环境并避免冲突。
 
-Python 3.11 is the development environment. Python 3.12 seems to work but has not been thoroughly tested. Python 3.13 is entirely untested—**use at your own risk**.
+Python 3.11 是开发环境。Python 3.12 似乎可以工作，但尚未经过全面测试。Python 3.13 完全未经测试——**使用风险自负**。
 
-1. **Install Open WebUI**:  
+1. **安装 Open WebUI**：
 
-   Open your terminal and run the following command:  
+   打开终端并运行以下命令：
    ```bash
    pip install open-webui
    ```
 
-2. **Start Open WebUI**:  
+2. **启动 Open WebUI**：
 
-   Once installed, start the server using:  
+   安装完成后，使用以下命令启动服务器：
    ```bash
    open-webui serve
    ```
 
-### Updating Open WebUI
+### 更新 Open WebUI
 
-To update to the latest version, simply run:  
+要更新到最新版本，只需运行：
 
 ```bash
 pip install --upgrade open-webui
 ```
 
-This method installs all necessary dependencies and starts Open WebUI, allowing for a simple and efficient setup. After installation, you can access Open WebUI at [http://localhost:8080](http://localhost:8080). Enjoy! 😄
+这种方法安装所有必要的依赖项并启动 Open WebUI，实现简单高效的设置。安装完成后，您可以通过 [http://localhost:8080](http://localhost:8080) 访问 Open WebUI。祝您使用愉快！😄
 
-## Other Installation Methods
+## 其他安装方法
 
-We offer various installation alternatives, including non-Docker native installation methods, Docker Compose, Kustomize, and Helm. Visit our [Open WebUI Documentation](https://docs.openwebui.com/getting-started/) or join our [Discord community](https://discord.gg/5rJgQTnV4s) for comprehensive guidance.
+我们提供各种安装替代方案，包括非 Docker 原生安装方法、Docker Compose、Kustomize 和 Helm。访问我们的 [Open WebUI 文档](https://docs.openwebui.com/getting-started/) 或加入我们的 [Discord 社区](https://discord.gg/5rJgQTnV4s) 获取全面指导。
 
-Continue with the full [getting started guide](/getting-started).
+继续阅读完整的[入门指南](/getting-started)。
 
-## Sponsors 🙌
+## 赞助商 🙌
 
 <TopBanners />
 
 <SponsorList />
 
-
-We are incredibly grateful for the generous support of our sponsors. Their contributions help us to maintain and improve our project, ensuring we can continue to deliver quality work to our community. Thank you!
+我们非常感谢赞助商的慷慨支持。他们的贡献帮助我们维护和改进我们的项目，确保我们能够继续为社区提供优质的工作。感谢您！
 

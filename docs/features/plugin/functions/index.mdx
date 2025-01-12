@@ -1,133 +1,133 @@
 ---
 sidebar_position: 1
-title: "🧰 Functions"
+title: "🧰 函数"
 ---
 
-## 🚀 What Are Functions?
+## 🚀 什么是函数？
 
-Functions are like **plugins** for OpenWebUI. They help you **extend its capabilities**—whether it’s adding support for new AI model providers like Anthropic or Vertex AI, tweaking how messages are processed, or introducing custom buttons to the interface for better usability.  
+函数就像 OpenWebUI 的**插件**。它们帮助您**扩展其功能**——无论是添加对 Anthropic 或 Vertex AI 等新 AI 模型提供商的支持，调整消息处理方式，还是为界面引入自定义按钮以提高可用性。
 
-Unlike external tools that may require complex integrations, **Functions are built-in and run within the OpenWebUI environment.** That means they are fast, modular, and don’t rely on external dependencies.  
+与可能需要复杂集成的外部工具不同，**函数是内置的，在 OpenWebUI 环境中运行。**这意味着它们快速、模块化，并且不依赖外部依赖项。
 
-Think of Functions as **modular building blocks** that let you enhance how the WebUI works, tailored exactly to what you need. They’re lightweight, highly customizable, and written in **pure Python**, so you have the freedom to create anything—from new AI-powered workflows to integrations with anything you use, like Google Search or Home Assistant.
-
----
-
-## 🏗️ Types of Functions  
-
-There are **three types of Functions** in OpenWebUI, each with a specific purpose. Let’s break them down and explain exactly what they do:
+将函数视为**模块化构建块**，让您可以根据您的确切需求增强 WebUI 的工作方式。它们轻量级、高度可定制，并且用**纯 Python**编写，因此您可以自由创建任何东西——从新的 AI 驱动工作流到与您使用的任何东西的集成，如 Google 搜索或 Home Assistant。
 
 ---
 
-### 1. [**Pipe Function** – Create Custom "Agents/Models" ](./pipe.mdx)
+## 🏗️ 函数类型
 
-A **Pipe Function** is how you create **custom agents/models** or integrations, which then appear in the interface as if they were standalone models.  
-
-**What does it do?**  
-- Pipes let you define complex workflows. For instance, you could create a Pipe that sends data to **Model A** and **Model B**, processes their outputs, and combines the results into one finalized answer.
-- Pipes don’t even have to use AI! They can be setups for **search APIs**, **weather data**, or even systems like **Home Assistant**. Basically, anything you’d like to interact with can become part of OpenWebUI.  
-
-**Use case example:**  
-Imagine you want to query Google Search directly from OpenWebUI. You can create a Pipe Function that:  
-1. Takes your message as the search query.  
-2. Sends the query to Google Search’s API.  
-3. Processes the response and returns it to you inside the WebUI like a normal "model" response.  
-
-When enabled, **Pipe Functions show up as their own selectable model**. Use Pipes whenever you need custom functionality that works like a model in the interface.  
-
-For a detailed guide, see [**Pipe Functions**](./pipe.mdx).
+OpenWebUI 中有**三种类型的函数**，每种都有特定的用途。让我们分解并准确解释它们的作用：
 
 ---
 
-### 2. [**Filter Function** – Modify Inputs and Outputs](./filter.mdx)  
+### 1. [**管道函数** – 创建自定义"代理/模型"](./pipe.mdx)
 
-A **Filter Function** is like a tool for tweaking data before it gets sent to the AI **or** after it comes back.  
+**管道函数**是您创建**自定义代理/模型**或集成的方式，它们在界面中显示为独立模型。
 
-**What does it do?**  
-Filters act as "hooks" in the workflow and have two main parts:  
-- **Inlet**: Adjust the input that is sent to the model. For example, adding additional instructions, keywords, or formatting tweaks.  
-- **Outlet**: Modify the output that you receive from the model. For instance, cleaning up the response, adjusting tone, or formatting data into a specific style.  
+**它做什么？**
+- 管道让您定义复杂的工作流。例如，您可以创建一个管道，将数据发送到**模型 A**和**模型 B**，处理它们的输出，并将结果合并为一个最终答案。
+- 管道甚至不必使用 AI！它们可以是**搜索 API**、**天气数据**或甚至**Home Assistant**等系统的设置。基本上，任何您想要交互的东西都可以成为 OpenWebUI 的一部分。
 
-**Use case example:**  
-Suppose you’re working on a project that needs precise formatting. You can use a Filter to ensure:  
-1. Your input is always transformed into the required format.  
-2. The output from the model is cleaned up before being displayed.  
+**用例示例：**
+想象您想直接从 OpenWebUI 查询 Google 搜索。您可以创建一个管道函数，它：
+1. 将您的消息作为搜索查询。
+2. 将查询发送到 Google 搜索的 API。
+3. 处理响应并在 WebUI 中像普通"模型"响应一样返回给您。
 
-Filters are **linked to specific models** or can be enabled for all models **globally**, depending on your needs.  
+启用后，**管道函数显示为它们自己的可选模型**。当您需要在界面中像模型一样工作的自定义功能时，请使用管道。
 
-Check out the full guide for more examples and instructions: [**Filter Functions**](./filter.mdx).
-
----
-
-### 3. [**Action Function** – Add Custom Buttons](./action.mdx) 
-
-An **Action Function** is used to add **custom buttons** to the chat interface.  
-
-**What does it do?**  
-Actions allow you to define **interactive shortcuts** that trigger specific functionality directly from the chat. These buttons appear underneath individual chat messages, giving you convenient, one-click access to the actions you define.  
-
-**Use case example:**  
-Let’s say you often need to summarize long messages or generate specific outputs like translations. You can create an Action Function to:  
-1. Add a “Summarize” button under every incoming message.  
-2. When clicked, it triggers your custom function to process that message and return the summary.  
-
-Buttons provide a **clean and user-friendly way** to interact with extended functionality you define.  
-
-Learn how to set them up in the [**Action Functions Guide**](./action.mdx).
+有关详细指南，请参阅[**管道函数**](./pipe.mdx)。
 
 ---
 
-## 🛠️ How to Use Functions  
+### 2. [**过滤器函数** – 修改输入和输出](./filter.mdx)
 
-Here's how to put Functions to work in OpenWebUI:
+**过滤器函数**就像一个在数据发送到 AI **之前**或**之后**调整数据的工具。
 
-### 1. **Install Functions**  
-You can install Functions via the OpenWebUI interface or by importing them manually. You can find community-created functions on the [OpenWebUI Community Site](https://openwebui.com/functions).
+**它做什么？**
+过滤器在工作流中充当"钩子"，有两个主要部分：
+- **入口**：调整发送到模型的输入。例如，添加额外的指令、关键词或格式调整。
+- **出口**：修改您从模型收到的输出。例如，清理响应、调整语气或将数据格式化为特定样式。
 
-⚠️ **Be cautious.** Only install Functions from trusted sources. Running unknown code poses security risks.  
+**用例示例：**
+假设您正在处理一个需要精确格式的项目。您可以使用过滤器来确保：
+1. 您的输入始终转换为所需格式。
+2. 在显示之前清理来自模型的输出。
 
----
+过滤器可以**链接到特定模型**或根据您的需求**全局**启用于所有模型。
 
-### 2. **Enable Functions**  
-Functions must be explicitly enabled after installation:  
-- When you enable a **Pipe Function**, it becomes available as its own **model** in the interface.  
-- For **Filter** and **Action Functions**, enabling them isn’t enough—you also need to assign them to specific models or enable them globally for all models.   
-
----
-
-### 3. **Assign Filters or Actions to Models**  
-- Navigate to `Workspace => Models` and assign your Filter or Action to the relevant model there.  
-- Alternatively, enable Functions for **all models globally** by going to `Workspace => Functions`, selecting the "..." menu, and toggling the **Global** switch.
+查看完整指南以获取更多示例和说明：[**过滤器函数**](./filter.mdx)。
 
 ---
 
-### Quick Summary  
-- **Pipes** appear as standalone models you can interact with.  
-- **Filters** modify inputs/outputs for smoother AI interactions.  
-- **Actions** add clickable buttons to individual chat messages.  
+### 3. [**动作函数** – 添加自定义按钮](./action.mdx)
 
-Once you’ve followed the setup process, Functions will seamlessly enhance your workflows.
+**动作函数**用于向聊天界面添加**自定义按钮**。
 
----
+**它做什么？**
+动作允许您定义**交互式快捷方式**，直接从聊天中触发特定功能。这些按钮出现在单个聊天消息下方，让您可以方便地一键访问您定义的动作。
 
-## ✅ Why Use Functions?  
+**用例示例：**
+假设您经常需要总结长消息或生成特定输出，如翻译。您可以创建一个动作函数来：
+1. 在每个传入消息下添加一个"总结"按钮。
+2. 点击时，它触发您的自定义函数来处理该消息并返回摘要。
 
-Functions are designed for anyone who wants to **unlock new possibilities** with OpenWebUI:  
+按钮提供了一种**清晰和用户友好的方式**来与您定义的扩展功能交互。
 
-- **Extend**: Add new models or integrate with non-AI tools like APIs, databases, or smart devices.  
-- **Optimize**: Tweak inputs and outputs to fit your use case perfectly.  
-- **Simplify**: Add buttons or shortcuts to make the interface intuitive and efficient.  
-
-Whether you’re customizing workflows for specific projects, integrating external data, or just making OpenWebUI easier to use, Functions are the key to taking control of your instance.
+在[**动作函数指南**](./action.mdx)中了解如何设置它们。
 
 ---
 
-### 📝 Final Notes:  
-1. Always install Functions from **trusted sources only**.  
-2. Make sure you understand the difference between Pipe, Filter, and Action Functions to use them effectively.  
-3. Explore the official guides:  
-   - [Pipe Functions Guide](./pipe.mdx)  
-   - [Filter Functions Guide](./filter.mdx)  
-   - [Action Functions Guide](./action.mdx)  
+## 🛠️ 如何使用函数
 
-By leveraging Functions, you’ll bring entirely new capabilities to your OpenWebUI setup. Start experimenting today! 🚀
+以下是在 OpenWebUI 中使用函数的方法：
+
+### 1. **安装函数**
+您可以通过 OpenWebUI 界面或手动导入来安装函数。您可以在[OpenWebUI 社区网站](https://openwebui.com/functions)上找到社区创建的函数。
+
+⚠️ **请谨慎。**只安装来自可信来源的函数。运行未知代码会带来安全风险。
+
+---
+
+### 2. **启用函数**
+安装后必须显式启用函数：
+- 当您启用**管道函数**时，它在界面中作为自己的**模型**可用。
+- 对于**过滤器**和**动作函数**，仅启用它们是不够的——您还需要将它们分配给特定模型或全局启用于所有模型。
+
+---
+
+### 3. **将过滤器或动作分配给模型**
+- 导航到`工作区 => 模型`并在那里将您的过滤器或动作分配给相关模型。
+- 或者，通过转到`工作区 => 函数`，选择"..."菜单，并切换**全局**开关，为**所有模型全局**启用函数。
+
+---
+
+### 快速总结
+- **管道**显示为您可以交互的独立模型。
+- **过滤器**修改输入/输出以实现更流畅的 AI 交互。
+- **动作**为单个聊天消息添加可点击按钮。
+
+一旦您完成了设置过程，函数就会无缝地增强您的工作流程。
+
+---
+
+## ✅ 为什么使用函数？
+
+函数是为任何想要**解锁新可能性**的 OpenWebUI 用户设计的：
+
+- **扩展**：添加新模型或与非 AI 工具集成，如 API、数据库或智能设备。
+- **优化**：调整输入和输出以完美适应您的用例。
+- **简化**：添加按钮或快捷方式，使界面直观高效。
+
+无论您是为特定项目定制工作流程，集成外部数据，还是只是让 OpenWebUI 更易于使用，函数都是掌控您实例的关键。
+
+---
+
+### 📝 最后说明：
+1. 始终只从**可信来源**安装函数。
+2. 确保您理解管道、过滤器和动作函数之间的区别，以有效使用它们。
+3. 探索官方指南：
+   - [管道函数指南](./pipe.mdx)
+   - [过滤器函数指南](./filter.mdx)
+   - [动作函数指南](./action.mdx)
+
+通过利用函数，您将为您的 OpenWebUI 设置带来全新的功能。今天就开始实验吧！🚀

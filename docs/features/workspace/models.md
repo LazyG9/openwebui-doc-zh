@@ -1,56 +1,56 @@
 ---
 sidebar_position: 0
-title: "🤖 Models"
+title: "🤖 模型"
 ---
 
-The `Models` section of the `Workspace` within Open WebUI is a powerful tool that allows you to create and manage custom models tailored to specific purposes. This section serves as a central hub for all your modelfiles, providing a range of features to edit, clone, share, export, and hide your models.
+Open WebUI 工作区中的"模型"部分是一个强大的工具，允许您创建和管理针对特定目的定制的模型。该部分作为所有模型文件的中央枢纽，提供了一系列功能来编辑、克隆、共享、导出和隐藏您的模型。
 
-### Modelfile Management
+### 模型文件管理
 
-From the `Models` section, you can perform the following actions on your modelfiles:
+在"模型"部分，您可以对模型文件执行以下操作：
 
-* **Edit**: Dive into the details of your modelfile and make changes to its character and more.
-* **Clone**: Create a copy of a modelfile, which will be appended with `-clone` to the cloned `Model ID`. Note that you cannot clone a base model; you must create a model first before cloning it.
-* **Share**: Share your modelfile with the Open WebUI community by clicking the `Share` button, which will redirect you to [https://openwebui.com/models/create](https://openwebui.com/models/create).
-* **Export**: Download the modelfile's `.json` export to your PC.
-* **Hide**: Hide the modelfile from the model selector dropdown within chats.
+* **编辑**：深入了解模型文件的细节并修改其特性等。
+* **克隆**：创建模型文件的副本，克隆的"模型 ID"将附加"-clone"。请注意，您不能克隆基础模型；必须先创建模型才能克隆它。
+* **共享**：通过点击"共享"按钮与 Open WebUI 社区共享您的模型文件，这将重定向到 [https://openwebui.com/models/create](https://openwebui.com/models/create)。
+* **导出**：将模型文件的 `.json` 导出下载到您的电脑。
+* **隐藏**：在聊天中的模型选择器下拉菜单中隐藏模型文件。
 
-### Modelfile Editing
+### 模型文件编辑
 
-When editing a modelfile, you can customize the following settings:
+在编辑模型文件时，您可以自定义以下设置：
 
-* **Avatar Photo**: Upload an avatar photo to represent your modelfile.
-* **Model Name**: Change the name of your modelfile.
-* **System Prompt**: Provide an optional system prompt for your modelfile.
-* **Model Parameters**: Adjust the parameters of your modelfile.
-* **Prompt Suggestions**: Add prompts that will be displayed on a fresh new chat page.
-* **Documents**: Add documents to the modelfile (always RAG [Retrieval Augmented Generation]).
-* **Tools, Filters, and Actions**: Select the tools, filters, and actions that will be available to the modelfile.
-* **Vision**: Toggle to enable `Vision` for multi-modals.
-* **Tags**: Add tags to the modelfile that will be displayed beside the model name in the model selector dropdown.
+* **头像照片**：上传代表您模型文件的头像照片。
+* **模型名称**：更改模型文件的名称。
+* **系统提示**：为您的模型文件提供可选的系统提示。
+* **模型参数**：调整模型文件的参数。
+* **提示建议**：添加将在新聊天页面上显示的提示。
+* **文档**：向模型文件添加文档（始终使用 RAG [检索增强生成]）。
+* **工具、过滤器和操作**：选择模型文件可用的工具、过滤器和操作。
+* **视觉**：切换以启用多模态的"视觉"功能。
+* **标签**：向模型文件添加标签，这些标签将在模型选择器下拉菜单中的模型名称旁边显示。
 
-### Model Discovery and Import/Export
+### 模型发现和导入/导出
 
-The `Models` section also includes features for importing and exporting models:
+"模型"部分还包括导入和导出模型的功能：
 
-* **Import Models**: Use this button to import models from a .json file or other sources.
-* **Export Models**: Use this button to export all your modelfiles in a single .json file.
+* **导入模型**：使用此按钮从 .json 文件或其他来源导入模型。
+* **导出模型**：使用此按钮将所有模型文件导出为单个 .json 文件。
 
-To download models, navigate to the **Ollama Settings** in the Connections tab.
-Alternatively, you can also download models directly by typing a command like `ollama run hf.co/[model creator]/[model name]` in the model selection dropdown.
-This action will create a button labeled "Pull [Model Name]" for downloading.
+要下载模型，请导航到连接标签中的 **Ollama 设置**。
+或者，您也可以通过在模型选择下拉菜单中输入类似 `ollama run hf.co/[模型创建者]/[模型名称]` 的命令直接下载模型。
+此操作将创建一个标有"拉取[模型名称]"的按钮用于下载。
 
-### Model Switching
+### 模型切换
 
-   **Example**: Switching between **Mistral**, **LLaVA**, and **GPT-3.5** in a Multi-Stage Task
+   **示例**：在多阶段任务中在 **Mistral**、**LLaVA** 和 **GPT-3.5** 之间切换
 
-* **Scenario**: A multi-stage conversation involves different task types, such as starting with a simple FAQ, interpreting an image, and then generating a creative response.
-* **Reason for Switching**: The user can leverage each model's specific strengths for each stage:
-  * **Mistral** for general questions to reduce computation time and costs.
-  * **LLaVA** for visual tasks to gain insights from image-based data.
-  * **GPT-3.5** for generating more sophisticated and nuanced language output.
-* **Process**: The user switches between models, depending on the task type, to maximize efficiency and response quality.
+* **场景**：多阶段对话涉及不同类型的任务，例如从简单的常见问题开始，解释图像，然后生成创意回复。
+* **切换原因**：用户可以利用每个模型的特定优势来完成每个阶段：
+  * **Mistral** 用于一般问题，以减少计算时间和成本。
+  * **LLaVA** 用于视觉任务，从基于图像的数据中获取见解。
+  * **GPT-3.5** 用于生成更复杂和细微的语言输出。
+* **过程**：用户根据任务类型在模型之间切换，以最大限度地提高效率和响应质量。
 
-    **How To**:
-    1. **Select the Model**: Within the chat interface, select the desired models from the model switcher dropdown. You can select up to two models simultaneously, and both responses will be generated. You can then navigate between them by using the back and forth arrows.
-    2. **Context Preservation**: Open WebUI retains the conversation context across model switches, allowing smooth transitions.
+    **操作方法**：
+    1. **选择模型**：在聊天界面中，从模型切换器下拉菜单中选择所需的模型。您最多可以同时选择两个模型，两个响应都将生成。然后，您可以使用前后箭头在它们之间导航。
+    2. **上下文保留**：Open WebUI 在模型切换过程中保留对话上下文，实现平滑过渡。

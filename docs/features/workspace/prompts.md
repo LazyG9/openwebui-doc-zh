@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: "📚 Prompts"
+title: "📚 提示词"
 ---
 
-COMING SOON!
+即将推出！

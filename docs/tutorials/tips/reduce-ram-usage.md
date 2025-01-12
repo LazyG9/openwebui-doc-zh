@@ -1,27 +1,27 @@
 ---
 sidebar_position: 10
-title: "✂️ Reduce RAM Usage"
+title: "✂️ 减少内存使用"
 ---
 
-# Reduce RAM Usage
+# 减少内存使用
 
-If you are deploying this image in a RAM-constrained environment, there are a few things you can do to slim down the image.
+如果您在内存受限的环境中部署此镜像，有几种方法可以减少镜像的内存占用。
 
-On a Raspberry Pi 4 (arm64) with version v0.3.10, this was able to reduce idle memory consumption from >1GB to ~200MB (as observed with `docker container stats`).
+在运行 v0.3.10 版本的树莓派 4（arm64）上，通过以下方法可以将空闲内存消耗从超过 1GB 降低到约 200MB（通过 `docker container stats` 观察）。
 
-## TLDR
+## 简要说明
 
-Set the following environment variables (or the respective UI settings for an existing deployment): `RAG_EMBEDDING_ENGINE: ollama`, `AUDIO_STT_ENGINE: openai`.
+设置以下环境变量（或对于现有部署设置相应的 UI 选项）：`RAG_EMBEDDING_ENGINE: ollama`，`AUDIO_STT_ENGINE: openai`。
 
-## Longer explanation
+## 详细说明
 
-Much of the memory consumption is due to loaded ML models. Even if you are using an external language model (OpenAI or unbundled ollama), many models may be loaded for additional purposes.
+大部分内存消耗来自于加载的机器学习模型。即使您使用外部语言模型（OpenAI 或独立的 ollama），也可能会为其他用途加载许多模型。
 
-As of v0.3.10 this includes:
+截至 v0.3.10 版本，这包括：
 
-* Speech-to-text (whisper by default)
-* RAG embedding engine (defaults to local SentenceTransformers model)
-* Image generation engine (disabled by default)
+* 语音转文字（默认使用 whisper）
+* RAG 嵌入引擎（默认使用本地 SentenceTransformers 模型）
+* 图像生成引擎（默认禁用）
 
-The first 2 are enabled and set to local models by default. You can change the models in the admin panel (RAG: Documents category, set it to Ollama or OpenAI, Speech-to-text: Audio section, work with OpenAI or WebAPI).
-If you are deploying a fresh Docker image, you can also set them with the following environment variables: `RAG_EMBEDDING_ENGINE: ollama`, `AUDIO_STT_ENGINE: openai`. Note that these environment variables have no effect if a `config.json` already exists.
+前两个功能默认启用并设置为使用本地模型。您可以在管理面板中更改这些模型（RAG：在文档类别中将其设置为 Ollama 或 OpenAI；语音转文字：在音频部分中使用 OpenAI 或 WebAPI）。
+如果您正在部署新的 Docker 镜像，也可以通过设置以下环境变量来配置：`RAG_EMBEDDING_ENGINE: ollama`，`AUDIO_STT_ENGINE: openai`。请注意，如果 `config.json` 已存在，这些环境变量将不会生效。

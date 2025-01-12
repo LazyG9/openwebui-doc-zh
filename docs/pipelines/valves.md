@@ -1,15 +1,15 @@
 ---
 sidebar_position: 3
-title: "⚙️ Valves"
+title: "⚙️ 阀门"
 ---
 
-# Valves
+# 阀门
 
-Valves are input variables that are set per pipeline. Valves are set as a subclass of the `Pipeline` class, and initialized as part of the `__init__` method of the `Pipeline` class.
+阀门是为每个管道设置的输入变量。阀门被设置为 `Pipeline` 类的子类，并作为 `Pipeline` 类的 `__init__` 方法的一部分进行初始化。
 
-When adding valves to your pipeline, include a way to ensure that valves can be reconfigured by admins in the web UI. There are a few options for this:
+在向管道添加阀门时，需要确保管理员可以在 Web UI 中重新配置阀门。有几个选项可供选择：
 
-- Use `os.getenv()` to set an environment variable to use for the pipeline, and a default value to use if the environment variable isn't set. An example can be seen below:
+- 使用 `os.getenv()` 设置管道要使用的环境变量，以及在未设置环境变量时使用的默认值。示例如下：
 
 ```
 self.valves = self.Valves(
@@ -21,7 +21,7 @@ self.valves = self.Valves(
 )
 ```
 
-- Set the valve to the `Optional` type, which will allow the pipeline to load even if no value is set for the valve.
+- 将阀门设置为 `Optional` 类型，这样即使没有为阀门设置值，管道也能加载。
 
 ```
 class Pipeline:
@@ -30,5 +30,5 @@ class Pipeline:
         max_turns: Optional[int] = None
 ```
 
-If you don't leave a way for valves to be updated in the web UI, you'll see the following error in the Pipelines server log after trying to add a pipeline to the web UI:
+如果你没有提供在 Web UI 中更新阀门的方法，在尝试将管道添加到 Web UI 后，你会在 Pipelines 服务器日志中看到以下错误：
 `WARNING:root:No Pipeline class found in <pipeline name>`

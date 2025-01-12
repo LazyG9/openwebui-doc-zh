@@ -1,25 +1,25 @@
 ---
 sidebar_position: 7
-title: "🗄️ Hosting UI and Models separately"
+title: "🗄️ 分离部署 UI 和模型"
 ---
 
 :::warning
-This tutorial is a community contribution and is not supported by the OpenWebUI team. It serves only as a demonstration on how to customize OpenWebUI for your specific use case. Want to contribute? Check out the contributing tutorial.
+本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
 :::
 
 :::note
-If you plan to expose this to the wide area network, consider implementing security like a [network firewall](https://github.com/chr0mag/geoipsets), [web application firewall](https://github.com/owasp-modsecurity/ModSecurity), and [threat intelligence](https://github.com/crowdsecurity/crowdsec).
-Additionally, it's strongly recommended to enable HSTS possibly like `Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"` within your **HTTPS** configuration and a redirect of some kind to your **HTTPS URL** within your **HTTP** configuration. For free SSL certification, [Let's Encrypt](https://letsencrypt.org/) is a good option coupled with [Certbot](https://github.com/certbot/certbot) management.
+如果您计划将其暴露在广域网中，请考虑实施安全措施，如[网络防火墙](https://github.com/chr0mag/geoipsets)、[Web 应用防火墙](https://github.com/owasp-modsecurity/ModSecurity)和[威胁情报](https://github.com/crowdsecurity/crowdsec)。
+此外，强烈建议在您的 **HTTPS** 配置中启用 HSTS，可以使用类似 `Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"` 的配置，并在您的 **HTTP** 配置中添加某种形式的重定向到您的 **HTTPS URL**。对于免费的 SSL 证书，[Let's Encrypt](https://letsencrypt.org/) 是一个不错的选择，可以配合 [Certbot](https://github.com/certbot/certbot) 进行管理。
 :::
 
-Sometimes, its beneficial to host Ollama, separate from the UI, but retain the RAG and RBAC support features shared across users:
+有时，将 Ollama 与 UI 分开托管是有益的，同时保留跨用户共享的 RAG 和 RBAC 支持功能：
 
-## UI Configuration
+## UI 配置
 
-For the UI configuration, you can set up the Apache VirtualHost as follows:
+对于 UI 配置，您可以按如下方式设置 Apache VirtualHost：
 
 ```
-# Assuming you have a website hosting this UI at "server.com"
+# 假设您在 "server.com" 上托管此 UI
 <VirtualHost 192.168.1.100:80>
     ServerName server.com
     DocumentRoot /home/server/public_html
@@ -34,17 +34,17 @@ For the UI configuration, you can set up the Apache VirtualHost as follows:
 </VirtualHost>
 ```
 
-Enable the site first before you can request SSL:
+在请求 SSL 之前，需要先启用站点：
 
 :::warning
-Use of the `nocanon` option may [affect the security of your backend](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#proxypass). It's recommended to enable this only if required by your configuration.
-_Normally, mod_proxy will canonicalise ProxyPassed URLs. But this may be incompatible with some backends, particularly those that make use of PATH_INFO. The optional nocanon keyword suppresses this and passes the URL path "raw" to the backend. Note that this keyword may affect the security of your backend, as it removes the normal limited protection against URL-based attacks provided by the proxy._
+使用 `nocanon` 选项可能会[影响您的后端安全性](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#proxypass)。建议仅在配置需要时启用此选项。
+_通常，mod_proxy 会规范化 ProxyPassed URL。但这可能与某些后端不兼容，特别是那些使用 PATH_INFO 的后端。可选的 nocanon 关键字会禁用这种规范化，并将 URL 路径"原样"传递给后端。请注意，此关键字可能会影响后端的安全性，因为它移除了代理提供的针对基于 URL 攻击的常规有限保护。_
 :::
 
-`a2ensite server.com.conf` # this will enable the site. a2ensite is short for "Apache 2 Enable Site"
+`a2ensite server.com.conf` # 这将启用站点。a2ensite 是 "Apache 2 Enable Site" 的缩写
 
 ```
-# For SSL
+# SSL 配置
 <VirtualHost 192.168.1.100:443>
     ServerName server.com
     DocumentRoot /home/server/public_html
@@ -65,37 +65,36 @@ _Normally, mod_proxy will canonicalise ProxyPassed URLs. But this may be incompa
     SSLProxyEngine on
     SSLCACertificateFile /etc/ssl/virtualmin/170514456865864/ssl.ca
 </VirtualHost>
-
 ```
 
-I'm using virtualmin here for my SSL clusters, but you can also use certbot directly or your preferred SSL method. To use SSL:
+我在这里使用 virtualmin 来管理我的 SSL 集群，但您也可以直接使用 certbot 或您喜欢的 SSL 方法。要使用 SSL：
 
-### Prerequisites
+### 先决条件
 
-Run the following commands:
+运行以下命令：
 
 `snap install certbot --classic`
-`snap apt install python3-certbot-apache` (this will install the apache plugin).
+`snap apt install python3-certbot-apache` (这将安装 apache 插件)。
 
-Navigate to the apache sites-available directory:
+导航到 apache sites-available 目录：
 
 `cd /etc/apache2/sites-available/`
 
-Create server.com.conf if it is not yet already created, containing the above `<virtualhost>` configuration (it should match your case. Modify as necessary). Use the one without the SSL:
+如果尚未创建 server.com.conf，请创建它，包含上述 `<virtualhost>` 配置（应该与您的情况匹配。根据需要修改）。使用不带 SSL 的配置：
 
-Once it's created, run `certbot --apache -d server.com`, this will request and add/create an SSL keys for you as well as create the server.com.le-ssl.conf
+创建完成后，运行 `certbot --apache -d server.com`，这将为您请求并添加/创建 SSL 密钥，并创建 server.com.le-ssl.conf
 
-# Configuring Ollama Server
+# 配置 Ollama 服务器
 
-On your latest installation of Ollama, make sure that you have setup your api server from the official Ollama reference:
+在您最新安装的 Ollama 上，确保您已按照官方 Ollama 参考文档设置了 API 服务器：
 
 [Ollama FAQ](https://github.com/jmorganca/ollama/blob/main/docs/faq.md)
 
-### TL;DR
+### 简要说明
 
-The guide doesn't seem to match the current updated service file on linux. So, we will address it here:
+该指南似乎与 Linux 上当前更新的服务文件不匹配。所以，我们将在这里解决这个问题：
 
-Unless when you're compiling Ollama from source, installing with the standard install `curl https://ollama.com/install.sh | sh` creates a file called `ollama.service` in /etc/systemd/system. You can use nano to edit the file:
+除非您是从源代码编译 Ollama，否则使用标准安装 `curl https://ollama.com/install.sh | sh` 会在 /etc/systemd/system 中创建一个名为 `ollama.service` 的文件。您可以使用 nano 编辑该文件：
 
 ```
 sudo nano /etc/systemd/system/ollama.service
@@ -145,8 +144,7 @@ Navigate to the apache sites-available directory:
 Add the follwoing virtualhost containing this example (modify as needed):
 
 ```
-
-# Assuming you have a website hosting this UI at "models.server.city"
+# 假设您在 "models.server.city" 上托管此 UI
 <IfModule mod_ssl.c>
     <VirtualHost 192.168.254.109:443>
         DocumentRoot "/var/www/html/"
@@ -161,8 +159,8 @@ Add the follwoing virtualhost containing this example (modify as needed):
         ProxyAddHeaders On
         SSLProxyEngine on
 
-        ProxyPass / http://server.city:1000/ nocanon # or port 11434
-        ProxyPassReverse / http://server.city:1000/ # or port 11434
+        ProxyPass / http://server.city:1000/ nocanon # 或端口 11434
+        ProxyPassReverse / http://server.city:1000/ # 或端口 11434
 
         SSLCertificateFile /etc/letsencrypt/live/models.server.city/fullchain.pem
         SSLCertificateKeyFile /etc/letsencrypt/live/models.server.city/privkey.pem
@@ -171,15 +169,15 @@ Add the follwoing virtualhost containing this example (modify as needed):
 </IfModule>
 ```
 
-You may need to enable the site first (if you haven't done so yet) before you can request SSL:
+在请求 SSL 之前，您可能需要先启用站点（如果您尚未这样做）：
 
 `a2ensite models.server.city.conf`
 
-#### For the SSL part of Ollama server
+#### Ollama 服务器的 SSL 部分
 
-Run the following commands:
+运行以下命令：
 
-Navigate to the apache sites-available directory:
+导航到 apache sites-available 目录：
 
 `cd /etc/apache2/sites-available/`
 `certbot --apache -d server.com`
@@ -198,26 +196,25 @@ Navigate to the apache sites-available directory:
     ProxyAddHeaders On
     SSLProxyEngine on
 
-    ProxyPass / http://server.city:1000/ nocanon # or port 11434
-    ProxyPassReverse / http://server.city:1000/ # or port 11434
+    ProxyPass / http://server.city:1000/ nocanon # 或端口 11434
+    ProxyPassReverse / http://server.city:1000/ # 或端口 11434
 
     RewriteEngine on
     RewriteCond %{SERVER_NAME} =models.server.city
     RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 </VirtualHost>
-
 ```
 
-Don't forget to restart/reload Apache with `systemctl reload apache2`
+不要忘记使用 `systemctl reload apache2` 重启/重载 Apache
 
-Open your site at https://server.com!
+在 https://server.com 打开您的站点！
 
-**Congratulations**, your _**Open-AI-like Chat-GPT style UI**_ is now serving AI with RAG, RBAC and multimodal features! Download Ollama models if you haven't yet done so!
+**恭喜**，您的 _**类似 Open-AI 的 Chat-GPT 风格 UI**_ 现在正在提供具有 RAG、RBAC 和多模态功能的 AI 服务！如果您还没有下载 Ollama 模型，请立即下载！
 
-If you encounter any misconfiguration or errors, please file an issue or engage with our discussion. There are a lot of friendly developers here to assist you.
+如果您遇到任何配置错误或问题，请提交问题或参与我们的讨论。这里有很多友好的开发者可以帮助您。
 
-Let's make this UI much more user friendly for everyone!
+让我们一起让这个 UI 对每个人都更加友好！
 
-Thanks for making open-webui your UI Choice for AI!
+感谢您选择 open-webui 作为您的 AI UI！
 
-This doc is made by **Bob Reyes**, your **Open-WebUI** fan from the Philippines.
+本文档由来自菲律宾的 **Open-WebUI** 粉丝 **Bob Reyes** 编写。

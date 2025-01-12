@@ -1,163 +1,163 @@
 ---
 sidebar_position: 3
-title: "🕸️ Network Diagrams"
+title: "🕸️ 网络架构图"
 ---
 
-Here, we provide clear and structured diagrams to help you understand how various components of the network interact within different setups. This documentation is designed to assist both macOS/Windows and Linux users. Each scenario is illustrated using Mermaid diagrams to show how the interactions are set up depending on the different system configurations and deployment strategies.
+在这里，我们提供清晰和结构化的图表，帮助你理解不同设置中各个网络组件之间的交互方式。本文档旨在帮助 macOS/Windows 和 Linux 用户。每个场景都使用 Mermaid 图表来展示根据不同的系统配置和部署策略如何设置交互。
 
-## Mac OS/Windows Setup Options 🖥️
+## Mac OS/Windows 设置选项 🖥️
 
-### Ollama on Host, Open WebUI in Container
+### Ollama 在主机上，Open WebUI 在容器中
 
-In this scenario, `Ollama` runs directly on the host machine while `Open WebUI` operates within a Docker container.
+在这种场景中，`Ollama` 直接在主机上运行，而 `Open WebUI` 在 Docker 容器中运行。
 
 ```mermaid
 C4Context
-Boundary(b0, "Hosting Machine - Mac OS/Windows") {
-   Person(user, "User")
-   Boundary(b1, "Docker Desktop's Linux VM") {
-      Component(openwebui, "Open WebUI", "Listening on port 8080")
+Boundary(b0, "主机 - Mac OS/Windows") {
+   Person(user, "用户")
+   Boundary(b1, "Docker Desktop 的 Linux 虚拟机") {
+      Component(openwebui, "Open WebUI", "监听端口 8080")
    }
-   Component(ollama, "Ollama", "Listening on port 11434")
+   Component(ollama, "Ollama", "监听端口 11434")
 }
-Rel(openwebui, ollama, "Makes API calls via Docker proxy", "http://host.docker.internal:11434")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
+Rel(openwebui, ollama, "通过 Docker 代理进行 API 调用", "http://host.docker.internal:11434")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
 UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
 ```
 
-### Ollama and Open WebUI in Compose Stack
+### Ollama 和 Open WebUI 在 Compose 堆栈中
 
-Both `Ollama` and `Open WebUI` are configured within the same Docker Compose stack, simplifying network communications.
+`Ollama` 和 `Open WebUI` 都配置在同一个 Docker Compose 堆栈中，简化了网络通信。
 
 ```mermaid
 C4Context
-Boundary(b0, "Hosting Machine - Mac OS/Windows") {
-   Person(user, "User")
-   Boundary(b1, "Docker Desktop's Linux VM") {
-      Boundary(b2, "Compose Stack") {
-         Component(openwebui, "Open WebUI", "Listening on port 8080")
-         Component(ollama, "Ollama", "Listening on port 11434")
+Boundary(b0, "主机 - Mac OS/Windows") {
+   Person(user, "用户")
+   Boundary(b1, "Docker Desktop 的 Linux 虚拟机") {
+      Boundary(b2, "Compose 堆栈") {
+         Component(openwebui, "Open WebUI", "监听端口 8080")
+         Component(ollama, "Ollama", "监听端口 11434")
       }
    }
 }
-Rel(openwebui, ollama, "Makes API calls via inter-container networking", "http://ollama:11434")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
+Rel(openwebui, ollama, "通过容器间网络进行 API 调用", "http://ollama:11434")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
 UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
 ```
 
-### Ollama and Open WebUI, Separate Networks
+### Ollama 和 Open WebUI，独立网络
 
-Here, `Ollama` and `Open WebUI` are deployed in separate Docker networks, potentially leading to connectivity issues.
+在这里，`Ollama` 和 `Open WebUI` 部署在独立的 Docker 网络中，可能会导致连接问题。
 
 ```mermaid
 C4Context
-Boundary(b0, "Hosting Machine - Mac OS/Windows") {
-   Person(user, "User")
-   Boundary(b1, "Docker Desktop's Linux VM") {
-      Boundary(b2, "Network A") {
-         Component(openwebui, "Open WebUI", "Listening on port 8080")
+Boundary(b0, "主机 - Mac OS/Windows") {
+   Person(user, "用户")
+   Boundary(b1, "Docker Desktop 的 Linux 虚拟机") {
+      Boundary(b2, "网络 A") {
+         Component(openwebui, "Open WebUI", "监听端口 8080")
       }
-      Boundary(b3, "Network B") {
-         Component(ollama, "Ollama", "Listening on port 11434")
-      }
-   }
-}
-Rel(openwebui, ollama, "Unable to connect")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
-UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
-```
-
-### Open WebUI in Host Network
-
-In this configuration, `Open WebUI` utilizes the host network, which impacts its ability to connect in certain environments.
-
-```mermaid
-C4Context
-Boundary(b0, "Hosting Machine - Mac OS/Windows") {
-   Person(user, "User")
-   Boundary(b1, "Docker Desktop's Linux VM") {
-      Component(openwebui, "Open WebUI", "Listening on port 8080")
-   }
-}
-Rel(user, openwebui, "Unable to connect, host network is the VM's network")
-UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
-```
-
-
-## Linux Setup Options 🐧
-
-### Ollama on Host, Open WebUI in Container (Linux)
-
-This diagram is specific to the Linux platform, with `Ollama` running on the host and `Open WebUI` deployed inside a Docker container.
-
-```mermaid
-C4Context
-Boundary(b0, "Hosting Machine - Linux") {
-   Person(user, "User")
-   Boundary(b1, "Container Network") {
-      Component(openwebui, "Open WebUI", "Listening on port 8080")
-   }
-   Component(ollama, "Ollama", "Listening on port 11434")
-}
-Rel(openwebui, ollama, "Makes API calls via Docker proxy", "http://host.docker.internal:11434")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
-UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
-```
-
-### Ollama and Open WebUI in Compose Stack (Linux)
-
-A set-up where both `Ollama` and `Open WebUI` reside within the same Docker Compose stack, allowing for straightforward networking on Linux.
-
-```mermaid
-C4Context
-Boundary(b0, "Hosting Machine - Linux") {
-   Person(user, "User")
-   Boundary(b1, "Container Network") {
-      Boundary(b2, "Compose Stack") {
-         Component(openwebui, "Open WebUI", "Listening on port 8080")
-         Component(ollama, "Ollama", "Listening on port 11434")
+      Boundary(b3, "网络 B") {
+         Component(ollama, "Ollama", "监听端口 11434")
       }
    }
 }
-Rel(openwebui, ollama, "Makes API calls via inter-container networking", "http://ollama:11434")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
+Rel(openwebui, ollama, "无法连接")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
 UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
 ```
 
-### Ollama and Open WebUI, Separate Networks (Linux)
+### Open WebUI 在主机网络中
 
-A scenario in which `Ollama` and `Open WebUI` are in different Docker networks under a Linux environment, which could hinder connectivity.
+在这种配置中，`Open WebUI` 使用主机网络，这会影响其在某些环境中的连接能力。
 
 ```mermaid
 C4Context
-Boundary(b0, "Hosting Machine - Linux") {
-   Person(user, "User")
-   Boundary(b2, "Container Network A") {
-      Component(openwebui, "Open WebUI", "Listening on port 8080")
-   }
-   Boundary(b3, "Container Network B") {
-      Component(ollama, "Ollama", "Listening on port 11434")
+Boundary(b0, "主机 - Mac OS/Windows") {
+   Person(user, "用户")
+   Boundary(b1, "Docker Desktop 的 Linux 虚拟机") {
+      Component(openwebui, "Open WebUI", "监听端口 8080")
    }
 }
-Rel(openwebui, ollama, "Unable to connect")
-Rel(user, openwebui, "Makes requests via exposed port -p 3000:8080", "http://localhost:3000")
+Rel(user, openwebui, "无法连接，主机网络是虚拟机的网络")
 UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
 ```
 
-### Open WebUI in Host Network, Ollama on Host (Linux)
 
-An optimal layout where both `Open WebUI` and `Ollama` use the host’s network, facilitating seamless interaction on Linux systems.
+## Linux 设置选项 🐧
+
+### Ollama 在主机上，Open WebUI 在容器中（Linux）
+
+这个图表专门针对 Linux 平台，`Ollama` 在主机上运行，`Open WebUI` 部署在 Docker 容器中。
 
 ```mermaid
 C4Context
-Boundary(b0, "Hosting Machine - Linux") {
-   Person(user, "User")
-   Component(openwebui, "Open WebUI", "Listening on port 8080")
-   Component(ollama, "Ollama", "Listening on port 11434")
+Boundary(b0, "主机 - Linux") {
+   Person(user, "用户")
+   Boundary(b1, "容器网络") {
+      Component(openwebui, "Open WebUI", "监听端口 8080")
+   }
+   Component(ollama, "Ollama", "监听端口 11434")
 }
-Rel(openwebui, ollama, "Makes API calls via localhost", "http://localhost:11434")
-Rel(user, openwebui, "Makes requests via listening port", "http://localhost:8080")
+Rel(openwebui, ollama, "通过 Docker 代理进行 API 调用", "http://host.docker.internal:11434")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
 UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
 ```
 
-Each setup addresses different deployment strategies and networking configurations to help you choose the best layout for your requirements.
+### Ollama 和 Open WebUI 在 Compose 堆栈中（Linux）
+
+一个设置，其中 `Ollama` 和 `Open WebUI` 都位于同一个 Docker Compose 堆栈中，在 Linux 上实现简单的网络连接。
+
+```mermaid
+C4Context
+Boundary(b0, "主机 - Linux") {
+   Person(user, "用户")
+   Boundary(b1, "容器网络") {
+      Boundary(b2, "Compose 堆栈") {
+         Component(openwebui, "Open WebUI", "监听端口 8080")
+         Component(ollama, "Ollama", "监听端口 11434")
+      }
+   }
+}
+Rel(openwebui, ollama, "通过容器间网络进行 API 调用", "http://ollama:11434")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
+UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
+```
+
+### Ollama 和 Open WebUI，独立网络（Linux）
+
+一个场景，其中 `Ollama` 和 `Open WebUI` 在 Linux 环境下位于不同的 Docker 网络中，这可能会阻碍连接。
+
+```mermaid
+C4Context
+Boundary(b0, "主机 - Linux") {
+   Person(user, "用户")
+   Boundary(b2, "容器网络 A") {
+      Component(openwebui, "Open WebUI", "监听端口 8080")
+   }
+   Boundary(b3, "容器网络 B") {
+      Component(ollama, "Ollama", "监听端口 11434")
+   }
+}
+Rel(openwebui, ollama, "无法连接")
+Rel(user, openwebui, "通过暴露的端口 -p 3000:8080 发起请求", "http://localhost:3000")
+UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
+```
+
+### Open WebUI 在主机网络中，Ollama 在主机上（Linux）
+
+一个最优布局，其中 `Open WebUI` 和 `Ollama` 都使用主机的网络，在 Linux 系统上实现无缝交互。
+
+```mermaid
+C4Context
+Boundary(b0, "主机 - Linux") {
+   Person(user, "用户")
+   Component(openwebui, "Open WebUI", "监听端口 8080")
+   Component(ollama, "Ollama", "监听端口 11434")
+}
+Rel(openwebui, ollama, "通过 localhost 进行 API 调用", "http://localhost:11434")
+Rel(user, openwebui, "通过监听端口发起请求", "http://localhost:8080")
+UpdateRelStyle(user, openwebui, $offsetX="-100", $offsetY="-50")
+```
+
+每种设置都针对不同的部署策略和网络配置，帮助你选择最适合你需求的布局。

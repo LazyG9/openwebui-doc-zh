@@ -1,80 +1,80 @@
 ---
 sidebar_position: 0
-title: "🛠️ Tools & Functions"
+title: "🛠️ 工具和函数"
 ---
 
-# 🛠️ Tools & Functions
+# 🛠️ 工具和函数
 
-Imagine you've just stumbled upon Open WebUI, or maybe you're already using it, but you're a bit lost with all the talk about "Tools", "Functions", and "Pipelines". Everything sounds like some mysterious tech jargon, right? No worries! Let's break it down piece by piece, super clearly, step by step. By the end of this, you'll have a solid understanding of what these terms mean, how they work, and why know it's not as complicated as it seems.
+想象一下，您刚刚接触 Open WebUI，或者您已经在使用它，但对所有关于"工具"、"函数"和"管道"的讨论感到有点困惑。一切听起来都像是一些神秘的技术术语，对吧？别担心！让我们一步一步地、非常清晰地分解它。到最后，您将对这些术语的含义、工作原理有一个扎实的理解，并且知道它并不像看起来那么复杂。
 
-## TL;DR
+## 简要总结
 
-- **Tools** extend the abilities of LLMs, allowing them to collect real-world, real-time data like weather, stock prices, etc.
-- **Functions** extend the capabilities of the Open WebUI itself, enabling you to add new AI model support (like Anthropic or Vertex AI) or improve usability (like creating custom buttons or filters).
-- **Pipelines** are more for advanced users who want to transform Open WebUI features into API-compatible workflows—mainly for offloading heavy processing.
+- **工具**扩展了 LLM 的能力，使它们能够收集真实世界的实时数据，如天气、股票价格等。
+- **函数**扩展了 Open WebUI 本身的功能，使您能够添加新的 AI 模型支持（如 Anthropic 或 Vertex AI）或改进可用性（如创建自定义按钮或过滤器）。
+- **管道**更适合想要将 Open WebUI 功能转换为 API 兼容工作流的高级用户——主要用于卸载重型处理。
 
-Getting started with Tools and Functions is easy because everything’s already built into the core system! You just **click a button** and **import these features directly from the community**, so there’s no coding or deep technical work required.
+开始使用工具和函数很容易，因为所有功能都已内置在核心系统中！您只需**点击一个按钮**并**直接从社区导入这些功能**，无需编码或深入的技术工作。
 
-## What are "Tools" and "Functions"?
+## 什么是"工具"和"函数"？
 
-Let's start by thinking of **Open WebUI** as a "base" software that can do many tasks related to using Large Language Models (LLMs). But sometimes, you need extra features or abilities that don't come *out of the box*—this is where **tools** and **functions** come into play.
+让我们先把 **Open WebUI** 想象成一个可以执行许多与使用大型语言模型（LLM）相关任务的"基础"软件。但有时，您需要一些不是*开箱即用*的额外功能或能力——这就是**工具**和**函数**发挥作用的地方。
 
-### Tools
+### 工具
 
-**Tools** are an exciting feature because they allow LLMs to do more than just process text. They provide **external abilities** that LLMs wouldn't otherwise have on their own.
+**工具**是一个令人兴奋的功能，因为它们允许 LLM 做的不仅仅是处理文本。它们提供了 LLM 本身原本没有的**外部能力**。
 
-#### Example of a Tool:
+#### 工具示例：
 
-Imagine you're chatting with an LLM and you want it to give you the latest weather update or stock prices in real time. Normally, the LLM can't do that because it's just working on pre-trained knowledge. This is where **tools** come in!
+想象您正在与 LLM 聊天，您想让它给您最新的天气更新或实时股票价格。通常，LLM 无法做到这一点，因为它只是在处理预训练的知识。这就是**工具**发挥作用的地方！
 
-- **Tools are like plugins** that the LLM can use to gather **real-world, real-time data**. So, with a "weather tool" enabled, the model can go out on the internet, gather live weather data, and display it in your conversation.
+- **工具就像插件**，LLM 可以使用它们来收集**真实世界的实时数据**。因此，启用"天气工具"后，模型可以在互联网上收集实时天气数据，并在您的对话中显示它。
 
-Tools are essentially **abilities** you’re giving your AI to help it interact with the outside world. By adding these, the LLM can "grab" useful information or perform specialized tasks based on the context of the conversation.
+工具本质上是您赋予 AI 的**能力**，帮助它与外部世界互动。通过添加这些工具，LLM 可以根据对话的上下文"获取"有用信息或执行专门的任务。
 
-#### Examples of Tools (extending LLM’s abilities):
-1. **Real-time weather predictions** 🛰️.
-2. **Stock price retrievers** 📈.
-3. **Flight tracking information** ✈️.
+#### 工具示例（扩展 LLM 的能力）：
+1. **实时天气预报** 🛰️
+2. **股票价格检索器** 📈
+3. **航班跟踪信息** ✈️
 
-### Functions
+### 函数
 
-While **tools** are used by the AI during a conversation, **functions** help extend or customize the capabilities of Open WebUI itself. Imagine tools are like adding new ingredients to a dish, and functions are the process you use to control the kitchen! 🚪
+虽然**工具**是由 AI 在对话过程中使用的，但**函数**帮助扩展或自定义 Open WebUI 本身的功能。想象工具就像给菜添加新的配料，而函数就是您用来控制厨房的过程！🚪
 
-#### Let's break that down: 
+#### 让我们分解一下：
 
-- **Functions** give you the ability to tweak or add **features** inside **Open WebUI** itself.
-- You’re not giving new abilities to the LLM, but instead, you’re extending the **interface, behavior, or logic** of the platform itself!
+- **函数**使您能够调整或添加 **Open WebUI** 本身内部的**功能**。
+- 您不是给 LLM 新的能力，而是在扩展平台本身的**界面、行为或逻辑**！
 
-For instance, maybe you want to:
-1. Add a new AI model like **Anthropic** to the WebUI.
-2. Create a custom button in your toolbar that performs a frequently used command.
-3. Implement a better **filter** function that catches inappropriate or **spammy messages** from the incoming text.
+例如，也许您想要：
+1. 在 WebUI 中添加新的 AI 模型，如 **Anthropic**。
+2. 在工具栏中创建一个执行常用命令的自定义按钮。
+3. 实现一个更好的**过滤器**功能，可以捕获传入文本中的不当或**垃圾信息**。
 
-Without functions, these would all be out of reach. But with this framework in Open WebUI, you can easily extend these features!
+没有函数，这些都将无法实现。但有了 Open WebUI 中的这个框架，您可以轻松扩展这些功能！
 
-### Summary of Differences:
-- **Tools** are things that allow LLMs to **do more things** outside their default abilities (such as retrieving live info or performing custom tasks based on external data).
-- **Functions** help the WebUI itself **do more things**, like adding new AI models or creating smarter ways to filter data.
+### 差异总结：
+- **工具**是允许 LLM 在其默认能力之外**做更多事情**的东西（如检索实时信息或基于外部数据执行自定义任务）。
+- **函数**帮助 WebUI 本身**做更多事情**，如添加新的 AI 模型或创建更智能的数据过滤方式。
 
-Both are designed to be **pluggable**, meaning you can easily import them into your system with just one click from the community! 🎉 You won’t have to spend hours coding or tinkering with them.
+两者都设计为**可插拔的**，这意味着您可以通过社区一键轻松导入到您的系统中！🎉 您不必花费数小时编码或调试它们。
 
-## What are Pipelines?
+## 什么是管道？
 
-And then, we have **Pipelines**… Here’s where things start to sound pretty technical—but don’t despair.
+然后，我们有**管道**...这里的东西开始听起来相当技术性——但别担心。
 
-**Pipelines** are part of an Open WebUI initiative focused on making every piece of the WebUI **inter-operable with OpenAI’s API system**. Essentially, they extend what both **Tools** and **Functions** can already do, but now with even more flexibility. They allow you to turn features into OpenAI API-compatible formats. 🧠
+**管道**是 Open WebUI 计划的一部分，专注于使 WebUI 的每个部分都**与 OpenAI 的 API 系统互操作**。本质上，它们扩展了**工具**和**函数**已经可以做的事情，但现在具有更大的灵活性。它们允许您将功能转换为 OpenAI API 兼容格式。🧠
 
-### But here’s the thing… 
+### 但是这里有一点...
 
-You likely **won't need** pipelines unless you're dealing with super-advanced setups.
+除非您在处理超级高级设置，否则您可能**不需要**管道。
 
-- **Who are pipelines for?** Typically, **experts** or people running more complicated use cases.
-- **When do you need them?** If you're trying to offload processing from your primary Open WebUI instance to a different machine (so you don’t overload your primary system).
+- **管道适合谁？**通常是**专家**或处理更复杂用例的人。
+- **什么时候需要它们？**如果您试图将处理从主要 Open WebUI 实例卸载到不同的机器（这样就不会使主系统过载）。
   
-In most cases, as a beginner or even an intermediate user, you won’t have to worry about pipelines. Just focus on enjoying the benefits that **tools** and **functions** bring to your Open WebUI experience!
+在大多数情况下，作为初学者甚至中级用户，您不必担心管道。只需专注于享受**工具**和**函数**为您的 Open WebUI 体验带来的好处！
 
-## Want to Try? 🚀
+## 想要尝试？🚀
 
-Jump into Open WebUI, head over to the community section, and try importing a tool like **weather updates** or maybe adding a new feature to the toolbar with a function. Exploring these tools will show you how powerful and flexible Open WebUI can be!
+进入 Open WebUI，转到社区部分，尝试导入像**天气更新**这样的工具，或者使用函数在工具栏中添加新功能。探索这些工具将向您展示 Open WebUI 可以有多么强大和灵活！
 
-🌟 There's always more to learn, so stay curious and keep experimenting!
+🌟 总是有更多东西要学习，所以保持好奇心，继续探索！

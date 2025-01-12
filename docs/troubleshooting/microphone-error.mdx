@@ -1,38 +1,38 @@
 ---
 sidebar_position: 2
-title: "🎙️ Troubleshooting Microphone Access"
+title: "🎙️ 麦克风访问故障排除"
 ---
 
-Ensuring your application has the proper microphone access is crucial for functionality that depends on audio input. This guide covers how to manage and troubleshoot microphone permissions, particularly under secure contexts.
+确保你的应用程序具有适当的麦克风访问权限对于依赖音频输入的功能至关重要。本指南介绍如何管理和排除麦克风权限问题，特别是在安全上下文中。
 
-## Understanding Secure Contexts 🔒
+## 理解安全上下文 🔒
 
-For security reasons, accessing the microphone is restricted to pages served over HTTPS or locally from `localhost`. This requirement is meant to safeguard your data by ensuring it is transmitted over secure channels.
+出于安全原因，麦克风访问仅限于通过 HTTPS 或从 `localhost` 本地提供的页面。这一要求旨在通过确保数据通过安全通道传输来保护你的数据。
 
-## Common Permission Issues 🚫
+## 常见权限问题 🚫
 
-Browsers like Chrome, Brave, Microsoft Edge, Opera, and Vivaldi, as well as Firefox, restrict microphone access on non-HTTPS URLs. This typically becomes an issue when accessing a site from another device within the same network (e.g., using a mobile phone to access a desktop server). Here's how you can manage these issues:
+Chrome、Brave、Microsoft Edge、Opera 和 Vivaldi 等浏览器，以及 Firefox，都会限制对非 HTTPS URL 的麦克风访问。这通常在从同一网络内的其他设备访问站点时成为问题（例如，使用手机访问桌面服务器）。以下是管理这些问题的方法：
 
-### Solutions for Non-HTTPS Connections
+### 非 HTTPS 连接的解决方案
 
-1. **Set Up HTTPS:**
-   - It is highly recommended to configure your server to support HTTPS. This not only resolves permission issues but also enhances the security of your data transmissions.
+1. **设置 HTTPS：**
+   - 强烈建议配置你的服务器以支持 HTTPS。这不仅解决了权限问题，还增强了数据传输的安全性。
 
-2. **Temporary Browser Flags (Use with caution):**
-   - These settings force your browser to treat certain insecure URLs as secure. This is useful for development purposes but poses significant security risks. Here's how to adjust these settings for major browsers:
+2. **临时浏览器标志（谨慎使用）：**
+   - 这些设置强制你的浏览器将某些不安全的 URL 视为安全。这对开发目的有用，但会带来重大安全风险。以下是如何为主要浏览器调整这些设置：
 
-   #### Chromium-based Browsers (e.g., Chrome, Brave)
-   - Open `chrome://flags/#unsafely-treat-insecure-origin-as-secure`.
-   - Enter your non-HTTPS address (e.g., `http://192.168.1.35:3000`).
-   - Restart the browser to apply the changes.
+   #### 基于 Chromium 的浏览器（如 Chrome、Brave）
+   - 打开 `chrome://flags/#unsafely-treat-insecure-origin-as-secure`。
+   - 输入你的非 HTTPS 地址（例如 `http://192.168.1.35:3000`）。
+   - 重启浏览器以应用更改。
 
-   #### Firefox-based Browsers
-   - Open `about:config`.
-   - Search and modify (or create) the string value `dom.securecontext.allowlist`.
-   - Add your IP addresses separated by commas (e.g., `http://127.0.0.1:8080`).
+   #### 基于 Firefox 的浏览器
+   - 打开 `about:config`。
+   - 搜索并修改（或创建）字符串值 `dom.securecontext.allowlist`。
+   - 添加你的 IP 地址，用逗号分隔（例如 `http://127.0.0.1:8080`）。
 
-### Considerations and Risks 🚨
+### 注意事项和风险 🚨
 
-While browser flags offer a quick fix, they bypass important security checks which can expose your device and data to vulnerabilities. Always prioritize proper security measures, especially when planning for a production environment.
+虽然浏览器标志提供了快速修复方案，但它们会绕过重要的安全检查，这可能使你的设备和数据面临漏洞风险。在规划生产环境时，始终优先考虑适当的安全措施。
 
-By following these best practices, you can ensure that your application properly accesses the microphone while maintaining the security and integrity of your data.
+通过遵循这些最佳实践，你可以确保你的应用程序在维护数据安全性和完整性的同时正确访问麦克风。

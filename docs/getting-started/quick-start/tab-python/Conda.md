@@ -1,25 +1,24 @@
+# 使用 Conda 安装
 
-# Install with Conda
-
-1. **Create a Conda Environment:**
+1. **创建 Conda 环境：**
 
    ```bash
    conda create -n open-webui python=3.11
    ```
 
-2. **Activate the Environment:**
+2. **激活环境：**
 
    ```bash
    conda activate open-webui
    ```
 
-3. **Install Open WebUI:**
+3. **安装 Open WebUI：**
 
    ```bash
    pip install open-webui
    ```
 
-4. **Start the Server:**
+4. **启动服务器：**
 
    ```bash
    open-webui serve

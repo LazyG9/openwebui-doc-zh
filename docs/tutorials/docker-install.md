@@ -1,27 +1,27 @@
 ---
 sidebar_position: 0
-title: 🐳 Installing Docker
+title: 🐳 安装 Docker
 ---
 
 :::warning
-This tutorial is a community contribution and is not supported by the OpenWebUI team. It serves only as a demonstration on how to customize OpenWebUI for your specific use case. Want to contribute? Check out the contributing tutorial.
+本教程是社区贡献内容，不由 OpenWebUI 团队提供支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
 :::
 
-# Installing Docker
+# 安装 Docker
 
-## For Windows and Mac Users
+## Windows 和 Mac 用户
 
-- Download Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).  
-- Follow the installation instructions on the website.  
-- After installation, **open Docker Desktop** to ensure it's running properly.
+- 从 [Docker 官方网站](https://www.docker.com/products/docker-desktop) 下载 Docker Desktop。
+- 按照网站上的安装说明进行操作。
+- 安装完成后，**打开 Docker Desktop** 确保它正常运行。
 
 ---
 
-## For Ubuntu Users
+## Ubuntu 用户
 
-1. **Open your terminal.**
+1. **打开终端。**
 
-2. **Set up Docker’s apt repository:**
+2. **设置 Docker 的 apt 仓库：**
 
    ```bash
    sudo apt-get update
@@ -36,17 +36,17 @@ This tutorial is a community contribution and is not supported by the OpenWebUI 
    ```
 
 :::note
-If using an **Ubuntu derivative** (e.g., Linux Mint), use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
+如果使用 **Ubuntu 衍生版**（如 Linux Mint），请使用 `UBUNTU_CODENAME` 替代 `VERSION_CODENAME`。
 :::
 
-3. **Install Docker Engine:**
+3. **安装 Docker Engine：**
 
    ```bash
    sudo apt-get update
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
    ```
 
-4. **Verify Docker Installation:**
+4. **验证 Docker 安装：**
 
    ```bash
    sudo docker run hello-world
@@ -54,17 +54,17 @@ If using an **Ubuntu derivative** (e.g., Linux Mint), use `UBUNTU_CODENAME` inst
 
 ---
 
-## For Other Linux Distributions
+## 其他 Linux 发行版
 
-For other Linux distributions, refer to the [official Docker documentation](https://docs.docker.com/engine/install/).
+对于其他 Linux 发行版，请参考 [Docker 官方文档](https://docs.docker.com/engine/install/)。
 
 ---
 
-## Install and Verify Ollama
+## 安装和验证 Ollama
 
-1. **Download Ollama** from [https://ollama.com/](https://ollama.com/).
+1. **下载 Ollama**，访问 [https://ollama.com/](https://ollama.com/)。
 
-2. **Verify Ollama Installation:**
-   - Open a browser and navigate to:
-     [http://127.0.0.1:11434/](http://127.0.0.1:11434/).
-   - Note: The port may vary based on your installation.
+2. **验证 Ollama 安装：**
+   - 打开浏览器并访问：
+     [http://127.0.0.1:11434/](http://127.0.0.1:11434/)。
+   - 注意：端口可能因安装设置而异。

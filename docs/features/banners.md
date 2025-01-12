@@ -1,64 +1,64 @@
 ---
 sidebar_position: 13
-title: "🔰 Customizable Banners"
+title: "🔰 可自定义横幅"
 ---
 
-Overview
+概述
 --------
 
-Open WebUI provides a feature that allows administrators to create customizable banners with persistence in the `config.json` file. These banners can feature options for content, background color (info, warning, error, or success), and dismissibility. Banners are accessible only to logged-in users, ensuring the confidentiality of sensitive information.
+Open WebUI 提供了一个功能，允许管理员在 `config.json` 文件中创建可持久化的自定义横幅。这些横幅可以设置内容、背景颜色（信息、警告、错误或成功）和是否可关闭等选项。横幅仅对已登录用户可见，确保敏感信息的保密性。
 
-Configuring Banners through the Admin Panel
+通过管理面板配置横幅
 ---------------------------------------------
 
-To configure banners through the admin panel, follow these steps:
+要通过管理面板配置横幅，请按照以下步骤操作：
 
-1. Log in to your Open WebUI instance as an administrator.
-2. Navigate to the `Admin Panel` -> `Settings` -> `Interface`.
-3. Locate the `Banners` option directly above the `Default Prompt Suggestions` option.
-4. Click on the `+` icon to add a new banner.
-5. Select the banner type and set the banner text as desired.
-6. Choose whether the banner is dismissible or not.
-7. Set the timestamp for the banner (optional).
-8. Press `Save` at the bottom of the page to save the banner.
+1. 以管理员身份登录到你的 Open WebUI 实例。
+2. 导航到`管理面板` -> `设置` -> `界面`。
+3. 在`默认提示建议`选项上方找到`横幅`选项。
+4. 点击`+`图标添加新横幅。
+5. 选择横幅类型并根据需要设置横幅文本。
+6. 选择横幅是否可关闭。
+7. 设置横幅的时间戳（可选）。
+8. 点击页面底部的`保存`按钮保存横幅。
 
-Configuring Banners through Environment Variables
+通过环境变量配置横幅
 ------------------------------------------------
 
-Alternatively, you can configure banners through environment variables. To do this, you will need to set the `WEBUI_BANNERS` environment variable with a list of dictionaries in the following format:
+另外，你也可以通过环境变量配置横幅。要做到这一点，你需要按照以下格式设置 `WEBUI_BANNERS` 环境变量，其中包含一个字典列表：
 
 ```json
 [{"id": "string","type": "string [info, success, warning, error]","title": "string","content": "string","dismissible": False,"timestamp": 1000}]
 ```
 
-For more information on configuring environment variables in Open WebUI, see [Environment Variable Configuration](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration#webui_banners).
+有关在 Open WebUI 中配置环境变量的更多信息，请参见[环境变量配置](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration#webui_banners)。
 
-Environment Variable Description
+环境变量说明
 ---------------------------------
 
 * `WEBUI_BANNERS`:
-  * Type: list of dict
-  * Default: `[]`
-  * Description: List of banners to show to users.
+  * 类型：字典列表
+  * 默认值：`[]`
+  * 描述：要向用户显示的横幅列表。
 
-Banner Options
+横幅选项
 ----------------
 
-* `id`: Unique identifier for the banner.
-* `type`: Background color of the banner (info, success, warning, error).
-* `title`: Title of the banner.
-* `content`: Content of the banner.
-* `dismissible`: Whether the banner is dismissible or not.
-* `timestamp`: Timestamp for the banner (optional).
+* `id`：横幅的唯一标识符。
+* `type`：横幅的背景颜色（info、success、warning、error）。
+* `title`：横幅的标题。
+* `content`：横幅的内容。
+* `dismissible`：横幅是否可关闭。
+* `timestamp`：横幅的时间戳（可选）。
 
-FAQ
+常见问题
 ----
 
-* Q: Can I configure banners through the admin panel?
-A: Yes, you can configure banners through the admin panel by navigating to `Admin Panel` -> `Settings` -> `Interface` and clicking on the `+` icon to add a new banner.
-* Q: Can I configure banners through environment variables?
-A: Yes, you can configure banners through environment variables by setting the `WEBUI_BANNERS` environment variable with a list of dictionaries.
-* Q: What is the format for the `WEBUI_BANNERS` environment variable?
-A: The format for the `WEBUI_BANNERS` environment variable is a list of dictionaries with the following keys: `id`, `type`, `title`, `content`, `dismissible`, and `timestamp`.
-* Q: Can I make banners dismissible?
-A: Yes, you can make banners dismissible by setting the `dismissible` key to `True` in the banner configuration or by toggling dismissibility for a banner within the UI.
+* 问：我可以通过管理面板配置横幅吗？
+答：是的，你可以通过导航到`管理面板` -> `设置` -> `界面`并点击`+`图标来添加新横幅。
+* 问：我可以通过环境变量配置横幅吗？
+答：是的，你可以通过设置包含字典列表的 `WEBUI_BANNERS` 环境变量来配置横幅。
+* 问：`WEBUI_BANNERS` 环境变量的格式是什么？
+答：`WEBUI_BANNERS` 环境变量的格式是一个字典列表，每个字典包含以下键：`id`、`type`、`title`、`content`、`dismissible` 和 `timestamp`。
+* 问：我可以让横幅可关闭吗？
+答：是的，你可以通过在横幅配置中将 `dismissible` 键设置为 `True`，或在用户界面中切换横幅的可关闭性来实现这一点。

@@ -1,173 +1,173 @@
 ---
 sidebar_position: 6
-title: "🎨 Image Generation"
+title: "🎨 图像生成"
 ---
 
 :::warning
-This tutorial is a community contribution and is not supported by the OpenWebUI team. It serves only as a demonstration on how to customize OpenWebUI for your specific use case. Want to contribute? Check out the contributing tutorial.
+本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
 :::
 
-# 🎨 Image Generation
+# 🎨 图像生成
 
-Open WebUI supports image generation through three backends: **AUTOMATIC1111**, **ComfyUI**, and **OpenAI DALL·E**. This guide will help you set up and use either of these options.
+Open WebUI 支持通过三个后端进行图像生成：**AUTOMATIC1111**、**ComfyUI** 和 **OpenAI DALL·E**。本指南将帮助您设置和使用这些选项。
 
 ## AUTOMATIC1111
 
-Open WebUI supports image generation through the **AUTOMATIC1111** [API](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/API). Here are the steps to get started:
+Open WebUI 支持通过 **AUTOMATIC1111** [API](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/API) 生成图像。以下是开始使用的步骤：
 
-### Initial Setup
+### 初始设置
 
-1. Ensure that you have [AUTOMATIC1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) installed.
-2. Launch AUTOMATIC1111 with additional flags to enable API access:
+1. 确保您已安装 [AUTOMATIC1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui)。
+2. 使用额外的标志启动 AUTOMATIC1111 以启用 API 访问：
 
    ```
    ./webui.sh --api --listen
    ```
 
-3. For Docker installation of WebUI with the environment variables preset, use the following command:
+3. 对于预设环境变量的 WebUI Docker 安装，使用以下命令：
 
    ```
    docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -e AUTOMATIC1111_BASE_URL=http://host.docker.internal:7860/ -e ENABLE_IMAGE_GENERATION=True -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
    ```
 
-### Setting Up Open WebUI with AUTOMATIC1111
+### 使用 AUTOMATIC1111 设置 Open WebUI
 
-1. In Open WebUI, navigate to the **Admin Panel** > **Settings** > **Images** menu.
-2. Set the `Image Generation Engine` field to `Default (Automatic1111)`.
-3. In the API URL field, enter the address where AUTOMATIC1111's API is accessible:
+1. 在 Open WebUI 中，导航到 **Admin Panel** > **Settings** > **Images** 菜单。
+2. 将 `Image Generation Engine` 字段设置为 `Default (Automatic1111)`。
+3. 在 API URL 字段中，输入可访问 AUTOMATIC1111 API 的地址：
 
    ```
    http://<your_automatic1111_address>:7860/
    ```
 
-   If you're running a Docker installation of Open WebUI and AUTOMATIC1111 on the same host, use `http://host.docker.internal:7860/` as your address.
+   如果您在同一主机上运行 Open WebUI 和 AUTOMATIC1111 的 Docker 安装，请使用 `http://host.docker.internal:7860/` 作为您的地址。
 
 ## ComfyUI
 
-ComfyUI provides an alternative interface for managing and interacting with image generation models. Learn more or download it from its [GitHub page](https://github.com/comfyanonymous/ComfyUI). Below are the setup instructions to get ComfyUI running alongside your other tools.
+ComfyUI 提供了另一种管理图像生成模型的接口。更多信息或从其 [GitHub 页面](https://github.com/comfyanonymous/ComfyUI) 下载。以下是设置 ComfyUI 以与您的其他工具一起运行的步骤。
 
-### Initial Setup
+### 初始设置
 
-1. Download and extract the ComfyUI software package from [GitHub](https://github.com/comfyanonymous/ComfyUI) to your desired directory.
-2. To start ComfyUI, run the following command:
+1. 从 [GitHub](https://github.com/comfyanonymous/ComfyUI) 下载并提取 ComfyUI 软件包到您想要的目录。
+2. 要启动 ComfyUI，请运行以下命令：
 
    ```
    python main.py
    ```
 
-   For systems with low VRAM, launch ComfyUI with additional flags to reduce memory usage:
+   对于 VRAM 较低的系统，使用额外的标志启动 ComfyUI 以减少内存使用：
 
    ```
    python main.py --lowvram
    ```
 
-3. For Docker installation of WebUI with the environment variables preset, use the following command:
+3. 对于预设环境变量的 WebUI Docker 安装，使用以下命令：
 
    ```
    docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -e COMFYUI_BASE_URL=http://host.docker.internal:7860/ -e ENABLE_IMAGE_GENERATION=True -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
    ```
 
-### Setting Up Open WebUI with ComfyUI
+### 使用 ComfyUI 设置 Open WebUI
 
-#### Setting Up FLUX.1 Models
+#### 设置 FLUX.1 模型
 
-1. **Model Checkpoints**:
+1. **模型检查点**：
 
-* Download either the `FLUX.1-schnell` or `FLUX.1-dev` model from the [black-forest-labs HuggingFace page](https://huggingface.co/black-forest-labs).
-* Place the model checkpoint(s) in both the `models/checkpoints` and `models/unet` directories of ComfyUI. Alternatively, you can create a symbolic link between `models/checkpoints` and `models/unet` to ensure both directories contain the same model checkpoints.
+* 从 [black-forest-labs HuggingFace 页面](https://huggingface.co/black-forest-labs) 下载 `FLUX.1-schnell` 或 `FLUX.1-dev` 模型。
+* 将模型检查点（s）放置在 ComfyUI 的 `models/checkpoints` 和 `models/unet` 目录中。或者，您可以在 `models/checkpoints` 和 `models/unet` 之间创建一个符号链接，以确保两个目录都包含相同的模型检查点。
 
-2. **VAE Model**:
+2. **VAE 模型**：
 
-* Download `ae.safetensors` VAE from [here](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors).
-* Place it in the `models/vae` ComfyUI directory.
+* 从 [这里](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors) 下载 `ae.safetensors` VAE。
+* 将其放置在 ComfyUI 的 `models/vae` 目录中。
 
-3. **CLIP Model**:
+3. **CLIP 模型**：
 
-* Download `clip_l.safetensors` from [here](https://huggingface.co/comfyanonymous/flux_text_encoders/tree/main).
-* Place it in the `models/clip` ComfyUI directory.
+* 从 [这里](https://huggingface.co/comfyanonymous/flux_text_encoders/tree/main) 下载 `clip_l.safetensors`。
+* 将其放置在 ComfyUI 的 `models/clip` 目录中。
 
-4. **T5XXL Model**:
+4. **T5XXL 模型**：
 
-* Download either the `t5xxl_fp16.safetensors` or `t5xxl_fp8_e4m3fn.safetensors` model from [here](https://huggingface.co/comfyanonymous/flux_text_encoders/tree/main).
-* Place it in the `models/clip` ComfyUI directory.
+* 从 [这里](https://huggingface.co/comfyanonymous/flux_text_encoders/tree/main) 下载 `t5xxl_fp16.safetensors` 或 `t5xxl_fp8_e4m3fn.safetensors` 模型。
+* 将其放置在 ComfyUI 的 `models/clip` 目录中。
 
-To integrate ComfyUI into Open WebUI, follow these steps:
+要集成 ComfyUI 到 Open WebUI，请执行以下步骤：
 
-#### Step 1: Configure Open WebUI Settings
+#### 步骤 1：配置 Open WebUI 设置
 
-1. Navigate to the **Admin Panel** in Open WebUI.
-2. Click on **Settings** and then select the **Images** tab.
-3. In the `Image Generation Engine` field, choose `ComfyUI`.
-4. In the **API URL** field, enter the address where ComfyUI's API is accessible, following this format: `http://<your_comfyui_address>:8188/`.
-   * Set the environment variable `COMFYUI_BASE_URL` to this address to ensure it persists within the WebUI.
+1. 导航到 Open WebUI 中的 **Admin Panel**。
+2. 点击 **Settings** 并选择 **Images** 选项卡。
+3. 在 `Image Generation Engine` 字段中选择 `ComfyUI`。
+4. 在 **API URL** 字段中输入可访问 ComfyUI API 的地址，格式如下：`http://<your_comfyui_address>:8188/`。
+   * 将环境变量 `COMFYUI_BASE_URL` 设置为此地址，以确保它持久存在于 WebUI 中。
 
-#### Step 2: Verify the Connection and Enable Image Generation
+#### 步骤 2：验证连接并启用图像生成
 
-1. Ensure ComfyUI is running and that you've successfully verified the connection to Open WebUI. You won't be able to proceed without a successful connection.
-2. Once the connection is verified, toggle on **Image Generation (Experimental)**. More options will be presented to you.
-3. Continue to step 3 for the final configuration steps.
+1. 确保 ComfyUI 正在运行，并且您已成功验证与 Open WebUI 的连接。您将无法继续，除非连接成功。
+2. 连接成功后，切换 **Image Generation (Experimental)**。将显示更多选项。
+3. 继续进行步骤 3 以完成最终配置步骤。
 
-#### Step 3: Configure ComfyUI Settings and Import Workflow
+#### 步骤 3：配置 ComfyUI 设置和导入工作流
 
-1. Enable developer mode within ComfyUI. To do this, look for the gear icon above the **Queue Prompt** button within ComfyUI and enable the `Dev Mode` toggle.
-2. Export the desired workflow from ComfyUI in `API format` using the `Save (API Format)` button. The file will be downloaded as `workflow_api.json` if done correctly.
-3. Return to Open WebUI and click the **Click here to upload a workflow.json file** button.
-4. Select the `workflow_api.json` file to import the exported workflow from ComfyUI into Open WebUI.
-5. After importing the workflow, you must map the `ComfyUI Workflow Nodes` according to the imported workflow node IDs.
-6. Set `Set Default Model` to the name of the model file being used, such as `flux1-dev.safetensors`
+1. 在 ComfyUI 中启用开发者模式。为此，请在 ComfyUI 中查找齿轮图标并启用 `Dev Mode` 切换。
+2. 使用 `Save (API Format)` 按钮将所需的工作流从 ComfyUI 导出为 `API 格式`。文件将下载为 `workflow_api.json` 如果正确完成。
+3. 返回 Open WebUI 并点击 **Click here to upload a workflow.json file** 按钮。
+4. 选择 `workflow_api.json` 文件以将导出的工作流从 ComfyUI 导入到 Open WebUI。
+5. 导入工作流后，您必须映射 `ComfyUI Workflow Nodes` 根据导入的工作流节点 ID。
+6. 将 `Set Default Model` 设置为正在使用的模型文件的名称，例如 `flux1-dev.safetensors`
 
 :::info
-You may need to adjust an `Input Key` or two within Open WebUI's `ComfyUI Workflow Nodes` section to match a node within your workflow.
-For example, `seed` may need to be renamed to `noise_seed` to match a node ID within your imported workflow.
+您可能需要调整 Open WebUI 的 `ComfyUI Workflow Nodes` 部分中的一个或两个 `Input Key` 以匹配工作流中的节点。
+例如，`seed` 可能需要重命名为 `noise_seed` 以匹配工作流中的节点 ID。
 :::
 :::tip
-Some workflows, such as ones that use any of the Flux models, may utilize multiple nodes IDs that is necessary to fill in for their node entry fields within Open WebUI. If a node entry field requires multiple IDs, the node IDs should be comma separated (e.g. `1` or `1, 2`).
+一些工作流（例如使用任何 Flux 模型的工作流）可能利用多个节点 ID，这些 ID 是必要的，以填充 Open WebUI 中工作流节点条目字段中的节点 ID。如果节点条目字段需要多个 ID，则节点 ID 应该是逗号分隔的（例如 `1` 或 `1, 2`）。
 :::
 
-6. Click `Save` to apply the settings and enjoy image generation with ComfyUI integrated into Open WebUI!
+6. 点击 `Save` 应用设置并享受使用 ComfyUI 集成到 Open WebUI 的图像生成！
 
-After completing these steps, your ComfyUI setup should be integrated with Open WebUI, and you can use the Flux.1 models for image generation.
+完成这些步骤后，您的 ComfyUI 设置应与 Open WebUI 集成，您可以使用 Flux.1 模型进行图像生成。
 
-### Configuring with SwarmUI
+### 配置 SwarmUI
 
-SwarmUI utilizes ComfyUI as its backend. In order to get Open WebUI to work with SwarmUI you will have to append `ComfyBackendDirect` to the `ComfyUI Base URL`. Additionally, you will want to setup SwarmUI with LAN access. After aforementioned adjustments, setting up SwarmUI to work with Open WebUI will be the same as [Step one: Configure Open WebUI Settings](https://github.com/open-webui/docs/edit/main/docs/features/images.md#step-1-configure-open-webui-settings) as outlined above.
+SwarmUI 使用 ComfyUI 作为其后端。为了使 Open WebUI 与 SwarmUI 一起工作，您必须将 `ComfyBackendDirect` 附加到 `ComfyUI Base URL`。此外，您还需要设置 SwarmUI 与 LAN 访问。在上述调整之后，设置 SwarmUI 与 Open WebUI 一起工作将与 [步骤 1：配置 Open WebUI 设置](https://github.com/open-webui/docs/edit/main/docs/features/images.md#step-1-configure-open-webui-settings) 相同。
 ![Install SwarmUI with LAN Access](https://github.com/user-attachments/assets/a6567e13-1ced-4743-8d8e-be526207f9f6)
 
 #### SwarmUI API URL
 
-The address you will input as the ComfyUI Base URL will look like: `http://<your_swarmui_address>:7801/ComfyBackendDirect`
+您将输入的 ComfyUI Base URL 将如下所示：`http://<your_swarmui_address>:7801/ComfyBackendDirect`
 
 ## OpenAI DALL·E
 
-Open WebUI also supports image generation through the **OpenAI DALL·E APIs**. This option includes a selector for choosing between DALL·E 2 and DALL·E 3, each supporting different image sizes.
+Open WebUI 还支持通过 **OpenAI DALL·E APIs** 生成图像。此选项包括选择 DALL·E 2 和 DALL·E 3 的选项，每个选项支持不同的图像大小。
 
-### Initial Setup
+### 初始设置
 
-1. Obtain an [API key](https://platform.openai.com/api-keys) from OpenAI.
+1. 从 OpenAI 获取 [API 密钥](https://platform.openai.com/api-keys)。
 
-### Configuring Open WebUI
+### 配置 Open WebUI
 
-1. In Open WebUI, navigate to the **Admin Panel** > **Settings** > **Images** menu.
-2. Set the `Image Generation Engine` field to `Open AI (Dall-E)`.
-3. Enter your OpenAI API key.
-4. Choose the DALL·E model you wish to use. Note that image size options will depend on the selected model:
-   * **DALL·E 2**: Supports `256x256`, `512x512`, or `1024x1024` images.
-   * **DALL·E 3**: Supports `1024x1024`, `1792x1024`, or `1024x1792` images.
+1. 在 Open WebUI 中，导航到 **Admin Panel** > **Settings** > **Images** 菜单。
+2. 将 `Image Generation Engine` 字段设置为 `Open AI (Dall-E)`。
+3. 输入您的 OpenAI API 密钥。
+4. 选择您要使用的 DALL·E 模型。请注意，图像大小选项将取决于所选模型：
+   * **DALL·E 2**：支持 `256x256`、`512x512` 或 `1024x1024` 图像。
+   * **DALL·E 3**：支持 `1024x1024`、`1792x1024` 或 `1024x1792` 图像。
 
 ### Azure OpenAI
 
-Using Azure OpenAI Dall-E directly is unsupported, but you can [set up a LiteLLM proxy](https://litellm.vercel.app/docs/image_generation) which is compatible with the `Open AI (Dall-E)` Image Generation Engine.
+使用 Azure OpenAI Dall-E 直接是不支持的，但您可以 [设置 LiteLLM 代理](https://litellm.vercel.app/docs/image_generation)，它与 `Open AI (Dall-E)` 图像生成引擎兼容。
 
-## Using Image Generation
+## 使用图像生成
 
 ![Image Generation Tutorial](/img/tutorial_image_generation.png)
 
-1. First, use a text generation model to write a prompt for image generation.
-2. After the response has finished, you can click the Picture icon to generate an image.
-3. After the image has finished generating, it will be returned automatically in chat.
+1. 首先，使用文本生成模型编写图像生成提示。
+2. 响应完成后，您可以点击图片图标生成图像。
+3. 图像生成完成后，它将自动返回聊天。
 
 :::tip
-    You can also edit the LLM's response and enter your image generation prompt as the message
-    to send off for image generation instead of using the actual response provided by the
-    LLM.
+   您还可以编辑 LLM 的响应并输入图像生成提示作为消息
+   发送给图像生成而不是使用实际响应提供的
+   由 LLM 提供。
 :::

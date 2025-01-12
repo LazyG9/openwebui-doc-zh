@@ -1,27 +1,27 @@
 ---
 sidebar_position: 300 
-title: "🔄 Updating Open WebUI"
+title: "🔄 更新 Open WebUI"
 ---
 
 
 
-## Why isn't my Open WebUI updating?
+## 为什么我的 Open WebUI 没有更新？
 
-To update your local Docker installation of Open WebUI to the latest version available, you can either use **Watchtower** or manually update the container. Follow either of the steps provided below to be guided through updating your existing Open WebUI image.
+要将本地 Docker 安装的 Open WebUI 更新到最新版本，您可以使用 **Watchtower** 或手动更新容器。按照以下步骤之一进行操作，指导您更新现有的 Open WebUI 镜像。
 
-### Manual Update
+### 手动更新
 
-1. **Stop and remove the current container**:
+1. **停止并删除当前容器**：
 
-   This will stop the running container and remove it, but it won't delete the data stored in the Docker volume. (Replace `open-webui` with your container's name throughout the updating process if it's different for you.)
+   这将停止正在运行的容器并将其删除，但不会删除存储在 Docker 卷中的数据。（如果您的容器名称不同，请在整个更新过程中将 `open-webui` 替换为您的容器名称。）
 
 ```bash
 docker rm -f open-webui
 ```
 
-2. **Pull the latest Docker image**:
+2. **拉取最新的 Docker 镜像**：
 
-   This will update the Docker image, but it won't update the running container or its data.
+   这将更新 Docker 镜像，但不会更新正在运行的容器或其数据。
 
 ```bash
 docker pull ghcr.io/open-webui/open-webui:main
@@ -29,40 +29,40 @@ docker pull ghcr.io/open-webui/open-webui:main
 
 
 :::info
-**Remove any existing data in the Docker volume (NOT RECOMMENDED UNLESS ABSOLUTELY NECCESSARY!)**. Skip this step entirely if not needed and move on to the last step:
+**删除 Docker 卷中的任何现有数据（除非绝对必要，否则不建议！）**。如果不需要，请完全跳过此步骤并继续最后一步：
 
-   If you want to start with a clean slate, you can remove the existing data in the Docker volume. Be careful, as this will delete all your chat histories and other data.
+   如果您想从头开始，可以删除 Docker 卷中的现有数据。请小心，因为这将删除所有聊天历史记录和其他数据。
 
-   The data is stored in a Docker volume named `open-webui`. You can remove it with the following command:
+   数据存储在名为 `open-webui` 的 Docker 卷中。您可以使用以下命令删除它：
 
 ```bash
 docker volume rm open-webui
 ```
 :::
 
-3. **Start the container again with the updated image and existing volume attached**:
+3. **使用更新的镜像和附加的现有卷重新启动容器**：
 
-   If you didn't remove the existing data, this will start the container with the updated image and the existing data. If you removed the existing data, this will start the container with the updated image and a new, empty volume. **For Nvidia GPU support, add `--gpus all` to the docker run command**
+   如果您没有删除现有数据，这将使用更新的镜像和现有数据启动容器。如果您删除了现有数据，这将使用更新的镜像和一个新的空卷启动容器。**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**
 
 ```bash
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main
 ```
 
-## Automatically Updating Open WebUI with Watchtower
+## 使用 Watchtower 自动更新 Open WebUI
 
-You can use [Watchtower](https://containrrr.dev/watchtower/) to automate the update process for Open WebUI. Here are three options:
+您可以使用 [Watchtower](https://containrrr.dev/watchtower/) 自动化 Open WebUI 的更新过程。以下是三个选项：
 
-### Option 1: One-time Update
+### 选项 1：一次性更新
 
-You can run Watchtower as a one-time update to stop the current container, pull the latest image, and start a new container with the updated image and existing volume attached (**For Nvidia GPU support, add `--gpus all` to the docker run command**):
+您可以运行 Watchtower 作为一次性更新，停止当前容器，拉取最新镜像，并使用更新的镜像和附加的现有卷启动新容器（**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**）：
 
 ```bash
 docker run --rm --volume /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once open-webui
 ```
 
-### Option 2: Running Watchtower as a Separate Container
+### 选项 2：将 Watchtower 作为单独的容器运行
 
-You can run Watchtower as a separate container that watches and updates your Open WebUI container:
+您可以将 Watchtower 作为单独的容器运行，监视和更新您的 Open WebUI 容器：
 
 ```bash
 docker run -d --name watchtower \
@@ -70,11 +70,11 @@ docker run -d --name watchtower \
   containrrr/watchtower -i 300 open-webui
 ```
 
-This will start Watchtower in detached mode, watching your Open WebUI container for updates every 5 minutes.
+这将以分离模式启动 Watchtower，每 5 分钟监视一次您的 Open WebUI 容器是否有更新。
 
-### Option 3: Integrating Watchtower with a `docker-compose.yml` File
+### 选项 3：将 Watchtower 与 `docker-compose.yml` 文件集成
 
-You can also integrate Watchtower with your `docker-compose.yml` file to automate updates for Open WebUI (**For Nvidia GPU support, add `--gpus all` to the docker run command**):
+您还可以将 Watchtower 与您的 `docker-compose.yml` 文件集成，以自动更新 Open WebUI（**对于 Nvidia GPU 支持，请在 docker run 命令中添加 `--gpus all`**）：
 
 ```yml
 version: '3'
@@ -98,14 +98,14 @@ volumes:
   open-webui:
 ```
 
-In this example, Watchtower is integrated with the `docker-compose.yml` file and watches the Open WebUI container for updates every 5 minutes.
+在此示例中，Watchtower 与 `docker-compose.yml` 文件集成，每 5 分钟监视一次 Open WebUI 容器是否有更新。
 
-## Persistent Data in Docker Volumes
+## Docker 卷中的持久数据
 
-The data is stored in a Docker volume named `open-webui`. The path to the volume is not directly accessible, but you can inspect the volume with the following command:
+数据存储在名为 `open-webui` 的 Docker 卷中。卷的路径不能直接访问，但您可以使用以下命令检查卷：
 
 ```bash
 docker volume inspect open-webui
 ```
 
-This will show you the details of the volume, including the mountpoint, which is usually located in `/var/lib/docker/volumes/open-webui/_data`.
+这将显示卷的详细信息，包括挂载点，通常位于 `/var/lib/docker/volumes/open-webui/_data`。

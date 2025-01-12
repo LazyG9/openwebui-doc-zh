@@ -1,60 +1,60 @@
 ---
 sidebar_position: 17
-title: "🪝 Webhook Integrations"
+title: "🪝 Webhook 集成"
 ---
 
-Overview
+概述
 --------
 
-Open WebUI provides a webhook feature that allows you to receive notifications automatically whenever new users sign up to your instance. This is done by providing a webhook URL to Open WebUI, which will then send notifications to that URL when a new user account is created.
+Open WebUI 提供了 webhook 功能，允许你在新用户注册到你的实例时自动接收通知。这是通过向 Open WebUI 提供一个 webhook URL 来实现的，当新用户账户创建时，系统会向该 URL 发送通知。
 
-Configuring Webhooks in Open WebUI
+在 Open WebUI 中配置 Webhooks
 ---------------------------------
 
-You will need to obtain a webhook URL from an external service that supports webhooks, such as a Discord channel or a Slack workspace. This URL will be used to receive notifications from Open WebUI.
+你需要从支持 webhooks 的外部服务（如 Discord 频道或 Slack 工作区）获取一个 webhook URL。这个 URL 将用于接收来自 Open WebUI 的通知。
 
-To configure webhooks in Open WebUI, you have two options:
+在 Open WebUI 中配置 webhooks 有两种方式：
 
-### Option 1: Configure through the Admin Interface
+### 方式 1：通过管理界面配置
 
-1. Log in to your Open WebUI instance as an administrator.
-2. Navigate to the `Admin Panel`.
-3. Click the `Settings` tab located at the top.
-4. From there, navigate to the `General` sectionn of the setting in the admin panel.
-5. Locate the `Webhook URL` field and enter the webhook URL.
-6. Save the changes.
+1. 以管理员身份登录到你的 Open WebUI 实例。
+2. 导航到`管理面板`。
+3. 点击顶部的`设置`标签。
+4. 从那里，导航到管理面板中的`常规`部分。
+5. 找到`Webhook URL`字段并输入 webhook URL。
+6. 保存更改。
 
-### Option 2: Configure through Environment Variables
+### 方式 2：通过环境变量配置
 
-Alternatively, you can configure the webhook URL by setting the `WEBHOOK_URL` environment variable. For more information on environment variables in Open WebUI, see [Environment Variable Configuration](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration/#webhook_url).
+另外，你也可以通过设置 `WEBHOOK_URL` 环境变量来配置 webhook URL。有关 Open WebUI 中环境变量的更多信息，请参见[环境变量配置](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration/#webhook_url)。
 
-### Step 3: Verify the Webhook
+### 步骤 3：验证 Webhook
 
-To verify that the webhook is working correctly, create a new user account in Open WebUI. If the webhook is configured correctly, you should receive a notification at the specified webhook URL.
+要验证 webhook 是否正常工作，请在 Open WebUI 中创建一个新用户账户。如果 webhook 配置正确，你应该会在指定的 webhook URL 收到通知。
 
-Webhook Payload Format
+Webhook 负载格式
 ----------------------
 
-The webhook payload sent by Open WebUI is in plain text and contains a simple notification message about the new user account. The payload format is as follows:
+Open WebUI 发送的 webhook 负载是纯文本格式，包含关于新用户账户的简单通知消息。负载格式如下：
 
 ```
 New user signed up: <username>
 ```
 
-For example, if a user named "Tim" signs up, the payload sent would be:
+例如，如果一个名为"Tim"的用户注册，发送的负载将是：
 
 ```
 New user signed up: Tim
 ```
 
-Troubleshooting
+故障排除
 --------------
 
-* Make sure the webhook URL is correct and properly formatted.
-* Verify that the webhook service is enabled and configured correctly.
-* Check the Open WebUI logs for any errors related to the webhook.
-* Verify the connection hasn't been interrupted or blocked by a firewall or proxy.
-* The webhook server could be temporarily unavailable or experiencing high latency.
-* If provided through the webhook service, verify if the Webhook API key is invalid, expired, or revoked.
+* 确保 webhook URL 正确且格式正确。
+* 验证 webhook 服务已启用并正确配置。
+* 检查 Open WebUI 日志中是否有与 webhook 相关的错误。
+* 验证连接是否被防火墙或代理中断或阻止。
+* webhook 服务器可能暂时不可用或出现高延迟。
+* 如果是通过 webhook 服务提供的，请验证 Webhook API 密钥是否无效、过期或被撤销。
 
-Note: The webhook feature in Open WebUI is still evolving, and we plan to add more features and event types in the future.
+注意：Open WebUI 中的 webhook 功能仍在不断发展，我们计划在未来添加更多功能和事件类型。

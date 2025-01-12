@@ -1,80 +1,80 @@
 ---
 sidebar_position: 1600
-title: "🤝 Contributing"
+title: "🤝 贡献指南"
 ---
 
 import { TopBanners } from "@site/src/components/TopBanners";
 
 <TopBanners />
 
-🚀 **Welcome, Contributors!** 🚀
+🚀 **欢迎，贡献者们！** 🚀
 
-Your interest in contributing to Open WebUI is greatly appreciated. This document is here to guide you through the process, ensuring your contributions enhance the project effectively. Let's make Open WebUI even better, together!
+非常感谢您有兴趣为 Open WebUI 做出贡献。本文档旨在指导您完成贡献过程，确保您的贡献能有效地增强项目。让我们一起让 Open WebUI 变得更好！
 
-## 💡 Contributing
+## 💡 如何贡献
 
-Looking to contribute? Great! Here's how you can help:
+想要贡献？太好了！以下是您可以帮助的方式：
 
-### 🌟 Code Contribution Guidelines
+### 🌟 代码贡献指南
 
-We welcome pull requests. Before submitting one, please:
+我们欢迎拉取请求。在提交之前，请：
 
-1. Open a discussion regarding your ideas [here](https://github.com/open-webui/open-webui/discussions/new/choose).
-2. Follow the project's coding standards and include tests for new features.
-3. Update documentation as necessary.
-4. Write clear, descriptive commit messages.
+1. 在[这里](https://github.com/open-webui/open-webui/discussions/new/choose)开启一个关于您想法的讨论。
+2. 遵循项目的编码标准，并为新功能包含测试。
+3. 根据需要更新文档。
+4. 编写清晰、描述性的提交消息。
 
-### 🛠 Code PR Best Practices:
+### 🛠 代码 PR 最佳实践：
 
-1. **Atomic PRs:** Make sure your PRs are small, focused, and deal with a single objective or task. This helps in easier code review and limits the chances of introducing unrelated issues. If the scope of changes grows too large, consider breaking them into smaller, logically independent PRs.
-2. **Follow Existing Code Convention:** Ensure your code aligns with the existing coding standards and practices of the project.
-3. **Avoid Additional External Dependencies:** Do not include additional external dependencies without prior discussion.
-4. **Framework Agnostic Approach:** We aim to stay framework agnostic. Implement functionalities on our own whenever possible rather than relying on external frameworks or libraries. If you have doubts or suggestions regarding this approach, feel free to discuss it.
+1. **原子性 PR：** 确保您的 PR 小而集中，只处理单一目标或任务。这有助于更容易的代码审查，并限制引入不相关问题的可能性。如果更改范围变得太大，考虑将其分解为更小的、逻辑独立的 PR。
+2. **遵循现有代码约定：** 确保您的代码与项目现有的编码标准和实践保持一致。
+3. **避免额外的外部依赖：** 在没有事先讨论的情况下，不要包含额外的外部依赖。
+4. **框架无关方法：** 我们的目标是保持框架无关性。尽可能自己实现功能，而不是依赖外部框架或库。如果您对这种方法有疑问或建议，请随时讨论。
 
-Thank you for contributing! 🚀
+感谢您的贡献！🚀
 
-### 📚 Documentation & Tutorials
+### 📚 文档和教程
 
-Help us make Open WebUI more accessible by improving documentation, writing tutorials, or creating guides on setting up and optimizing the web UI.
+通过改进文档、编写教程或创建关于设置和优化 Web UI 的指南，帮助我们使 Open WebUI 更容易使用。
 
-### 🌐 Translations and Internationalization
+### 🌐 翻译和国际化
 
-Help us make Open WebUI available to a wider audience. In this section, we'll guide you through the process of adding new translations to the project.
+帮助我们让 Open WebUI 面向更广泛的受众。在本节中，我们将指导您完成向项目添加新翻译的过程。
 
-We use JSON files to store translations. You can find the existing translation files in the `src/lib/i18n/locales` directory. Each directory corresponds to a specific language, for example, `en-US` for English (US), `fr-FR` for French (France) and so on. You can refer to [ISO 639 Language Codes](http://www.lingoes.net/en/translator/langcode.htm) to find the appropriate code for a specific language.
+我们使用 JSON 文件存储翻译。您可以在 `src/lib/i18n/locales` 目录中找到现有的翻译文件。每个目录对应一个特定的语言，例如，`en-US` 表示英语（美国），`fr-FR` 表示法语（法国）等。您可以参考 [ISO 639 语言代码](http://www.lingoes.net/en/translator/langcode.htm) 找到特定语言的适当代码。
 
-To add a new language:
+要添加新语言：
 
-- Create a new directory in the `src/lib/i18n/locales` path with the appropriate language code as its name. For instance, if you're adding translations for Spanish (Spain), create a new directory named `es-ES`.
-- Copy the American English translation file(s) (from `en-US` directory in `src/lib/i18n/locale`) to this new directory and update the string values in JSON format according to your language. Make sure to preserve the structure of the JSON object.
-- Add the language code and its respective title to languages file at `src/lib/i18n/locales/languages.json`.
+- 在 `src/lib/i18n/locales` 路径中创建一个以适当语言代码命名的新目录。例如，如果您要添加西班牙语（西班牙）翻译，创建一个名为 `es-ES` 的新目录。
+- 将美式英语翻译文件（从 `src/lib/i18n/locale` 中的 `en-US` 目录）复制到这个新目录，并根据您的语言更新 JSON 格式的字符串值。确保保持 JSON 对象的结构。
+- 将语言代码及其相应标题添加到 `src/lib/i18n/locales/languages.json` 的语言文件中。
 
-### 🤔 Questions & Feedback
+### 🤔 问题和反馈
 
-Got questions or feedback? Join our [Discord community](https://discord.gg/5rJgQTnV4s) or open an issue. We're here to help!
+有问题或反馈？加入我们的 [Discord 社区](https://discord.gg/5rJgQTnV4s)或开启一个问题。我们在这里帮助您！
 
-### 🚨 Reporting Issues
+### 🚨 报告问题
 
-Noticed something off? Have an idea? Check our [Issues tab](https://github.com/open-webui/open-webui/issues) to see if it's already been reported or suggested. If not, feel free to open a new issue. When reporting an issue, please follow our issue templates. These templates are designed to ensure that all necessary details are provided from the start, enabling us to address your concerns more efficiently.
+发现了什么问题？有什么想法？查看我们的[问题选项卡](https://github.com/open-webui/open-webui/issues)，看看是否已经有人报告或建议过。如果没有，请随时开启一个新问题。在报告问题时，请遵循我们的问题模板。这些模板旨在确保从一开始就提供所有必要的细节，使我们能够更有效地解决您的问题。
 
 :::important
 
-- **Template Compliance:** Please be aware that failure to follow the provided issue template, or not providing the requested information at all, will likely result in your issue being closed without further consideration. This approach is critical for maintaining the manageability and integrity of issue tracking.
+- **模板合规性：** 请注意，如果不遵循提供的问题模板，或根本不提供所需信息，您的问题很可能会被关闭而不会进一步考虑。这种方法对于维护问题跟踪的可管理性和完整性至关重要。
 
-- **Detail is Key:** To ensure your issue is understood and can be effectively addressed, it's imperative to include comprehensive details. Descriptions should be clear, including steps to reproduce, expected outcomes, and actual results. Lack of sufficient detail may hinder our ability to resolve your issue.
+- **细节是关键：** 为确保您的问题被理解并能得到有效解决，提供全面的细节至关重要。描述应该清晰，包括重现步骤、预期结果和实际结果。缺乏足够的细节可能会妨碍我们解决您的问题的能力。
 
 :::
 
-### 🧭 Scope of Support
+### 🧭 支持范围
 
-We've noticed an uptick in issues not directly related to Open WebUI but rather to the environment it's run in, especially Docker setups. While we strive to support Docker deployment, understanding Docker fundamentals is crucial for a smooth experience.
+我们注意到与 Open WebUI 无直接关系但与其运行环境（特别是 Docker 设置）相关的问题有所增加。虽然我们努力支持 Docker 部署，但了解 Docker 基础知识对于获得流畅的体验至关重要。
 
-- **Docker Deployment Support**: Open WebUI supports Docker deployment. Familiarity with Docker is assumed. For Docker basics, please refer to the [official Docker documentation](https://docs.docker.com/get-started/overview/).
+- **Docker 部署支持**：Open WebUI 支持 Docker 部署。假定您熟悉 Docker。有关 Docker 基础知识，请参阅[官方 Docker 文档](https://docs.docker.com/get-started/overview/)。
 
-- **Advanced Configurations**: Setting up reverse proxies for HTTPS and managing Docker deployments requires foundational knowledge. There are numerous online resources available to learn these skills. Ensuring you have this knowledge will greatly enhance your experience with Open WebUI and similar projects.
+- **高级配置**：设置 HTTPS 的反向代理和管理 Docker 部署需要基础知识。有许多在线资源可供学习这些技能。确保您掌握这些知识将大大提升您使用 Open WebUI 和类似项目的体验。
 
-## 🙏 Thank You!
+## 🙏 感谢您！
 
-Your contributions, big or small, make a significant impact on Open WebUI. We're excited to see what you bring to the project!
+您的贡献，无论大小，都对 Open WebUI 产生重大影响。我们很期待看到您为项目带来什么！
 
-Together, let's create an even more powerful tool for the community. 🌟
+让我们一起为社区创造一个更强大的工具。🌟

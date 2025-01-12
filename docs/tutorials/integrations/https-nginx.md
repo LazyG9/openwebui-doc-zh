@@ -1,21 +1,21 @@
 ---
-title: "🔒 HTTPS using Nginx"
+title: "🔒 使用 Nginx 配置 HTTPS"
 ---
 
 :::warning
-This tutorial is a community contribution and is not supported by the OpenWebUI team. It serves only as a demonstration on how to customize OpenWebUI for your specific use case. Want to contribute? Check out the contributing tutorial.
+本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
 :::
 
-# HTTPS using Nginx
+# 使用 Nginx 配置 HTTPS
 
-Ensuring secure communication between your users and the Open WebUI is paramount. HTTPS (HyperText Transfer Protocol Secure) encrypts the data transmitted, protecting it from eavesdroppers and tampering. By configuring Nginx as a reverse proxy, you can seamlessly add HTTPS to your Open WebUI deployment, enhancing both security and trustworthiness.
+确保用户与 Open WebUI 之间的安全通信至关重要。HTTPS（超文本传输协议安全）对传输的数据进行加密，保护其免受窃听和篡改。通过将 Nginx 配置为反向代理，您可以无缝地为 Open WebUI 部署添加 HTTPS，从而提高安全性和可信度。
 
-This guide provides two methods to set up HTTPS:
+本指南提供了两种设置 HTTPS 的方法：
 
-- **Self-Signed Certificates**: Ideal for development and internal use.
-- **Let's Encrypt**: Perfect for production environments requiring trusted SSL certificates.
+- **自签名证书**：适用于开发和内部使用。
+- **Let's Encrypt**：适用于需要受信任 SSL 证书的生产环境。
 
-Choose the method that best fits your deployment needs.
+选择最适合您部署需求的方法。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -24,7 +24,7 @@ import SelfSigned from './tab-nginx/SelfSigned.md';
 import LetsEncrypt from './tab-nginx/LetsEncrypt.md';
 
 <Tabs>
-  <TabItem value="self-signed" label="Self-Signed Certificate">
+  <TabItem value="self-signed" label="自签名证书">
     <SelfSigned />
   </TabItem>
 
@@ -33,12 +33,12 @@ import LetsEncrypt from './tab-nginx/LetsEncrypt.md';
   </TabItem>
 </Tabs>
 
-## Next Steps
+## 后续步骤
 
-After setting up HTTPS, access Open WebUI securely at:
+设置 HTTPS 后，可以通过以下地址安全地访问 Open WebUI：
 
 - [https://localhost](https://localhost)
 
-Ensure that your DNS records are correctly configured if you're using a domain name. For production environments, it's recommended to use Let's Encrypt for trusted SSL certificates.
+如果您使用域名，请确保正确配置 DNS 记录。对于生产环境，建议使用 Let's Encrypt 获取受信任的 SSL 证书。
 
 ---

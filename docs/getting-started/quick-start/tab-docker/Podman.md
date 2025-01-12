@@ -1,28 +1,27 @@
+# 使用 Podman
 
-# Using Podman
+Podman 是一个无守护进程的容器引擎，用于开发、管理和运行 OCI 容器。
 
-Podman is a daemonless container engine for developing, managing, and running OCI Containers.
+## 基本命令
 
-## Basic Commands
-
-- **Run a Container:**
+- **运行容器：**
 
   ```bash
   podman run -d --name openwebui -p 3000:8080 ghcr.io/open-webui/open-webui:main
   ```
 
-- **List Running Containers:**
+- **列出运行中的容器：**
 
   ```bash
   podman ps
   ```
 
-## Networking with Podman
+## Podman 网络配置
 
-If networking issues arise, you may need to adjust your network settings:
+如果出现网络问题，您可能需要调整网络设置：
 
 ```bash
 --network=slirp4netns:allow_host_loopback=true
 ```
 
-Refer to the Podman [documentation](https://podman.io/) for advanced configurations.
+有关高级配置，请参阅 Podman [文档](https://podman.io/)。

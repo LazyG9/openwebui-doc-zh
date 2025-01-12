@@ -1,50 +1,50 @@
 ---
 sidebar_position: 11
-title: "🔎 Retrieval Augmented Generation (RAG)"
+title: "🔎 检索增强生成 (RAG)"
 ---
 
-Retrieval Augmented Generation (RAG) is a cutting-edge technology that enhances the conversational capabilities of chatbots by incorporating context from diverse sources. It works by retrieving relevant information from a wide range of sources such as local and remote documents, web content, and even multimedia sources like YouTube videos. The retrieved text is then combined with a predefined RAG template and prefixed to the user's prompt, providing a more informed and contextually relevant response.
+检索增强生成（RAG）是一项前沿技术，通过整合来自不同来源的上下文来增强聊天机器人的对话能力。它通过从各种来源（如本地和远程文档、网页内容，甚至包括 YouTube 视频等多媒体源）检索相关信息来工作。检索到的文本随后与预定义的 RAG 模板结合，并添加到用户的提示词之前，从而提供更加明智和具有上下文相关性的响应。
 
-One of the key advantages of RAG is its ability to access and integrate information from a variety of sources, making it an ideal solution for complex conversational scenarios. For instance, when a user asks a question related to a specific document or web page, RAG can retrieve and incorporate the relevant information from that source into the chat response. RAG can also retrieve and incorporate information from multimedia sources like YouTube videos. By analyzing the transcripts or captions of these videos, RAG can extract relevant information and incorporate it into the chat response.
+RAG 的一个关键优势是它能够访问和整合来自各种来源的信息，使其成为复杂对话场景的理想解决方案。例如，当用户询问与特定文档或网页相关的问题时，RAG 可以从该来源检索并整合相关信息到聊天响应中。RAG 还可以从 YouTube 视频等多媒体源检索和整合信息。通过分析这些视频的转录或字幕，RAG 可以提取相关信息并将其整合到聊天响应中。
 
-## Local and Remote RAG Integration
+## 本地和远程 RAG 集成
 
-Local documents must first be uploaded via the Documents section of the Workspace area to access them using the `#` symbol before a query. Click on the formatted URL in the that appears above the chat box. Once selected, a document icon appears above `Send a message`, indicating successful retrieval.
+要使用 `#` 符号访问本地文档，必须首先通过工作区的文档部分上传这些文档。点击聊天框上方出现的格式化 URL。选择后，`发送消息`上方会出现一个文档图标，表示检索成功。
 
-You can also load documents into the workspace area with their access by starting a prompt with `#`, followed by a URL. This can help incorporate web content directly into your conversations.
+你还可以通过在提示词前加上 `#` 和 URL 的方式，将文档加载到工作区并访问它们。这可以帮助将网页内容直接整合到你的对话中。
 
-## Web Search for RAG
+## RAG 的网页搜索
 
-For web content integration, start a query in a chat with `#`, followed by the target URL. Click on the formatted URL in the box that appears above the chat box. Once selected, a document icon appears above `Send a message`, indicating successful retrieval. Open WebUI fetches and parses information from the URL if it can.
+对于网页内容集成，在聊天中以 `#` 开始查询，后跟目标 URL。点击聊天框上方出现的格式化 URL。选择后，`发送消息`上方会出现一个文档图标，表示检索成功。如果可能，Open WebUI 会获取并解析 URL 中的信息。
 
 :::tip
-Web pages often contain extraneous information such as navigation and footer. For better results, link to a raw or reader-friendly version of the page.
+网页通常包含导航和页脚等额外信息。为了获得更好的结果，请链接到页面的原始版本或阅读器友好版本。
 :::
 
-## RAG Template Customization
+## RAG 模板自定义
 
-Customize the RAG template from the `Admin Panel` > `Settings` > `Documents` menu.
+可以从`管理面板` > `设置` > `文档`菜单自定义 RAG 模板。
 
-## RAG Embedding Support
+## RAG 嵌入支持
 
-Change the RAG embedding model directly in the `Admin Panel` > `Settings` > `Documents` menu. This feature supports Ollama and OpenAI models, enabling you to enhance document processing according to your requirements.
+可以直接在`管理面板` > `设置` > `文档`菜单中更改 RAG 嵌入模型。此功能支持 Ollama 和 OpenAI 模型，使你能够根据需求增强文档处理。
 
-## Citations in RAG Feature
+## RAG 功能中的引用
 
-The RAG feature allows users to easily track the context of documents fed to LLMs with added citations for reference points. This ensures transparency and accountability in the use of external sources within your chats.
+RAG 功能允许用户通过添加引用参考点，轻松追踪输入到 LLM 的文档上下文。这确保了在聊天中使用外部来源时的透明度和可追溯性。
 
-## Enhanced RAG Pipeline
+## 增强的 RAG 管道
 
-The togglable hybrid search sub-feature for our RAG embedding feature enhances RAG functionality via `BM25`, with re-ranking powered by `CrossEncoder`, and configurable relevance score thresholds. This provides a more precise and tailored RAG experience for your specific use case.
+我们的 RAG 嵌入功能中可切换的混合搜索子功能通过 `BM25` 增强了 RAG 功能，由 `CrossEncoder` 提供重新排序，并具有可配置的相关性分数阈值。这为你的特定用例提供了更精确和定制化的 RAG 体验。
 
-## YouTube RAG Pipeline
+## YouTube RAG 管道
 
-The dedicated RAG pipeline for summarizing YouTube videos via video URLs enables smooth interaction with video transcriptions directly. This innovative feature allows you to incorporate video content into your chats, further enriching your conversation experience.
+专用的 RAG 管道通过视频 URL 总结 YouTube 视频，实现与视频转录的顺畅交互。这一创新功能允许你将视频内容整合到聊天中，进一步丰富你的对话体验。
 
-## Document Parsing
+## 文档解析
 
-A variety of parsers extract content from local and remote documents. For more, see the [`get_loader`](https://github.com/open-webui/open-webui/blob/2fa94956f4e500bf5c42263124c758d8613ee05e/backend/apps/rag/main.py#L328) function.
+各种解析器从本地和远程文档中提取内容。更多信息，请参见 [`get_loader`](https://github.com/open-webui/open-webui/blob/2fa94956f4e500bf5c42263124c758d8613ee05e/backend/apps/rag/main.py#L328) 函数。
 
-## Google Drive Integration
+## Google Drive 集成
 
-When paired with a Google Cloud project that has the Google Picker API and Google Drive API enabled, this feature allows users to directly access their Drive files from the chat interface and upload documents, slides, sheets and more and uploads them as context to your chat. Can be enabled `Admin Panel` > `Settings` > `Documents` menu. Must set [`GOOGLE_DRIVE_API_KEY and GOOGLE_DRIVE_CLIENT_ID`](https://github.com/open-webui/docs/blob/main/docs/getting-started/advanced-topics/env-configuration.md) environment variables to use.
+当与启用了 Google Picker API 和 Google Drive API 的 Google Cloud 项目配对时，此功能允许用户直接从聊天界面访问他们的 Drive 文件，并上传文档、幻灯片、表格等作为聊天的上下文。可以在`管理面板` > `设置` > `文档`菜单中启用。必须设置 [`GOOGLE_DRIVE_API_KEY 和 GOOGLE_DRIVE_CLIENT_ID`](https://github.com/open-webui/docs/blob/main/docs/getting-started/advanced-topics/env-configuration.md) 环境变量才能使用。

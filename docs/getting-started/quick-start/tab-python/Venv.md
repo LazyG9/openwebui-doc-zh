@@ -1,37 +1,36 @@
+# 使用虚拟环境
 
-# Using Virtual Environments
+使用 `venv` 创建隔离的 Python 环境。
 
-Create isolated Python environments using `venv`.
+## 步骤
 
-## Steps
-
-1. **Create a Virtual Environment:**
+1. **创建虚拟环境：**
 
    ```bash
    python3 -m venv venv
    ```
 
-2. **Activate the Virtual Environment:**
+2. **激活虚拟环境：**
 
-   - On Linux/macOS:
+   - 在 Linux/macOS 上：
 
      ```bash
      source venv/bin/activate
      ```
 
-   - On Windows:
+   - 在 Windows 上：
 
      ```bash
      venv\Scripts\activate
      ```
 
-3. **Install Open WebUI:**
+3. **安装 Open WebUI：**
 
    ```bash
    pip install open-webui
    ```
 
-4. **Start the Server:**
+4. **启动服务器：**
 
    ```bash
    open-webui serve
