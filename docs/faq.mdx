@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1200
-title: "📋 常见问题"
+title: "📋 常见问题解答"
 ---
 
 import { TopBanners } from "@site/src/components/TopBanners";
@@ -8,100 +8,100 @@ import { TopBanners } from "@site/src/components/TopBanners";
 <TopBanners />
 
 ### 💡 为什么选择 Docker？
-我们理解 Docker 可能不是每个人的首选；但是，这种方法是我们项目设计和运营效率的核心。我们将项目对 Docker 的承诺视为一个基本方面，并鼓励寻求不同部署方法的用户探索社区驱动的替代方案。
+我们理解并非所有人都偏好使用 Docker；然而，这种容器化方案是我们项目设计和运营效率的核心。我们将项目对 Docker 的使用视为基础性选择，同时也鼓励需要其他部署方式的用户探索社区提供的替代方案。
 
 ### 📜 目录
 
-- [问：为什么要我注册？我的数据会被发送到哪里？](#q-why-am-i-asked-to-sign-up-where-are-my-data-being-sent-to)
-- [问：为什么我的 Docker 容器无法使用 localhost 连接到主机上的服务？](#q-why-cant-my-docker-container-connect-to-services-on-the-host-using-localhost)
-- [问：如何让我的主机服务对 Docker 容器可访问？](#q-how-do-i-make-my-hosts-services-accessible-to-docker-containers)
-- [问：为什么我的 Open WebUI 没有更新？我已经重新拉取/重启了容器，但没有任何变化。](#q-why-isnt-my-open-webui-updating-ive-re-pulledrestarted-the-container-and-nothing-changed)
-- [问：等等，为什么要删除我的容器？我不会丢失数据吗？](#q-wait-why-would-i-delete-my-container-wont-i-lose-my-data)
-- [问：我应该使用发行版打包的 Docker 还是官方 Docker 包？](#q-should-i-use-the-distro-packaged-docker-or-the-official-docker-package)
-- [问：Docker 中是否支持 GPU？](#q-is-gpu-support-available-in-docker)
-- [问：为什么 Open WebUI 强调使用 Docker？](#q-why-does-open-webui-emphasize-the-use-of-docker)
-- [问：为什么语音转文本（STT）和文本转语音（TTS）在我的部署中不工作？](#q-why-doesnt-speech-to-text-stt-and-text-to-speech-tts-work-in-my-deployment)
-- [问：为什么 Open WebUI 不包含内置的 HTTPS 支持？](#q-why-doesnt-open-webui-include-built-in-https-support)
-- [问：我更新/重启/安装了一些新软件，现在 Open WebUI 不能工作了！](#q-i-updatedrestartedinstalled-some-new-software-and-now-open-webui-isnt-working-anymore)
-- [问：我更新/重启后登录不了了，我不得不创建一个新账户，而且所有的聊天记录都不见了。](#q-i-updatedrestarted-and-now-my-login-isnt-working-anymore-i-had-to-create-a-new-account-and-all-my-chats-are-gone)
-- [问：我尝试登录但失败了，创建了新账户后被告知需要管理员激活。](#q-i-tried-to-login-and-couldnt-made-a-new-account-and-now-im-being-told-my-account-needs-to-be-activated-by-an-admin)
+- [问：为什么需要注册？我的数据会被发送到哪里？](#q-why-am-i-asked-to-sign-up-where-are-my-data-being-sent-to)
+- [问：为什么我的 Docker 容器无法通过 localhost 连接主机服务？](#q-why-cant-my-docker-container-connect-to-services-on-the-host-using-localhost)
+- [问：如何让 Docker 容器访问主机服务？](#q-how-do-i-make-my-hosts-services-accessible-to-docker-containers)
+- [问：为什么我的 Open WebUI 没有更新？我已重新拉取/重启容器但毫无变化](#q-why-isnt-my-open-webui-updating-ive-re-pulledrestarted-the-container-and-nothing-changed)
+- [问：为什么要删除容器？这样不会丢失数据吗？](#q-wait-why-would-i-delete-my-container-wont-i-lose-my-data)
+- [问：应该使用发行版自带的 Docker 还是官方 Docker 包？](#q-should-i-use-the-distro-packaged-docker-or-the-official-docker-package)
+- [问：Docker 支持 GPU 吗？](#q-is-gpu-support-available-in-docker)
+- [问：为什么 Open WebUI 要强调使用 Docker？](#q-why-does-open-webui-emphasize-the-use-of-docker)
+- [问：为什么语音转文字（STT）和文字转语音（TTS）功能在我的部署中不工作？](#q-why-doesnt-speech-to-text-stt-and-text-to-speech-tts-work-in-my-deployment)
+- [问：为什么 Open WebUI 不内置 HTTPS 支持？](#q-why-doesnt-open-webui-include-built-in-https-support)
+- [问：更新/重启/安装新软件后，Open WebUI 不能工作了！](#q-i-updatedrestartedinstalled-some-new-software-and-now-open-webui-isnt-working-anymore)
+- [问：更新/重启后无法登录，创建新账号后所有聊天记录都消失了](#q-i-updatedrestarted-and-now-my-login-isnt-working-anymore-i-had-to-create-a-new-account-and-all-my-chats-are-gone)
+- [问：登录失败后创建新账号，提示需要管理员激活](#q-i-tried-to-login-and-couldnt-made-a-new-account-and-now-im-being-told-my-account-needs-to-be-activated-by-an-admin)
 - [问：为什么 Open WebUI 因 SSL 错误而无法启动？](#q-why-cant-open-webui-start-with-an-ssl-error)
 
-#### **问：为什么要我注册？我的数据会被发送到哪里？**
+#### **问：为什么需要注册？我的数据会被发送到哪里？**
 
-**答：** 我们要求您注册是为了让您成为具有增强安全性的管理员用户。这确保了如果 Open WebUI 曾经暴露于外部访问，您的数据仍然安全。重要的是要注意，所有内容都保持在本地。我们不收集您的数据。当您注册时，所有信息都保存在您的服务器中，永远不会离开您的设备。您的隐私和安全是我们的首要任务，确保您的数据始终在您的控制之下。
+**答：** 要求注册成为管理员用户是出于安全考虑。这样即使 Open WebUI 暴露在外部网络中，您的数据依然是安全的。请放心，所有数据都只会保存在本地。我们不会收集您的任何信息。当您注册时，所有数据都只存储在您的服务器中，绝不会离开您的设备。您的隐私和数据安全始终是我们的首要考虑。
 
-#### **问：为什么我的 Docker 容器无法使用 `localhost` 连接到主机上的服务？**
+#### **问：为什么我的 Docker 容器无法通过 localhost 连接主机服务？**
 
-**答：** 在 Docker 容器内部，`localhost` 指的是容器本身，而不是主机。这种区别对网络连接至关重要。要从容器连接到主机上运行的服务，您应该使用 DNS 名称 `host.docker.internal` 而不是 `localhost`。Docker 特别识别这个 DNS 名称以便于此类连接，有效地将主机视为容器内部可访问的实体，从而绕过通常的 `localhost` 范围限制。
+**答：** 在 Docker 容器内部，`localhost` 指向的是容器本身，而不是主机。这是容器网络的重要特性。如需从容器连接到主机上运行的服务，应使用 `host.docker.internal` 这个特殊的 DNS 名称来代替 `localhost`。Docker 专门提供这个 DNS 名称来实现容器与主机之间的连接，有效解决了 `localhost` 作用域的限制问题。
 
-#### **问：如何让我的主机服务对 Docker 容器可访问？**
+#### **问：如何让 Docker 容器访问主机服务？**
 
-**答：** 要使主机上运行的服务对 Docker 容器可访问，请将这些服务配置为监听所有网络接口，使用 IP 地址 `0.0.0.0`，而不是仅限于 `localhost` 的 `127.0.0.1`。这种配置允许服务接受来自任何 IP 地址的连接，包括 Docker 容器。重要的是要意识到这种设置的安全影响，特别是在可能有外部访问的环境中运行时。实施适当的安全措施，如防火墙和身份验证，可以帮助降低风险。
+**答：** 要让主机上运行的服务能被 Docker 容器访问，需要将这些服务配置为监听所有网络接口（使用 IP 地址 `0.0.0.0`），而不是仅限于 `127.0.0.1`（localhost）。这样配置后，服务就能接受来自任何 IP 地址的连接，包括来自 Docker 容器的连接。但请注意，这种配置可能带来安全风险，特别是在可能被外部访问的环境中。建议实施适当的安全措施，如防火墙和身份认证，以降低风险。
 
-#### **问：为什么我的 Open WebUI 没有更新？我已经重新拉取/重启了容器，但没有任何变化。**
+#### **问：为什么我的 Open WebUI 没有更新？我已重新拉取/重启容器但毫无变化**
 
-**答：** 更新 Open WebUI 需要的不仅仅是拉取新的 Docker 镜像。以下是您的更新可能没有显示的原因以及如何确保它们生效：
+**答：** 更新 Open WebUI 不仅仅是拉取新的 Docker 镜像那么简单。以下是可能的原因和解决方法：
 
-1. **更新 Docker 镜像**：命令 `docker pull ghcr.io/open-webui/open-webui:main` 更新 Docker 镜像，但不会更新正在运行的容器或其数据。
-2. **Docker 卷中的持久数据**：Docker 卷独立于容器生命周期存储数据，在更新过程中保留您的数据（如聊天历史）。
-3. **应用更新**：通过删除现有容器（这不会删除卷）并使用更新的镜像和现有卷创建新容器，确保您的更新生效。
+1. **更新 Docker 镜像**：执行 `docker pull ghcr.io/open-webui/open-webui:main` 只会更新镜像，不会更新正在运行的容器或其数据。
+2. **Docker 数据卷的持久性**：Docker 数据卷独立于容器生命周期存储数据，确保您的数据（如聊天历史）在更新过程中得以保留。
+3. **应用更新**：要确保更新生效，需要删除现有容器（这不会删除数据卷），然后用更新后的镜像创建新容器并挂载现有数据卷。
 
-这个过程在保持数据安全的同时更新应用程序。
+这个过程可以在更新应用的同时安全地保留您的数据。
 
-#### **问：等等，为什么要删除我的容器？我不会丢失数据吗？**
+#### **问：为什么要删除容器？这样不会丢失数据吗？**
 
-**答：** 这是一个常见的担忧，但只要您正确使用 Docker 卷，删除容器并不意味着您会丢失数据。原因如下：
+**答：** 这是一个常见的担忧，但只要正确使用 Docker 数据卷，删除容器并不会导致数据丢失。原因如下：
 
-- **卷保留数据**：Docker 卷设计用于在容器生命周期之外持久保存数据。只要您的数据存储在卷中，无论容器发生什么，它都会保持完整。
-- **安全更新过程**：更新 Open WebUI 时，删除旧容器并使用更新的镜像创建新容器不会影响存储在卷中的数据。关键是不要使用 `docker volume rm` 等命令显式删除卷。
+- **数据卷保护数据**：Docker 数据卷设计用于在容器生命周期之外持久化数据。只要数据存储在数据卷中，无论容器发生什么，数据都会保持完整。
+- **安全的更新流程**：更新 Open WebUI 时，删除旧容器并用更新后的镜像创建新容器不会影响存储在数据卷中的数据。关键是不要使用 `docker volume rm` 等命令显式删除数据卷。
 
-通过遵循正确的更新步骤——拉取新镜像、删除旧容器而不删除卷、使用更新的镜像和现有卷创建新容器——您的应用程序代码得到更新，而您的数据保持不变且安全。
+只要按照正确的更新步骤操作——拉取新镜像、删除旧容器（但保留数据卷）、用更新后的镜像创建新容器并挂载现有数据卷，您的应用代码就会更新，而数据依然安全完整。
 
-#### **问：我应该使用发行版打包的 Docker 还是官方 Docker 包？**
+#### **问：应该使用发行版自带的 Docker 还是官方 Docker 包？**
 
-**答：** 我们建议使用官方 Docker 包而不是发行版打包的版本来运行 Open WebUI。官方 Docker 包经常更新最新功能、错误修复和安全补丁，确保最佳性能和安全性。此外，它支持重要功能，如 `host.docker.internal`，这在发行版打包的版本中可能不可用。这个功能对于 Docker 容器内的正确网络配置和连接至关重要。
+**答：** 我们建议使用官方 Docker 包而不是发行版打包的版本来运行 Open WebUI。官方 Docker 包会频繁更新，包含最新的功能、错误修复和安全补丁，确保最佳性能和安全性。此外，它支持重要功能如 `host.docker.internal`，这在发行版打包的版本中可能不可用。这个功能对于 Docker 容器内的正确网络配置和连接至关重要。
 
-选择官方 Docker 包，您可以受益于不同环境中的一致行为、更可靠的故障排除支持，以及访问最新的 Docker 进展。更广泛的 Docker 社区和资源也更加符合官方包，为您可能遇到的任何问题提供丰富的信息和支持。
+选择官方 Docker 包可以获得跨环境的一致性行为、更可靠的故障排除支持，以及访问最新 Docker 功能的能力。更广泛的 Docker 社区和资源也更倾向于使用官方包，为您提供丰富的信息和支持。
 
-运行 Open WebUI 所需的一切，包括您的数据，都保持在您的控制之下和您的服务器环境中，强调我们对您的隐私和安全的承诺。有关安装官方 Docker 包的说明，请参阅 Docker 官方文档网站上的[安装 Docker 引擎](https://docs.docker.com/engine/install/)指南。
+运行 Open WebUI 所需的一切，包括您的数据，都保持在您的控制之下和服务器环境中，体现了我们对您的隐私和安全的承诺。关于安装官方 Docker 包的说明，请参考 Docker 官方文档中的[安装 Docker 引擎](https://docs.docker.com/engine/install/)指南。
 
-#### **问：Docker 中是否支持 GPU？**
+#### **问：Docker 支持 GPU 吗？**
 
-**答：** Docker 中的 GPU 支持是可用的，但根据平台而异。官方上，GPU 支持在 Windows 的 Docker 和 Linux 的 Docker Engine 中提供。其他平台，如 Linux 和 MacOS 的 Docker Desktop，目前不提供 GPU 支持。对于需要 GPU 加速的应用程序来说，这个限制很重要。为了获得最佳体验并利用 GPU 功能，我们建议在官方支持 GPU 集成的平台上使用 Docker。
+**答：** Docker 确实支持 GPU，但支持程度因平台而异。官方支持仅限于 Windows 版 Docker 和 Linux 上的 Docker Engine。其他平台，如 Linux 和 MacOS 上的 Docker Desktop，目前不提供 GPU 支持。对于需要 GPU 加速的应用来说，这一限制很重要。为获得最佳体验并利用 GPU 功能，我们建议在官方支持 GPU 集成的平台上使用 Docker。
 
-#### **问：为什么 Open WebUI 强调使用 Docker？**
+#### **问：为什么 Open WebUI 要强调使用 Docker？**
 
-**答：** 选择使用 Docker 源于其确保一致性、隔离依赖关系以及简化不同环境部署的能力。Docker 最大限度地减少了兼容性问题，并简化了让 WebUI 启动和运行的过程，而不受底层系统的影响。这是项目维护者的战略选择，以利用这些优势，认识到虽然 Docker 有学习曲线，但部署和维护的优势很显著。我们理解 Docker 可能不是每个人的首选；但是，这种方法是我们项目设计和运营效率的核心。我们将项目对 Docker 的承诺视为一个基本方面，并鼓励寻求不同部署方法的用户探索社区驱动的替代方案。
+**答：** 选择使用 Docker 是基于其确保一致性、隔离依赖关系以及简化跨环境部署的能力。Docker 最大限度地减少了兼容性问题，简化了 WebUI 的部署和运行过程，而不受底层系统的影响。这是项目维护者的战略选择，虽然 Docker 有一定的学习曲线，但在部署和维护方面的优势显著。我们理解 Docker 可能不是每个人的首选，但这种方法是我们项目设计和运营效率的核心。我们将项目对 Docker 的承诺视为基本要素，同时也鼓励寻求其他部署方式的用户探索社区驱动的替代方案。
 
-#### **问：为什么语音转文本（STT）和文本转语音（TTS）在我的部署中不工作？**
+#### **问：为什么语音转文字（STT）和文字转语音（TTS）功能在我的部署中不工作？**
 
-**答：** 您部署中的语音转文本（STT）和文本转语音（TTS）服务的功能可能需要 HTTPS 才能正确运行。现代浏览器强制执行安全措施，限制某些功能（包括 STT 和 TTS）仅在安全的 HTTPS 连接下工作。如果您的部署未配置使用 HTTPS，这些服务可能无法按预期运行。确保您的部署可通过 HTTPS 访问可以解决这些问题，启用 STT/TTS 功能的完整功能。
+**答：** 您部署中的语音转文字（STT）和文字转语音（TTS）服务可能需要 HTTPS 才能正常工作。现代浏览器出于安全考虑，限制某些功能（包括 STT 和 TTS）只能在安全的 HTTPS 连接下工作。如果您的部署未配置使用 HTTPS，这些服务可能无法按预期运行。确保您的部署通过 HTTPS 访问可以解决这些问题，使 STT/TTS 功能完全可用。
 
-#### **问：为什么 Open WebUI 不包含内置的 HTTPS 支持？**
+#### **问：为什么 Open WebUI 不内置 HTTPS 支持？**
 
-**答：** 虽然我们理解对包含 HTTPS 支持的一体化解决方案的需求，但我们认为这种方法无法充分满足我们用户群的多样化需求。直接在项目中实现 HTTPS 可能会限制灵活性，可能不符合所有用户的特定要求或偏好。为确保每个人都可以根据其独特环境定制其设置，我们将 HTTPS 终止的实现留给用户进行生产部署。这个决定允许更大的适应性和定制化。虽然我们不提供设置 HTTPS 的官方文档，但社区成员可能会根据请求提供指导，分享基于其经验的见解和建议。
+**答：** 虽然我们理解用户希望有一个包含 HTTPS 支持的一体化解决方案，但我们认为这种方法无法充分满足用户群的多样化需求。在项目中直接实现 HTTPS 可能会限制灵活性，可能无法满足所有用户的特定要求或偏好。为确保每个人都能根据其独特环境定制设置，我们将 HTTPS 终止的实现留给用户自行处理。这个决定允许更大的适应性和定制化。虽然我们不提供设置 HTTPS 的官方文档，但社区成员可能会根据请求提供指导，分享他们的经验和建议。
 
-#### **问：我更新/重启/安装了一些新软件，现在 Open WebUI 不能工作了！**
+#### **问：更新/重启/安装新软件后，Open WebUI 不能工作了！**
 
-**答：** 如果您的 Open WebUI 在更新后或安装新软件后无法启动，这很可能与直接安装方法有关，特别是如果您没有为后端依赖项使用虚拟环境。直接安装对系统环境的变化很敏感，例如更新或新安装改变现有依赖项。为避免冲突并确保稳定性，我们建议使用虚拟环境来管理后端的 `requirements.txt` 依赖项。这将您的 Open WebUI 依赖项与其他系统包隔离，最大限度地减少此类问题的风险。
+**答：** 如果您的 Open WebUI 在更新或安装新软件后无法启动，这很可能与直接安装方式有关，特别是如果您没有为后端依赖项使用虚拟环境。直接安装容易受到系统环境变化的影响，比如更新或新安装可能会改变现有依赖关系。为避免冲突并确保稳定性，我们建议使用虚拟环境来管理后端的 `requirements.txt` 依赖项。这样可以将 Open WebUI 的依赖项与其他系统包隔离，最大限度地减少此类问题的风险。
 
-#### **问：我更新/重启后登录不了了，我不得不创建一个新账户，而且所有的聊天记录都不见了。**
+#### **问：更新/重启后无法登录，创建新账号后所有聊天记录都消失了**
 
-**答：** 这个问题通常发生在创建 Docker 容器时没有挂载 `/app/backend/data` 的卷，或者指定的 Open WebUI 卷（在我们的示例中通常命名为 `open-webui`）被无意中删除。Docker 卷对于在容器生命周期中持久保存您的数据至关重要。如果您发现在重启后需要创建新账户，很可能是您启动了一个新容器，而没有附加存储数据的现有卷。确保您的 Docker run 命令包含指向正确数据位置的卷挂载，以防止数据丢失。
+**答：** 这个问题通常发生在创建 Docker 容器时没有挂载 `/app/backend/data` 的数据卷，或者指定的 Open WebUI 数据卷（在我们的示例中通常命名为 `open-webui`）被意外删除的情况下。Docker 数据卷对于在容器生命周期之间保持数据持久性至关重要。如果重启后需要创建新账号，很可能是您启动了新容器但没有挂载存储数据的现有数据卷。确保您的 Docker 运行命令包含指向正确数据位置的数据卷挂载，以防止数据丢失。
 
-#### **问：我尝试登录但失败了，创建了新账户后被告知需要管理员激活。**
+#### **问：登录失败后创建新账号，提示需要管理员激活**
 
-**答：** 这种情况发生在您忘记了首次设置期间创建的初始管理员账户的密码时。第一个账户自动指定为管理员账户。在没有管理员账户访问权限的情况下创建新账户将导致需要管理员激活。避免丢失初始管理员账户凭据对于无缝访问和管理 Open WebUI 至关重要。请参阅[重置管理员密码](troubleshooting/password-reset)指南，了解恢复管理员账户的说明。
+**答：** 这种情况发生在您忘记了首次设置时创建的初始管理员账号的密码。第一个创建的账号会自动被指定为管理员账号。如果在无法访问管理员账号的情况下创建新账号，就会需要管理员激活。避免丢失初始管理员账号凭据对于顺畅访问和管理 Open WebUI 至关重要。请参阅[重置管理员密码](troubleshooting/password-reset)指南，了解如何恢复管理员账号。
 
 #### **问：为什么 Open WebUI 因 SSL 错误而无法启动？**
 
-**答：** 启动 Open WebUI 时遇到的 SSL 错误可能是由于缺少 SSL 证书或 [huggingface.co](https://huggingface.co/) 配置不正确。要解决此问题，您可以为 HuggingFace 设置镜像，例如 [hf-mirror.com](https://hf-mirror.com/)，并在启动 Docker 容器时将其指定为端点。使用 `-e HF_ENDPOINT=https://hf-mirror.com/` 参数在 Docker run 命令中定义 HuggingFace 镜像地址。例如，您可以按如下方式修改 Docker run 命令：
+**答：** 启动 Open WebUI 时遇到的 SSL 错误可能是由于缺少 SSL 证书或 [huggingface.co](https://huggingface.co/) 配置不正确导致的。要解决这个问题，您可以设置 HuggingFace 的镜像站点，比如 [hf-mirror.com](https://hf-mirror.com/)，并在启动 Docker 容器时将其指定为端点。使用 `-e HF_ENDPOINT=https://hf-mirror.com/` 参数在 Docker 运行命令中定义 HuggingFace 镜像地址。例如，您可以按如下方式修改 Docker 运行命令：
 
 ```bash
 docker run -d -p 3000:8080 -e HF_ENDPOINT=https://hf-mirror.com/ --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-#### **需要进一步帮助？**
+#### **需要更多帮助？**
 
-如果您有任何其他问题或疑虑，请访问我们的 [GitHub Issues 页面](https://github.com/open-webui/open-webui/issues)或我们的 [Discord 频道](https://discord.gg/5rJgQTnV4s)获取更多帮助和信息。
+如果您还有任何问题或疑虑，请访问我们的 [GitHub Issues 页面](https://github.com/open-webui/open-webui/issues)或加入我们的 [Discord 频道](https://discord.gg/5rJgQTnV4s)获取更多帮助和信息。

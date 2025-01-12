@@ -10,7 +10,7 @@ import { SponsorList } from "@site/src/components/SponsorList";
 
 # Open WebUI
 
-**Open WebUI 是一个[可扩展的](https://docs.openwebui.com/features/plugin/)、功能丰富且用户友好的自托管 AI 平台，专为完全离线运行而设计。** 它支持多种 LLM 运行器，如 **Ollama** 和 **OpenAI 兼容的 API**，并具有用于 RAG 的**内置推理引擎**，使其成为**强大的 AI 部署解决方案**。
+**Open WebUI 是一个[可扩展的](https://docs.openwebui.com/features/plugin/)、功能丰富且用户友好的自托管 AI 平台，专为完全离线运行而设计。** 它支持多种 LLM 运行环境，如 **Ollama** 和 **OpenAI 兼容的 API**，并具有**内置推理引擎**用于 RAG，使其成为**强大的 AI 部署解决方案**。
 
 ![GitHub stars](https://img.shields.io/github/stars/open-webui/open-webui?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/open-webui/open-webui?style=social)
@@ -27,47 +27,47 @@ import { SponsorList } from "@site/src/components/SponsorList";
 
 ## 使用 Docker 快速开始 🐳
 
-**如果 Ollama 在您的计算机上**，请使用以下命令：
+**如果 Ollama 在您的计算机上**，使用此命令：
 
 ```bash
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-**要使用 Nvidia GPU 支持运行 Open WebUI**，请使用以下命令：
+**要使用 Nvidia GPU 支持运行 Open WebUI**，使用此命令：
 
 ```bash
 docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
-### 与 Ollama 捆绑的 Open WebUI
+### Open WebUI 与 Ollama 捆绑安装
 
-这种安装方法使用单个容器镜像，将 Open WebUI 与 Ollama 捆绑在一起，通过单个命令实现简化的设置。根据您的硬件设置选择适当的命令：
+此安装方法使用单个容器镜像，将 Open WebUI 与 Ollama 捆绑在一起，通过单个命令实现简化的设置。根据您的硬件设置选择适当的命令：
 
 - **使用 GPU 支持**：
-  通过运行以下命令利用 GPU 资源：
+通过运行以下命令利用 GPU 资源：
 
-  ```bash
-  docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
+```bash
+docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
 - **仅使用 CPU**：
-  如果您不使用 GPU，请使用以下命令：
+如果您不使用 GPU，请使用此命令：
 
-  ```bash
-  docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
+```bash
+docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
-这两个命令都提供了 Open WebUI 和 Ollama 的内置、无障碍安装，确保您能够快速启动并运行所有功能。
+这两个命令都提供了 Open WebUI 和 Ollama 的内置无障碍安装，确保您能够快速启动并运行所有功能。
 
-安装完成后，您可以通过 [http://localhost:3000](http://localhost:3000) 访问 Open WebUI。祝您使用愉快！😄
+安装完成后，您可以通过 [http://localhost:3000](http://localhost:3000) 访问 Open WebUI。尽情享用吧！😄
 
 ### 使用开发分支 🌙
 
 :::warning
-`:dev` 分支包含最新的不稳定功能和更改。使用时请自行承担风险，因为它可能包含错误或不完整的功能。
+`:dev` 分支包含最新的不稳定功能和更改。使用时请自行承担风险，因为它可能存在错误或不完整的功能。
 :::
 
-如果您想尝试最新的前沿功能，并且可以接受偶尔的不稳定性，可以使用 `:dev` 标签，如下所示：
+如果您想尝试最新的前沿功能，并且能接受偶尔的不稳定性，可以使用 `:dev` 标签，如下所示：
 
 ```bash
 docker run -d -p 3000:8080 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:dev
@@ -97,20 +97,20 @@ docker run -d --name watchtower --restart unless-stopped -v /var/run/docker.sock
 
 对于使用 Python 包管理器 `pip` 安装 Open WebUI 的用户，**强烈建议使用 `uv` 或 `conda` 等 Python 运行时管理器**。这些工具有助于有效管理 Python 环境并避免冲突。
 
-Python 3.11 是开发环境。Python 3.12 似乎可以工作，但尚未经过全面测试。Python 3.13 完全未经测试——**使用风险自负**。
+Python 3.11 是开发环境。Python 3.12 似乎可以工作但尚未经过全面测试。Python 3.13 完全未经测试——**使用风险自负**。
 
 1. **安装 Open WebUI**：
 
-   打开终端并运行以下命令：
-   ```bash
-   pip install open-webui
+打开终端并运行以下命令：
+```bash
+pip install open-webui
    ```
 
 2. **启动 Open WebUI**：
 
-   安装完成后，使用以下命令启动服务器：
-   ```bash
-   open-webui serve
+安装完成后，使用以下命令启动服务器：
+```bash
+open-webui serve
    ```
 
 ### 更新 Open WebUI
@@ -121,7 +121,7 @@ Python 3.11 是开发环境。Python 3.12 似乎可以工作，但尚未经过�
 pip install --upgrade open-webui
 ```
 
-这种方法安装所有必要的依赖项并启动 Open WebUI，实现简单高效的设置。安装完成后，您可以通过 [http://localhost:8080](http://localhost:8080) 访问 Open WebUI。祝您使用愉快！😄
+此方法安装所有必要的依赖项并启动 Open WebUI，实现简单高效的设置。安装后，您可以通过 [http://localhost:8080](http://localhost:8080) 访问 Open WebUI。尽情享用吧！😄
 
 ## 其他安装方法
 
