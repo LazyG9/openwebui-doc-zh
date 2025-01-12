@@ -9,7 +9,7 @@ Open WebUI 的早期版本（0.2 之前）在内部运行 `litellm`。为了提�
 
 ### 1. 下载您的 `config.yaml` 文件
 
-在进行任何更改之前，从 Open WebUI 管理设置窗口下载您现有的 `config.yaml` 文件。此文件包含您当前的 `litellm` 配置。
+在进行任何更改之前，请从 Open WebUI 管理设置窗口下载您现有的 `config.yaml` 文件。该文件包含您当前的 `litellm` 配置。
 
 ![LiteLLM config.yaml 下载](/img/migration_litellm_config.png)
 
@@ -28,31 +28,31 @@ docker run -d \
   --config /app/config.yaml --port 4000
 ```
 
-- 将 `./config.yaml` 替换为已下载的 `config.yaml` 文件的实际路径。
-- 为 `LITELLM_MASTER_KEY` 设置一个安全的 API 密钥。这确保了对您的 `litellm` 实例的受控访问。
+- 将 `./config.yaml` 替换为已下载的 `config.yaml` 文件的实际路径
+- 为 `LITELLM_MASTER_KEY` 设置一个安全的 API 密钥，以确保对您的 `litellm` 实例的安全访问
 
 ### 3. 将 `litellm` 连接到 Open WebUI
 
-一旦 `litellm` 容器启动并运行：
+当 `litellm` 容器启动并运行后：
 
-1. 进入 Open WebUI 设置。
-2. 在"连接"下，添加一个新的"OpenAI"连接。
-3. 将基础 URL 设置为 `http://host.docker.internal:4000/v1`（如有必要，调整端口）。
-4. 对于 API 密钥，使用您在步骤 2 中定义的 `LITELLM_MASTER_KEY` 值（例如，`your_secret_key`）。
+1. 进入 Open WebUI 设置
+2. 在"连接"下，添加一个新的"OpenAI"连接
+3. 将基础 URL 设置为 `http://host.docker.internal:4000/v1`（如有必要，请调整端口）
+4. 对于 API 密钥，使用您在步骤 2 中定义的 `LITELLM_MASTER_KEY` 值（例如：`your_secret_key`）
 
-恭喜！您已成功迁移到外部 `litellm` 设置，提高了 Open WebUI 安装的灵活性和可维护性。
+恭喜！您已成功迁移到外部 `litellm` 设置，这将提高您的 Open WebUI 安装的灵活性和可维护性。
 
-## 将内容从 Ollama WebUI 迁移到 Open WebUI
+## 从 Ollama WebUI 迁移到 Open WebUI
 
-由于最近从 [Ollama WebUI 更名为 Open WebUI](https://github.com/open-webui/open-webui/discussions/602)，docker 镜像已被重命名。对于之前使用 Ollama WebUI 并想开始使用新镜像的用户，需要执行额外的步骤。
+由于最近从 [Ollama WebUI 更名为 Open WebUI](https://github.com/open-webui/open-webui/discussions/602)，Docker 镜像已被重命名。对于之前使用 Ollama WebUI 并希望开始使用新镜像的用户，需要执行以下额外步骤。
 
-## 更新到 Open WebUI 而不保留数据
+## 不保留数据更新到 Open WebUI
 
-如果您想更新到新镜像但不想保留任何以前的数据（如对话、提示、文档等），可以执行以下步骤：
+如果您想更新到新镜像但不需要保留之前的数据（如对话记录、提示词、文档等），可以执行以下步骤：
 
 :::danger
 
-执行这些步骤将删除所有当前配置选项、聊天历史等。只有 LLM 模型会被保留
+警告：执行这些步骤将永久删除所有当前配置选项、聊天历史等数据。系统仅会保留已下载的 LLM 模型。
 
 :::
 
@@ -63,22 +63,22 @@ docker pull ghcr.io/open-webui/open-webui:main
 docker volume rm ollama-webui
 ```
 
-例如，对于本地安装，命令是 `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main`。有关其他安装命令，请查看本 README 文档的相关部分。
+例如，对于本地安装，命令为：`docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main`。其他安装命令请参考本文档的相关部分。
 
-## 更新到 Open WebUI 并保留数据
+## 保留数据更新到 Open WebUI
 
-如果您想更新到新镜像并迁移所有以前的设置（如对话、提示、文档等），可以执行以下步骤：
+如果您想更新到新镜像并同时迁移所有之前的设置（包括对话记录、提示词、文档等），请执行以下步骤：
 
 ```bash
 docker rm -f ollama-webui
 docker pull ghcr.io/open-webui/open-webui:main
-# 创建新卷并使用临时容器从一个卷复制到另一个卷，参见 https://github.com/moby/moby/issues/31154#issuecomment-360531460
+# 创建新数据卷并使用临时容器从旧数据卷复制到新数据卷
 docker volume create --name open-webui
 docker run --rm -v ollama-webui:/from -v open-webui:/to alpine ash -c "cd /from ; cp -av . /to"
 [插入您使用新 Docker 镜像名称安装时使用的等效命令]
 ```
 
-一旦您验证所有数据都已迁移，就可以使用以下命令删除旧卷：
+确认所有数据都已成功迁移后，您可以使用以下命令删除旧的数据卷：
 
 ```bash
 docker volume rm ollama-webui
@@ -86,10 +86,11 @@ docker volume rm ollama-webui
 
 ### 从本地 Git 仓库迁移
 
-如果您是从 git 安装的，在项目目录中使用了 `docker compose up`，您的卷名将以文件夹名为前缀。
-因此，如果您的 OpenWebUI 路径是：`/home/myserver/ollama-webui/`，卷名将是 "ollama-webui_open-webui" 和 "ollama-webui_ollama"。
+如果您之前是通过 git 仓库安装并使用 `docker compose up` 启动的，您的数据卷名称会以项目文件夹名为前缀。
+例如，如果您的 OpenWebUI 路径是：`/home/myserver/ollama-webui/`，则数据卷名称将是 "ollama-webui_open-webui" 和 "ollama-webui_ollama"。
 
-要将内容复制到常规的 docker 安装中，您可以运行类似的迁移命令。在我们的特定情况下，命令将是：
+要将内容迁移到标准的 docker 安装中，您可以执行以下迁移命令。以下是具体步骤：
+
 ```bash
 docker rm -f open-webui
 docker rm -f ollama
@@ -101,8 +102,8 @@ docker run --rm -v ollama-webui_open-webui:/from -v open-webui:/to alpine ash -c
 docker run --rm -v ollama-webui_ollama:/from -v ollama:/to alpine ash -c "cd /from ; cp -av . /to"
 ```
 
-根据您是否已安装 ollama，或者是否已经有相同的卷名，某些命令**可能会抛出错误**，但通常可以安全地忽略，因为我们正在覆盖。
+注意：根据您的安装情况，某些命令**可能会显示错误**，但由于我们是在执行覆盖操作，这些错误通常可以安全忽略。
 
-然后，按照入门指南中的描述正常启动两个容器。
+完成后，请按照入门指南中的说明正常启动两个容器。
 
-一旦您验证所有数据都已迁移，就可以使用上面提到的 `docker volume rm` 命令删除旧卷。
+确认所有数据迁移成功后，您可以使用上述的 `docker volume rm` 命令删除旧的数据卷。

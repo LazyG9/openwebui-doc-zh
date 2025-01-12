@@ -4,7 +4,7 @@ Let's Encrypt 提供免费的 SSL 证书，受大多数浏览器信任，非常�
 
 #### 前提条件
 
-- 系统上已安装 **Certbot**。
+- 系统已安装 **Certbot**。
 - DNS 记录已正确配置并指向您的服务器。
 
 #### 步骤
@@ -37,7 +37,7 @@ Let's Encrypt 提供免费的 SSL 证书，受大多数浏览器信任，非常�
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
 
-            # （可选）禁用代理缓冲以获得更好的模型流式响应
+            # (可选) 禁用代理缓冲以获得更好的模型流式响应
             proxy_buffering off;
         }
     }

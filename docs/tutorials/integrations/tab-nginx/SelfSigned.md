@@ -1,6 +1,7 @@
 ### 自签名证书
 
-使用自签名证书适用于开发环境或内部使用，在这些场景中信任不是关键考虑因素。
+
+自签名证书适用于开发或内部使用，在这些场景中信任不是关键考虑因素。
 
 #### 步骤
 
@@ -30,7 +31,7 @@
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto $scheme;
 
-            # （可选）禁用代理缓冲以获得更好的模型流式响应
+            # (可选) 禁用代理缓冲以获得更好的模型流式响应
             proxy_buffering off;
         }
     }

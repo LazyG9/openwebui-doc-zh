@@ -1,68 +1,68 @@
 ---
 sidebar_position: 13
-title: "⚛️ 在 Open WebUI 中使用 Continue.dev VSCode 扩展"
+title: "⚛️ Open WebUI 集成 Continue.dev VSCode 扩展教程"
 ---
 
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
+本教程来自社区贡献，未经 OpenWebUI 官方团队验证。仅供演示如何根据具体需求自定义 OpenWebUI 使用。如果您也想贡献内容，请参考贡献指南。
 :::
 
-# 将 Continue.dev VSCode 扩展与 Open WebUI 集成
+# Open WebUI 集成 Continue.dev VSCode 扩展教程
 
-### 下载扩展
+### 安装扩展
 
-您可以在 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Continue.continue) 下载 VSCode 扩展
+请前往 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Continue.continue)（VS Code 应用商店）下载并安装 VSCode 扩展
 
-安装完成后，您现在应该在侧边栏中看到一个 'continue' 标签页。
+安装完成后，您将在 VSCode 侧边栏看到 'continue' 标签页。
 
-打开它。在右下角您应该看到一个设置图标（看起来像齿轮）。
+打开该标签页，在右下角找到设置图标（齿轮样式图标）。
 
-点击设置图标后，编辑器中应该会打开一个 `config.json` 文件。
+点击设置图标后，编辑器将自动打开 `config.json` 配置文件。
 
-在这里您可以配置 continue 以使用 Open WebUI。
-
----
-
-目前 'ollama' 提供程序不支持身份验证，所以我们不能将此提供程序与 Open WebUI 一起使用。
-
-但是 Ollama 和 Open WebUI 都兼容 OpenAI API 规范。您可以在[这里](https://ollama.com/blog/openai-compatibility)查看 Ollama 的博客文章了解这一点。
-
-我们仍然可以设置 Continue 使用 openai 提供程序，这将允许我们使用 Open WebUI 的身份验证令牌。
+您可以在此文件中配置 Continue 以接入 Open WebUI。
 
 ---
 
-## 配置
+目前，由于 'ollama' provider（服务提供者）不支持身份验证功能，我们无法直接将其与 Open WebUI 配合使用。
 
-在 `config.json` 中，您只需要添加/更改以下选项。
+但是，Ollama 和 Open WebUI 都支持 OpenAI API 规范。您可以查看 Ollama 的[这篇博客文章](https://ollama.com/blog/openai-compatibility)了解详情。
 
-### 将提供程序更改为 openai
+我们可以通过配置 Continue 使用 OpenAI provider，并结合 Open WebUI 的身份验证令牌来实现集成。
+
+---
+
+## 配置说明
+
+在 `config.json` 中，您只需要配置以下几项内容：
+
+### 设置 provider 为 openai
 
 ```json
 "provider": "openai"
 ```
 
-### 添加或更新 apiBase
+### 配置 apiBase
 
-将其设置为您的 Open Web UI 域名。
+将其设置为您的 Open Web UI 访问地址：
 
 ```json
-"apiBase": "http://localhost:3000/" #如果您按照入门指南使用 Docker
+"apiBase": "http://localhost:3000/" # Docker 默认安装地址
 ```
 
-### 添加 apiKey
+### 设置 apiKey
 
 ```json
 "apiKey": "sk-79970662256d425eb274fc4563d4525b" # 替换为您的 API 密钥
 ```
 
-您可以在 Open WebUI -> Settings -> Account -> API Keys 中找到并生成您的 api 密钥
+您可以在 Open WebUI 的 设置 -> 账户 -> API 密钥 中生成并获取 API 密钥
 
-您需要复制 "API Key"（以 sk- 开头）
+请复制以 "sk-" 开头的 API 密钥
 
-## 配置示例
+## 配置文件示例
 
-这是一个使用 Open WebUI 通过 openai 提供程序的 config.json 基本示例。使用 Granite Code 作为模型。
-确保您事先将模型拉取到您的 ollama 实例中。
+以下是一个基础的 config.json 配置示例，展示了如何通过 OpenAI provider 接入 Open WebUI，并使用 Granite Code 模型：
+注意：使用前请确保已在 Ollama 实例中下载相应模型。
 
 ```json
 {
@@ -72,15 +72,15 @@ title: "⚛️ 在 Open WebUI 中使用 Continue.dev VSCode 扩展"
       "provider": "openai",
       "model": "granite-code:latest",
       "useLegacyCompletionsEndpoint": false,
-      "apiBase": "http://YOUROPENWEBUI/ollama/v1",
-      "apiKey": "sk-YOUR-API-KEY"
+      "apiBase": "http://YOUROPENWEBUI/ollama/v1",  # 替换为您的 Open WebUI 地址
+      "apiKey": "sk-YOUR-API-KEY"  # 替换为您的 API 密钥
     }
   ],
   "customCommands": [
     {
       "name": "test",
-      "prompt": "{{{ input }}}\n\n为选定的代码编写一套全面的单元测试。它应该包括设置、运行测试以检查正确性（包括重要的边缘情况）和清理。确保测试是完整和复杂的。仅作为聊天输出给出测试，不要编辑任何文件。",
-      "description": "为高亮显示的代码编写单元测试"
+      "prompt": "{{{ input }}}\n\nWrite a comprehensive set of unit tests for the selected code. It should setup, run tests that check for correctness including important edge cases, and teardown. Ensure that the tests are complete and sophisticated. Give the tests just as chat output, don't edit any file.",
+      "description": "Write unit tests for highlighted code"
     }
   ],
   "tabAutocompleteModel": {
@@ -88,18 +88,18 @@ title: "⚛️ 在 Open WebUI 中使用 Continue.dev VSCode 扩展"
     "provider": "openai",
     "model": "granite-code:latest",
     "useLegacyCompletionsEndpoint": false,
-    "apiBase": "http://localhost:3000/ollama/v1",
-    "apiKey": "sk-YOUR-API-KEY"
+    "apiBase": "http://localhost:3000/ollama/v1",  # 本地默认地址
+    "apiKey": "sk-YOUR-API-KEY"  # 替换为您的 API 密钥
   }
 }
 ```
 
-保存您的 `config.json`，就这样！
+保存 `config.json` 后，配置就完成了！
 
-您现在应该在 Continue 标签页的模型选择中看到您的模型。
+现在您可以在 Continue 标签页的模型选择下拉菜单中看到配置的模型。
 
-选择它，您现在应该通过 Open WebUI（和/或您设置的任何[管道](/pipelines)）进行聊天了。
+选择该模型后，您就可以通过 Open WebUI（以及您配置的任何[处理管道](/pipelines)）开始对话了。
 
-您可以为任意数量的想要使用的模型执行此操作，虽然任何模型都应该可以工作，但您应该使用专为代码设计的模型。
+您可以按照上述方式配置多个模型。虽然理论上所有模型都可以使用，但我们建议选择专门用于代码处理的模型。
 
-有关其他 continue 配置，请参阅 continue 文档，[Continue 文档](https://docs.continue.dev/reference/Model%20Providers/openai)
+更多 Continue 配置详情，请参考 [Continue 官方文档](https://docs.continue.dev/reference/Model%20Providers/openai)（英文）

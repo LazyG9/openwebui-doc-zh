@@ -1,42 +1,62 @@
 ---
 sidebar_position: 11
-title: "🖥️ 在 Intel GPU 上使用 IPEX-LLM 设置本地 LLM"
+title: "🖥️ 在 Intel GPU 上使用 IPEX-LLM 部署本地大语言模型"
 ---
 
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何根据您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
+注意：本教程由社区成员贡献，并非 OpenWebUI 官方团队支持的内容。它仅用于演示如何根据特定需求自定义 OpenWebUI。如果您也想贡献内容，请参考贡献指南教程。
 :::
 
 :::note
-本指南已通过 [手动安装](/getting-started/index.md) 方式验证 Open WebUI 设置。
+提示：本指南已通过 Open WebUI 的[手动安装](/getting-started/index.md)方式进行验证。
 :::
 
-# 在 Intel GPU 上使用 IPEX-LLM 设置本地 LLM
+# 在 Intel GPU 上使用 IPEX-LLM 部署本地大语言模型
 
 :::info
-[**IPEX-LLM**](https://github.com/intel-analytics/ipex-llm) 是一个 PyTorch 库，用于在 Intel CPU 和 GPU（例如，带有集成显卡的本地 PC、独立显卡如 Arc A 系列、Flex 和 Max）上以极低的延迟运行 LLM。
+[**IPEX-LLM**](https://github.com/intel-analytics/ipex-llm) 是英特尔开发的 PyTorch 扩展库，专门用于在 Intel CPU 和 GPU 上低延迟运行大语言模型（LLM）。支持的硬件包括：
+- 带集成显卡的普通 PC
+- Intel Arc A 系列独立显卡
+- Intel Flex 系列显卡
+- Intel Max 系列显卡
 :::
 
-本教程演示如何使用 **在 Intel GPU 上运行的 IPEX-LLM 加速 Ollama 后端** 设置 Open WebUI。通过按照本指南操作，您将能够在低成本 PC（即仅有集成显卡）上设置 Open WebUI，并获得流畅的体验。
+本教程将指导您如何在 Intel GPU 上使用 IPEX-LLM 加速的 Ollama 后端来配置 Open WebUI。通过本指南，即使是配置较低的计算机（如仅有集成显卡的设备），也能流畅运行 Open WebUI。
 
 ## 在 Intel GPU 上启动 Ollama 服务
 
-请参考 IPEX-LLM 官方文档中的 [本指南](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Quickstart/ollama_quickstart.html)，了解如何在 Intel GPU 上安装和运行由 IPEX-LLM 加速的 Ollama 服务。
+请参考 IPEX-LLM 官方文档中的[快速入门指南](https://ipex-llm.readthedocs.io/en/latest/doc/LLM/Quickstart/ollama_quickstart.html)，了解如何在 Intel GPU 上安装并运行 IPEX-LLM 加速版的 Ollama 服务。
 
 :::tip
-如果您想从另一台机器访问 Ollama 服务，请确保在执行 `ollama serve` 命令之前设置或导出环境变量 `OLLAMA_HOST=0.0.0.0`。
+重要提示：如果您需要从其他机器访问 Ollama 服务，请确保在执行 `ollama serve` 命令前，设置或导出以下环境变量：
+```bash
+OLLAMA_HOST=0.0.0.0
+```
 :::
 
 ## 配置 Open WebUI
 
-通过菜单中的 **Settings -> Connections** 访问 Ollama 设置。默认情况下，**Ollama Base URL** 预设为 `https://localhost:11434`，如下图所示。要验证 Ollama 服务连接的状态，请单击文本框旁边的 **刷新按钮**。如果 WebUI 无法与 Ollama 服务器建立连接，您将看到一条错误消息，显示 `WebUI could not connect to Ollama`。
+请按以下步骤配置 Ollama 连接：
 
-![Open WebUI Ollama 设置失败](https://llm-assets.readthedocs.io/en/latest/_images/open_webui_settings_0.png)
+1. 在菜单中导航至"设置（Settings）" -> "连接（Connections）"
+2. 找到 Ollama 设置部分
+3. 默认情况下，"Ollama 基础 URL"设置为 `https://localhost:11434`
+4. 点击文本框旁的"刷新"按钮验证连接状态
 
-如果连接成功，您将看到一条消息显示 `Service Connection Verified`，如下图所示。
+如果 WebUI 无法连接到 Ollama 服务器，您会看到如下错误提示：
+`WebUI could not connect to Ollama`（WebUI 无法连接到 Ollama 服务）
 
-![Open WebUI Ollama 设置成功](https://llm-assets.readthedocs.io/en/latest/_images/open_webui_settings.png)
+![Ollama 连接失败示例](https://llm-assets.readthedocs.io/en/latest/_images/open_webui_settings_0.png)
+
+连接成功时，您将看到如下确认消息：
+`Service Connection Verified`（服务连接已验证成功）
+
+![Ollama 连接成功示例](https://llm-assets.readthedocs.io/en/latest/_images/open_webui_settings.png)
 
 :::tip
-如果您想使用托管在不同 URL 的 Ollama 服务器，只需将 **Ollama Base URL** 更新为新的 URL，并按 **刷新** 按钮重新确认与 Ollama 的连接。
+使用远程 Ollama 服务器？
+如果您需要连接到其他地址的 Ollama 服务器：
+1. 在"Ollama 基础 URL"中输入新的服务器地址
+2. 点击"刷新"按钮重新验证连接
+3. 确认看到连接成功的提示
 :::
