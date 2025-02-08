@@ -40,7 +40,7 @@ docker run -p 9099:9099 --add-host=host.docker.internal:host-gateway -v pipeline
 
 进入 OpenWebUI 的**管理设置**，创建一个新的 OpenAI API 连接：
 
-- **服务地址：** http://host.docker.internal:9099（指向刚才部署的 Docker 容器）
+- **服务地址：** `http://host.docker.internal:9099`（指向刚才部署的 Docker 容器）
 - **访问密码：** 0p3n-w3bu!（系统默认密码）
 
 ![OpenWebUI 连接配置](https://langfuse.com/images/docs/openwebui-setup-settings.png)
@@ -49,7 +49,7 @@ docker run -p 9099:9099 --add-host=host.docker.internal:host-gateway -v pipeline
 
 1. 进入**管理设置** -> **管道配置**
 2. 添加 Langfuse 监控管道
-3. 确认管道服务地址为 http://host.docker.internal:9099
+3. 确认管道服务地址为http://host.docker.internal:9099
 4. 使用以下 URL 通过**Github 链接安装**选项安装管道插件：
 
 ```
