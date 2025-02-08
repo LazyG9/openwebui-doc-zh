@@ -1,16 +1,16 @@
 ---
 sidebar_position: 1
-title: "🚰 过滤器"
+title: "🚰 Filters"
 ---
 
-# 过滤器
+# Filters
 
-过滤器用于处理用户的输入消息和AI助手（LLM）的输出消息。过滤器可以执行多种操作，包括：将消息发送至监控平台（如Langfuse或DataDog）、修改消息内容、拦截有害消息、将消息翻译为其他语言，或对特定用户实施访问频率限制。您可以在[Pipelines代码仓库](https://github.com/open-webui/pipelines/tree/main/examples/filters)中找到更多示例。过滤器既可以作为Function在本地执行，也可以在Pipelines服务器上运行。下图展示了其基本工作流程。
+Filters 用于处理用户的输入消息和 LLM 的输出消息。在 Filters 中可以执行多种操作，例如将消息发送到监控平台（如 Langfuse 或 DataDog）、修改消息内容、拦截不良信息、将消息翻译为其他语言，或对特定用户实施限流。你可以在 [Pipelines 仓库](https://github.com/open-webui/pipelines/tree/main/examples/filters)中找到各种示例。Filters 可以以函数形式运行，也可以在 Pipelines 服务器上运行。下图展示了基本工作流程：
 
 <p align="center">
   <a href="#">
-    <img src="/img/pipelines/filters.png" alt="过滤器工作流程" />
+    <img src="/images/pipelines/filters.png" alt="Filter Workflow" />
   </a>
 </p>
 
-当在模型或管道中启用过滤器pipeline时，用户的输入消息（inlet，输入端）首先会传递给过滤器进行处理。过滤器会对消息执行预设的操作，随后向LLM模型请求对话补全。最后，过滤器会对LLM的返回消息（outlet，输出端）进行后处理，再将处理后的消息发送给用户。
+当在模型或管道上启用过滤管道（filter pipeline）时，用户的输入消息（inlet，入口消息）会被传递给 Filters 处理。Filters 会在请求 LLM 模型进行对话补全之前对消息进行预处理。最后，Filters 会对 LLM 的输出消息（outlet，出口消息）进行后期处理，然后再发送给用户。

@@ -1,7 +1,8 @@
 {
-	"label": "📝 教程",
+	"label": "📝 Tutorials（教程）",
 	"position": 800,
 	"link": {
 		"type": "generated-index"
 	}
 }
+

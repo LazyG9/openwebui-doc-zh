@@ -4,10 +4,10 @@ title: "🗨️ 使用 Docker 部署 Openedai-speech"
 ---
 
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队官方支持。它仅作为如何根据特定需求自定义 OpenWebUI 的示例。想要贡献？请查看贡献教程。
+本教程来自社区贡献，不受 Open WebUI 团队官方支持。仅作为如何根据特定需求自定义 Open WebUI 的示例。如果您想贡献内容，请查看贡献指南。
 :::
 
-**在 Open WebUI 中使用 Docker 集成 `openedai-speech`**
+**将 `openedai-speech` 集成到 Open WebUI 中（使用 Docker）**
 ==============================================================
 
 **什么是 `openedai-speech`？**
@@ -16,37 +16,37 @@ title: "🗨️ 使用 Docker 部署 Openedai-speech"
 :::info
 [openedai-speech](https://github.com/matatonic/openedai-speech) 是一个兼容 OpenAI 音频/语音 API 的文本转语音服务器。
 
-它提供 `/v1/audio/speech` 接口，并提供免费、私有的文本转语音体验，支持自定义声音克隆功能。该服务与 OpenAI 没有任何关联，也不需要 OpenAI API 密钥。
+它提供 `/v1/audio/speech` API 端点，为用户提供免费、私密的文本转语音体验，并支持自定义语音克隆功能。该服务与 OpenAI 完全无关，无需 OpenAI API 密钥即可使用。
 :::
 
-**要求**
+**系统要求**
 -----------------
 
 * 系统已安装 Docker
-* Open WebUI 运行在 Docker 容器中
-* 基本了解 Docker 和 Docker Compose
+* Open WebUI 以 Docker 容器方式运行
+* 具备 Docker 和 Docker Compose 的基本使用知识
 
 **方案一：使用 Docker Compose**
 ----------------------------------
 
-**步骤 1：为 `openedai-speech` 服务创建新文件夹**
+**步骤 1：创建 `openedai-speech` 服务目录**
 -----------------------------------------------------------------
 
-创建一个新文件夹，例如 `openedai-speech-service`，用于存储 `docker-compose.yml` 和 `speech.env` 文件。
+创建一个新目录，比如 `openedai-speech-service`，用于存放 `docker-compose.yml` 和 `speech.env` 配置文件。
 
-**步骤 2：从 GitHub 克隆 `openedai-speech` 仓库**
+**步骤 2：克隆 `openedai-speech` 代码仓库**
 --------------------------------------------------------------
 
 ```bash
 git clone https://github.com/matatonic/openedai-speech.git
 ```
 
-这将下载 `openedai-speech` 仓库到本地，其中包含 Docker Compose 文件（`docker-compose.yml`、`docker-compose.min.yml` 和 `docker-compose.rocm.yml`）以及其他必要文件。
+这将把 `openedai-speech` 仓库下载到本地，其中包含 Docker Compose 配置文件（`docker-compose.yml`、`docker-compose.min.yml` 和 `docker-compose.rocm.yml`）以及其他必需文件。
 
-**步骤 3：将 `sample.env` 文件重命名为 `speech.env`（根据需要自定义）**
+**步骤 3：配置环境文件**
 ------------------------------------------------------------------------------
 
-在 `openedai-speech` 仓库文件夹中，创建一个名为 `speech.env` 的新文件，内容如下：
+在 `openedai-speech` 目录中，创建 `speech.env` 文件（可从 `sample.env` 复制），内容如下：
 
 ```yaml
 TTS_HOME=voices
@@ -58,167 +58,191 @@ HF_HOME=voices
 #USE_ROCM=1
 ```
 
-**步骤 4：选择 Docker Compose 文件**
+**步骤 4：选择合适的 Docker Compose 配置**
 ----------------------------------------
 
-你可以使用以下任一 Docker Compose 文件：
+您可以根据需求选择以下配置文件之一：
 
-* [docker-compose.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.yml)：使用 `ghcr.io/matatonic/openedai-speech` 镜像，从 [Dockerfile](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile) 构建。
-* [docker-compose.min.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.min.yml)：使用 `ghcr.io/matatonic/openedai-speech-min` 镜像，从 [Dockerfile.min](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile.min) 构建。
-  这是一个最小版本，仅包含 Piper 支持，不需要 GPU。
-* [docker-compose.rocm.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.rocm.yml)：使用 `ghcr.io/matatonic/openedai-speech-rocm` 镜像，从 [Dockerfile](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile) 构建，支持 ROCm。
+* [docker-compose.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.yml)：使用 `ghcr.io/matatonic/openedai-speech` 镜像，基于标准 [Dockerfile](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile) 构建。
+* [docker-compose.min.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.min.yml)：使用 `ghcr.io/matatonic/openedai-speech-min` 镜像，基于精简版 [Dockerfile.min](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile.min) 构建。
+  这是一个轻量级版本，仅包含 Piper 支持，无需 GPU 即可运行。
+* [docker-compose.rocm.yml](https://github.com/matatonic/openedai-speech/blob/main/docker-compose.rocm.yml)：使用 `ghcr.io/matatonic/openedai-speech-rocm` 镜像，基于支持 ROCm 的 [Dockerfile](https://github.com/matatonic/openedai-speech/blob/main/Dockerfile) 构建。
 
-**步骤 4：构建所选 Docker 镜像**
+**步骤 5：构建 Docker 镜像**
 -----------------------------------------
 
-在运行 Docker Compose 文件之前，需要构建 Docker 镜像：
+在运行服务之前，需要先构建相应的 Docker 镜像：
 
-* **Nvidia GPU（支持 CUDA）**：
+* **Nvidia GPU 版本（支持 CUDA）**：
 
 ```bash
 docker build -t ghcr.io/matatonic/openedai-speech .
 ```
 
-* **AMD GPU（支持 ROCm）**：
+* **AMD GPU 版本（支持 ROCm）**：
 
 ```bash
 docker build -f Dockerfile --build-arg USE_ROCM=1 -t ghcr.io/matatonic/openedai-speech-rocm .
 ```
 
-* **仅 CPU，无 GPU（仅 Piper）**：
+* **纯 CPU 版本（仅 Piper）**：
 
 ```bash
 docker build -f Dockerfile.min -t ghcr.io/matatonic/openedai-speech-min .
 ```
 
-**步骤 5：运行正确的 `docker compose up -d` 命令**
+**步骤 6：启动服务**
 ----------------------------------------------------------
 
-* **Nvidia GPU（支持 CUDA）**：运行以下命令以在分离模式下启动 `openedai-speech` 服务：
+* **Nvidia GPU 版本（CUDA）**：以守护进程方式启动服务：
 
 ```bash
 docker compose up -d
 ```
 
-* **AMD GPU（支持 ROCm）**：运行以下命令以在分离模式下启动 `openedai-speech` 服务：
+* **AMD GPU 版本（ROCm）**：以守护进程方式启动服务：
 
 ```bash
 docker compose -f docker-compose.rocm.yml up -d
 ```
 
-* **ARM64（Apple M-series，Raspberry Pi）**：XTTS 仅支持 CPU，速度会很慢。你可以使用支持 CPU 的 XTTS 的 Nvidia 镜像（慢），或者使用仅 Piper 的镜像（推荐）：
+* **ARM64 设备（如 Apple M 系列芯片、树莓派）**：
+  注意：在这些设备上 XTTS 只能使用 CPU 运行，速度会很慢。您可以：
+  - 选择 Nvidia 镜像搭配 CPU 运行 XTTS（较慢）
+  - 使用仅包含 Piper 的轻量级镜像（推荐）：
 
 ```bash
 docker compose -f docker-compose.min.yml up -d
 ```
 
-* **仅 CPU，无 GPU（仅 Piper）**：对于一个最小化的 docker 镜像，仅包含 Piper 支持（< 1GB vs. 8GB）：
+* **纯 CPU 环境（仅 Piper）**：使用轻量级镜像（约 1GB，相比完整版的 8GB 大幅减小）：
 
 ```bash
 docker compose -f docker-compose.min.yml up -d
 ```
 
-这将启动 `openedai-speech` 服务在分离模式下。
-
-**选项 2：使用 Docker Run 命令**
+**方案二：使用 Docker Run 命令**
 ---------------------------------------
 
-你也可以使用以下 Docker run 命令来启动 `openedai-speech` 服务在分离模式下：
+如果您更习惯使用 Docker 命令行，也可以通过以下方式启动服务：
 
-* **Nvidia GPU（支持 CUDA）**：运行以下命令以构建和启动 `openedai-speech` 服务：
+* **Nvidia GPU 版本（CUDA）**：
 
 ```bash
 docker build -t ghcr.io/matatonic/openedai-speech .
 docker run -d --gpus=all -p 8000:8000 -v voices:/app/voices -v config:/app/config --name openedai-speech ghcr.io/matatonic/openedai-speech
 ```
 
-* **ROCm（AMD GPU）**：运行以下命令以构建和启动 `openedai-speech` 服务：
+* **AMD GPU 版本（ROCm）**：
 
-> 要启用 ROCm 支持，请取消 `speech.env` 文件中的 `#USE_ROCM=1` 行。
+> 注意：使用 ROCm 前，请先在 `speech.env` 中取消注释 `#USE_ROCM=1` 行。
 
 ```bash
 docker build -f Dockerfile --build-arg USE_ROCM=1 -t ghcr.io/matatonic/openedai-speech-rocm .
 docker run -d --privileged --init --name openedai-speech -p 8000:8000 -v voices:/app/voices -v config:/app/config ghcr.io/matatonic/openedai-speech-rocm
 ```
 
-* **仅 CPU，无 GPU（仅 Piper）**：运行以下命令以构建和启动 `openedai-speech` 服务：
+* **纯 CPU 版本（仅 Piper）**：
 
 ```bash
 docker build -f Dockerfile.min -t ghcr.io/matatonic/openedai-speech-min .
 docker run -d -p 8000:8000 -v voices:/app/voices -v config:/app/config --name openedai-speech ghcr.io/matatonic/openedai-speech-min
 ```
 
-**步骤 6：配置 Open WebUI 以使用 `openedai-speech` 进行 TTS**
+**步骤 7：配置 Open WebUI**
 ---------------------------------------------------------
 
 ![openedai-tts](https://github.com/silentoplayz/docs/assets/50341825/ea08494f-2ebf-41a2-bb0f-9b48dd3ace79)
 
-打开 Open WebUI 设置并导航到 **Admin Panel > Settings > Audio** 下的 TTS 设置。添加以下配置：
+打开 Open WebUI 设置页面，进入 **管理面板 > 设置 > 音频** 配置以下参数：
 
-* **API Base URL**：`http://host.docker.internal:8000/v1`
-* **API Key**：`sk-111111111`（请注意，这是一个虚拟 API 密钥，因为 `openedai-speech` 不需要 API 密钥。你可以使用任何你想要的值，只要它被填充）
+* **API 基础 URL**：`http://host.docker.internal:8000/v1`
+* **API 密钥**：`sk-111111111`（这是一个示例值，因为 `openedai-speech` 不校验 API 密钥，您可以填写任意内容）
 
-**步骤 7：选择声音**
+**步骤 8：选择语音模型**
 --------------------------
 
-在同一个音频设置菜单中，在管理面板中，你可以将 `TTS Model` 设置为以下选择之一，这些选择 `openedai-speech` 支持。这些模型的声音针对英语进行了优化。
+在音频设置中的 `文本转语音语音` 选项下，您可以选择以下 `openedai-speech` 支持的语音模型。这些模型主要针对英语优化：
 
-* `tts-1` 或 `tts-1-hd`：`alloy`、`echo`、`echo-alt`、`fable`、`onyx`、`nova` 和 `shimmer`（`tts-1-hd` 是可配置的；默认使用 OpenAI 样本）
+* `tts-1` 或 `tts-1-hd`：支持 `alloy`、`echo`、`echo-alt`、`fable`、`onyx`、`nova` 和 `shimmer` 等语音（`tts-1-hd` 可自定义配置，默认使用 OpenAI 语音样本）
 
-**步骤 8：按 `Save` 应用更改并开始享受自然声音**
+**步骤 9：保存并开始使用**
 --------------------------------------------------------------------------------------------
 
-按 `Save` 按钮应用更改到你的 Open WebUI 设置。刷新页面以使更改完全生效，并享受使用 `openedai-speech` 集成在 Open WebUI 中进行文本到语音的体验。
+点击 `保存` 按钮应用设置，然后刷新页面使更改生效。现在您就可以享受 `openedai-speech` 提供的自然语音服务了。
 
-**模型详情：**
+**模型说明**
 ------------------
 
-`openedai-speech` 支持多种文本到语音模型，每种模型都有其自身的优势和要求。以下模型可用：
+`openedai-speech` 支持多种文本转语音模型，每种都有其特点：
 
-* **Piper TTS**（非常快，运行在 CPU 上）：使用 `voice_to_speaker.yaml` 配置文件通过 [Piper voices](https://rhasspy.github.io/piper-samples/)。该模型非常适合需要低延迟和高性能的应用程序。Piper TTS 还支持 [多语言](https://github.com/matatonic/openedai-speech#multilingual) 声音。
-* **Coqui AI/TTS XTTS v2**（快速，但需要大约 4GB GPU VRAM 和带有 CUDA 的 Nvidia GPU）：此模型使用 Coqui AI 的 XTTS v2 语音克隆技术生成高质量声音。虽然需要更强大的 GPU，但它提供出色的性能和高质量音频。Coqui 还支持 [多语言](https://github.com/matatonic/openedai-speech#multilingual) 声音。
-* **Beta Parler-TTS 支持**（实验性，较慢）：此模型使用 Parler-TTS 框架生成声音。虽然目前处于测试阶段，但它允许你描述扬声器声音的基本特征。每次生成时声音会有所不同，但应该与扬声器描述提供的声音相似。有关如何描述声音的灵感，请参阅 [文本描述到语音](https://www.text-description-to-speech.com/)。
+* **Piper TTS**（超快速，CPU 运行）：
+  - 通过 `voice_to_speaker.yaml` 配置使用 [Piper 语音库](https://rhasspy.github.io/piper-samples/)
+  - 适合要求低延迟、高性能的场景
+  - 支持[多语言](https://github.com/matatonic/openedai-speech#multilingual)语音
 
-**故障排除**
+* **Coqui AI/TTS XTTS v2**（高性能，需要 GPU）：
+  - 需要约 4GB GPU 显存和支持 CUDA 的 Nvidia GPU
+  - 使用 Coqui AI 的 XTTS v2 语音克隆技术
+  - 提供高质量音频输出
+  - 支持[多语言](https://github.com/matatonic/openedai-speech#multilingual)语音
+
+* **Beta Parler-TTS**（实验性功能）：
+  - 使用 Parler-TTS 框架
+  - 支持通过文本描述定制语音特征
+  - 每次生成的语音略有变化，但会符合描述特征
+  - 可参考 [Text Description to Speech](https://www.text-description-to-speech.com/) 了解语音描述方法
+
+**问题排查指南**
 -------------------
 
-如果你在将 `openedai-speech` 与 Open WebUI 集成时遇到任何问题，请按照以下故障排除步骤进行：
+如果遇到集成问题，请按以下步骤检查：
 
-* **验证 `openedai-speech` 服务**：确保 `openedai-speech` 服务正在运行，并且你在 `docker-compose.yml` 文件中指定的端口已暴露。
-* **检查 host.docker.internal 的访问权限**：验证主机名 `host.docker.internal` 是否可以从 Open WebUI 容器中解析。这是必要的，因为 `openedai-speech` 通过 `localhost` 在你的 PC 上暴露，但 `open-webui` 无法从其容器内部正常访问它。你可以将卷添加到 `docker-compose.yml` 文件中，以将文件从主机挂载到容器，例如，挂载到将由 `openedai-speech` 服务的目录。
-* **审查 API 密钥配置**：确保 API 密钥设置为虚拟值或有效未检查，因为 `openedai-speech` 不需要 API 密钥。
-* **检查声音配置**：验证你正在尝试用于 TTS 的声音是否存在于你的 `voice_to_speaker.yaml` 文件中，并且相应的文件（例如，声音 XML 文件）是否存在于正确的目录中。
-* **验证声音模型路径**：如果你遇到声音模型加载问题，请双击检查你的 `voice_to_speaker.yaml` 文件中的路径是否与实际的声音模型位置匹配。
+* **服务状态检查**：
+  - 确认 `openedai-speech` 服务正在运行
+  - 验证配置的端口已正确暴露
 
-**附加故障排除提示**
+* **网络连接检查**：
+  - 确保 Open WebUI 容器能够解析 `host.docker.internal`
+  - 必要时在 `docker-compose.yml` 中添加额外的网络配置
+
+* **配置检查**：
+  - 确认 API 密钥已设置（可以是任意值）
+  - 验证语音配置文件 `voice_to_speaker.yaml` 中的设置
+  - 检查语音模型文件路径是否正确
+
+**其他排查建议**
 ------------------------------------
 
-* 检查 `openedai-speech` 日志中的错误或警告，以确定问题所在。
-* 验证 `docker-compose.yml` 文件是否正确配置了你的环境。
-* 如果你仍然遇到问题，请尝试重新启动 `openedai-speech` 服务或整个 Docker 环境。
-* 如果问题仍然存在，请咨询 `openedai-speech` GitHub 存储库或寻求相关社区论坛的帮助。
+* 查看 openedai-speech 的日志输出，寻找错误信息
+* 检查 `docker-compose.yml` 配置是否符合您的环境
+* 尝试重启服务或整个 Docker 环境
+* 在 [GitHub 仓库](https://github.com/matatonic/openedai-speech) 或社区论坛寻求帮助
 
-**常见问题**
+**常见问题解答**
 -------
 
-**如何控制生成音频的情绪范围？**
+**Q：如何调整语音的情感表现？**
+A：目前没有直接的情感控制机制。虽然大小写和标点符号可能会影响语音表现，但效果不一定稳定。
 
-没有直接机制来控制生成音频的情绪输出。某些因素，如大写或语法，可能会影响音频输出，但内部测试结果是混合的。
+**Q：语音和配置文件存放在哪里？**
+A：所有配置文件（包括可用语音定义）都存储在 Docker 的 config 卷中，默认语音配置位于 voice_to_speaker.default.yaml 文件中。
 
-**声音文件存储在哪里？配置文件呢？**
-
-配置文件存储在 config 卷中。具体来说，默认声音定义在 voice_to_speaker.default.yaml 中。
-
-**其他资源**
+**扩展资源**
 ------------------------
 
-有关配置 Open WebUI 以使用 `openedai-speech` 的更多信息，包括设置环境变量，请参阅 [Open WebUI 文档](https://docs.openwebui.com/getting-started/advanced-topics/env-configuration#text-to-speech)。
+* **配置指南**：
+  - 完整的配置说明请参考 [Open WebUI 文档](https://docs.openwebui.com/getting-started/env-configuration#text-to-speech)
+  - 包括环境变量设置、高级配置选项等
 
-有关 `openedai-speech` 的更多信息，请访问 [GitHub 存储库](https://github.com/matatonic/openedai-speech)。
+* **项目文档**：
+  - 详细文档请访问 [openedai-speech GitHub 仓库](https://github.com/matatonic/openedai-speech)
+  - 包含最新更新、问题反馈等信息
 
-**如何为 openedai-speech 添加更多声音：**
-[Custom-Voices-HowTo](https://github.com/matatonic/openedai-speech?tab=readme-ov-file#custom-voices-howto)
+* **语音定制**：
+  - 添加自定义语音请参考[自定义语音使用指南](https://github.com/matatonic/openedai-speech?tab=readme-ov-file#custom-voices-howto)
+  - 提供详细的语音添加和配置步骤
 
 :::note
-你可以更改 `docker-compose.yml` 文件中的端口号，但请确保在 Open WebUI Admin Audio 设置中更新 **API Base URL**。
+如需更改服务端口，可以修改 `docker-compose.yml` 中的端口映射，但请记得同步更新 Open WebUI 管理面板中的 **API 基础 URL** 设置。
 :::

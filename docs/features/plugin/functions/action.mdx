@@ -1,49 +1,50 @@
 ---
 sidebar_position: 3
-title: "🎬 动作函数"
+title: "🎬 Action 函数"
 ---
 
-动作函数允许您为最终用户编写自定义按钮到消息工具栏以进行交互。此功能实现了更多交互式消息传递，使用户能够在执行任务之前授予权限、生成结构化数据的可视化、下载聊天的音频片段，以及许多其他用例。
+Action 函数允许您在消息工具栏中为最终用户创建自定义交互按钮。这个功能让消息交互变得更加丰富多样，可以实现多种实用功能，例如：在执行任务前进行用户授权、生成结构化数据的可视化展示、下载聊天内容的音频片段等。
 
-可以在[社区部分](https://openwebui.com/f/hub/custom_action/)找到动作代码的脚手架。
+您可以在[社区版块](https://openwebui.com/f/hub/custom_action/)中找到 Action 的代码脚手架（示例代码框架）。
 
-下面的视频展示了图形可视化动作的示例。
+下面的视频展示了一个图形可视化 Action 的具体应用示例：
 
 <p align="center">
   <a href="#">
-    <img src="/img/pipelines/graph-viz-action.gif" alt="图形可视化动作" />
+    <img src="/images/pipelines/graph-viz-action.gif" alt="图形可视化 Action" />
   </a>
 </p>
 
 
-### 动作
-动作用于在消息 UI 中创建按钮（直接位于单个聊天消息下方的小按钮）。
+### Action
+Action 主要用于在消息 UI 中创建交互按钮（这些按钮会显示在每条聊天消息的正下方）。
 
-动作有一个称为动作函数的主要组件。该组件接受一个定义动作类型和正在处理的数据的对象。
+每个 Action 都包含一个核心组件：action 函数。该函数接收一个对象参数，用于定义具体的动作类型和需要处理的数据内容。
 
 <details>
-<summary>示例</summary>
+<summary>示例代码</summary>
 
-```
+```python
 async def action(
         self,
         body: dict,
-        __user__=None,
-        __event_emitter__=None,
-        __event_call__=None,
-    ) -> Optional[dict]:
+        __user__=None,        # 用户信息对象
+        __event_emitter__=None,    # 事件发射器
+        __event_call__=None,    # 事件调用函数
+    ) -> Optional[dict]:    # 返回可选的字典类型
         print(f"action:{__name__}")
 
         response = await __event_call__(
             {
-                "type": "input",
+                "type": "input",    # 动作类型：输入
                 "data": {
-                    "title": "写一条消息",
-                    "message": "在这里写一条要追加的消息",
-                    "placeholder": "输入您的消息",
+                    "title": "write a message",     # 对话框标题
+                    "message": "here write a message to append",    # 提示信息
+                    "placeholder": "enter your message",    # 输入框提示文本
                 },
             }
         )
         print(response)
 ```
+
 </details>

@@ -4,41 +4,41 @@ title: "🤝 贡献教程"
 ---
 
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何为您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
+本教程来自社区贡献，不受 Open WebUI 团队官方支持。它仅作为如何根据特定用例自定义 Open WebUI 的示例。想要贡献？请查看贡献教程。
 :::
 
 # 贡献教程
 
-我们感谢您有兴趣为 Open WebUI 文档贡献教程。请按照以下步骤设置您的环境并提交您的教程。
+感谢您有兴趣为 Open WebUI 文档贡献教程。请按照以下步骤设置您的环境并提交教程。
 
 ## 步骤
 
 1. **Fork `openwebui/docs` GitHub 仓库**
 
    - 访问 GitHub 上的 [Open WebUI Docs 仓库](https://github.com/open-webui/docs)。
-   - 点击右上角的 **Fork** 按钮，在您的 GitHub 账号下创建一个副本。
+   - 点击右上角的 **Fork** 按钮，在您的 GitHub 账户下创建一个副本。
 
 2. **启用 GitHub Actions**
 
-   - 在您的 fork 仓库中，导航至 **Actions** 标签页。
-   - 如果提示，请按照屏幕上的说明启用 GitHub Actions。
+   - 在您的 fork 仓库中，导航到 **Actions** 标签页。
+   - 如果出现提示，请按照屏幕上的说明启用 GitHub Actions。
 
 3. **启用 GitHub Pages**
 
-   - 在您的 fork 仓库中，转到 **Settings** > **Pages**。
+   - 在您的 fork 仓库中，进入 **Settings** > **Pages**。
    - 在 **Source** 下，选择您要部署的分支（例如 `main`）和文件夹（例如 `/docs`）。
    - 点击 **Save** 启用 GitHub Pages。
 
 4. **配置 GitHub 环境变量**
 
-   - 在您的 fork 仓库中，转到 **Settings** > **Secrets and variables** > **Actions** > **Variables**。
+   - 在您的 fork 仓库中，进入 **Settings** > **Secrets and variables** > **Actions** > **Variables**。
    - 添加以下环境变量：
      - `BASE_URL` 设置为 `/docs`（或您为 fork 选择的基础 URL）。
      - `SITE_URL` 设置为 `https://<your-github-username>.github.io/`。
 
 ### 📝 更新 GitHub Pages 工作流和配置文件
 
-如果您需要调整部署设置以适应您的自定义设置，请按以下步骤操作：
+如果您需要调整部署设置以适应自定义设置，请按以下步骤操作：
 
 a. **更新 `.github/workflows/gh-pages.yml`**
 
@@ -60,14 +60,14 @@ b. **修改 `docusaurus.config.ts` 以使用环境变量**
      const config: Config = {
        title: "Open WebUI",
        tagline: "ChatGPT-Style WebUI for LLMs (Formerly Ollama WebUI)",
-       favicon: "img/favicon.png",
+       favicon: "images/favicon.png",
        url: process.env.SITE_URL || "https://openwebui.com",
        baseUrl: process.env.BASE_URL || "/",
        ...
      };
      ```
 
-- 此设置确保 fork 和自定义设置的部署行为一致。
+- 这种设置可确保 fork 和自定义设置的部署行为一致。
 
 5. **运行 `gh-pages` GitHub 工作流**
 
@@ -92,24 +92,24 @@ b. **修改 `docusaurus.config.ts` 以使用环境变量**
    - 为您的 PR 提供描述性的标题和说明。
    - 提交拉取请求以供审核。
 
-## 重要提示
+## 重要说明
 
 社区贡献的教程必须包含以下内容：
 
 ```
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何为您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
+本教程来自社区贡献，不受 Open WebUI 团队官方支持。它仅作为如何根据特定用例自定义 Open WebUI 的示例。想要贡献？请查看贡献教程。
 :::
 ```
 
 ---
 
 :::tip 如何在本地测试 Docusaurus  
-您可以使用以下命令在本地测试您的 Docusaurus 站点：
+您可以使用以下命令在本地测试您的 Docusaurus 网站：
 
 ```bash
 npm install   # 安装依赖
-npm run build # 构建生产版本站点
+npm run build # 构建生产版本的网站
 ```
 
 这将帮助您在部署之前发现任何问题

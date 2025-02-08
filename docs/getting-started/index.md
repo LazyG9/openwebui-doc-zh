@@ -1,34 +1,34 @@
 ---
 sidebar_position: 200
-title: "🚀 新手指南"
+title: "🚀 开始使用"
 ---
 
-# Open WebUI 快速上手
+# 开始使用 Open WebUI
 
-欢迎访问 **Open WebUI 官方文档！**我们为你准备了以下入门指南和核心资源，帮助你轻松上手、管理和开发 Open WebUI。
-
----
-
-## ⏱️ 快速入门  
-
-查看[快速入门指南](/getting-started/quick-start)，几分钟内即可部署并运行 Open WebUI。
+欢迎访问 **Open WebUI 文档中心！** 我们精心准备了以下指南和资源，帮助您轻松开始使用、管理和开发 Open WebUI。
 
 ---
 
-## 🛠️ 高级配置  
+## ⏱️ 快速上手  
 
-通过[高级主题指南](/getting-started/advanced-topics)深入了解系统配置和开发技巧。
+我们的[快速入门指南](/getting-started/quick-start)将帮助您在几分钟内完成安装和基本配置。
+
+---
+
+## 🛠️ 进阶主题  
+
+准备深入了解更多？我们的[进阶主题指南](/getting-started/advanced-topics)涵盖了高级配置选项和开发者指南。
 
 ---
 
 ## 🔄 版本更新
 
-参考[更新指南](./updating)及时获取最新功能和安全更新。
+及时了解最新特性和安全更新，请查看我们的 [Open WebUI 更新指南](./updating)。
 
 ---
 
-准备好开始探索了吗？🎉 
+开始您的探索之旅吧！🎉 
 
-如果你在使用过程中遇到问题：
-- 欢迎加入我们的 [Discord 社区](https://discord.gg/5rJgQTnV4s)
-- 或访问我们的 [GitHub 项目主页](https://github.com/open-webui/open-webui)提交 Issue
+如需帮助：
+- 加入我们友好的 [Discord 社区](https://discord.gg/5rJgQTnV4s)
+- 在 [GitHub](https://github.com/open-webui/open-webui) 上提交问题或建议

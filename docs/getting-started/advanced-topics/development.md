@@ -3,19 +3,19 @@ sidebar_position: 5
 title: "🛠️ 开发指南"
 ---
 
-欢迎使用 **Open WebUI 开发指南**！本文将帮助所有开发者（无论新手还是专家）搭建一个完整的**本地开发环境**。让我们立即开始吧！🚀
+欢迎阅读 **Open WebUI 开发环境配置指南！** 无论您是新手还是经验丰富的开发者，本指南都将帮助您为前端和后端组件搭建**本地开发环境**。让我们深入了解吧！🚀
 
-## 环境准备
+## 系统要求
 
-- **系统环境**：Linux（Windows 用户请使用 WSL）或 macOS
-- **Python 环境**：3.11 或更高版本
-- **Node.js 环境**：22.10 或更高版本
+- **操作系统**：Linux（或 Windows 上的 WSL）或 macOS  
+- **Python 版本**：Python 3.11+  
+- **Node.js 版本**：22.10+
 
-## 开发环境搭建
+## 开发方法
 
-### 🐧 本地开发环境
+### 🐧 本地开发环境配置
 
-1. **获取源码**：
+1. **克隆（Clone）仓库**：
 
    ```bash
    git clone https://github.com/open-webui/open-webui.git
@@ -23,94 +23,94 @@ title: "🛠️ 开发指南"
    ```
 
 2. **前端配置**：
-    - 配置环境变量：
+   - 创建 `.env` 文件：
 
-      ```bash
-      cp -RPp .env.example .env
-      ```
+     ```bash
+     cp -RPp .env.example .env
+     ```
 
-    - 安装项目依赖：
+   - 安装依赖：
 
-      ```bash
-      npm install
-      ```
+     ```bash
+     npm install
+     ```
 
-    - 启动开发服务器：
+   - 启动前端服务器：
 
-      ```bash
-      npm run dev
-      ```
+     ```bash
+     npm run dev
+     ```
 
-      🌐 前端页面：[http://localhost:5173](http://localhost:5173)
+     🌐 访问地址：[http://localhost:5173](http://localhost:5173)。
 
 3. **后端配置**：
-    - 切换到后端目录：
+   - 进入后端目录：
 
-      ```bash
-      cd backend
-      ```
+     ```bash
+     cd backend
+     ```
 
-    - 创建并激活 **Conda** 环境：
+   - 使用 **Conda** 配置环境：
 
-      ```bash
-      conda create --name open-webui python=3.11
-      conda activate open-webui
-      ```
+     ```bash
+     conda create --name open-webui python=3.11
+     conda activate open-webui
+     ```
 
-    - 安装项目依赖：
+   - 安装依赖：
 
-      ```bash
-      pip install -r requirements.txt -U
-      ```
+     ```bash
+     pip install -r requirements.txt -U
+     ```
 
-    - 启动开发服务器：
+   - 启动后端：
 
-      ```bash
-      sh dev.sh
-      ```
+     ```bash
+     sh dev.sh
+     ```
 
-      📄 接口文档：[http://localhost:8080/docs](http://localhost:8080/docs)
+     📄 API 文档访问地址：[http://localhost:8080/docs](http://localhost:8080/docs)。
 
 
-## 🐛 疑难解答
+## 🐛 问题排查
 
-### **内存溢出问题**
+### **致命错误：达到堆内存限制**
 
-遇到构建时内存不足，请增加 **Node.js 内存限制**：
+如果在构建过程中遇到内存相关错误，请增加 **Node.js 堆内存大小**：
 
-1. **更新 Dockerfile**：
+1. **修改 Dockerfile**：
 
    ```dockerfile
    ENV NODE_OPTIONS=--max-old-space-size=4096
    ```
 
-2. **确保分配足够内存**（至少 4GB）。
+2. **为 Node.js 分配至少 4 GB 的 RAM**。
 
 ---
 
-### **常见问题**
+### **其他问题**
 
-- **端口被占用**：  
-  检查 **8080** 和 **5173** 端口是否被其他程序占用。
+- **端口冲突**：  
+   确保没有其他进程占用 **8080 或 5173 端口**。
 
-- **自动刷新失效**：  
-  检查前后端的文件监听是否正常开启。
+- **热重载不工作**：  
+   验证前端和后端的**监视模式**是否已启用。
 
-## 参与项目开发
+## 为 Open WebUI 贡献代码
 
-### 开发工作流
+### 本地工作流程
 
-1. **及时提交代码**，保持良好的开发习惯。
-2. **保持代码同步**，避免合并冲突：
+1. **定期提交代码变更**以跟踪进度。
+2. **与主分支保持同步**以避免冲突：
 
    ```bash
    git pull origin main
    ```
 
-3. **提交前自测**：
+3. **推送前运行测试**：
 
    ```bash
    npm run test
    ```
 
-开始愉快地开发吧！🎉
+开始愉快的编码吧！🎉

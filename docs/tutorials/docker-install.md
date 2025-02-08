@@ -1,25 +1,25 @@
 ---
-sidebar_position: 0
+sidebar_position: 4
 title: 🐳 安装 Docker
 ---
 
 :::warning
-本教程是社区贡献内容，不受 OpenWebUI 团队支持。它仅作为如何为您的特定用例自定义 OpenWebUI 的演示。想要贡献？请查看贡献教程。
+本教程来自社区贡献，不受 Open WebUI 团队官方支持。它仅作为如何根据特定用例自定义 Open WebUI 的示例。想要贡献？请查看贡献教程。
 :::
 
 # 安装 Docker
 
 ## Windows 和 Mac 用户
 
-- 从 [Docker 官网](https://www.docker.com/products/docker-desktop) 下载 Docker Desktop。
-- 按照网站上的安装说明进行操作。
-- 安装完成后，**启动 Docker Desktop** 以确保其正常运行。
+- 从 [Docker 官网](https://www.docker.com/products/docker-desktop) 下载 Docker Desktop
+- 按照网站上的安装指引进行操作
+- 安装完成后，**启动 Docker Desktop** 以确保其正常运行
 
 ---
 
 ## Ubuntu 用户
 
-1. **打开终端。**
+1. **打开终端**
 
 2. **配置 Docker 的 apt 软件源：**
 
@@ -46,7 +46,7 @@ title: 🐳 安装 Docker
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
    ```
 
-4. **验证 Docker 安装：**
+4. **验证 Docker 是否安装成功：**
 
    ```bash
    sudo docker run hello-world
@@ -54,17 +54,18 @@ title: 🐳 安装 Docker
 
 ---
 
-## 其他 Linux 发行版
+## 其他 Linux 发行版用户
 
-对于其他 Linux 发行版的安装说明，请参考 [Docker 官方文档](https://docs.docker.com/engine/install/)。
+如果您使用其他 Linux 发行版，请参考 [Docker 官方文档](https://docs.docker.com/engine/install/)。
 
 ---
 
 ## 安装和验证 Ollama
 
-1. **从 [https://ollama.com/](https://ollama.com/) 下载 Ollama**。
+1. **下载 Ollama**
+   请访问 [https://ollama.com/](https://ollama.com/) 下载。
 
-2. **验证 Ollama 安装：**
+2. **验证 Ollama 是否安装成功：**
    - 在浏览器中访问：
-     [http://127.0.0.1:11434/](http://127.0.0.1:11434/).
-   - 注意：端口号可能因具体安装配置而有所不同。
+     [http://127.0.0.1:11434/](http://127.0.0.1:11434/)
+   - 注意：端口号可能因安装配置而异

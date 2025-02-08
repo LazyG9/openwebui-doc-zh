@@ -3,24 +3,23 @@ sidebar_position: 1
 title: "🚰 管道函数"
 ---
 
-# 🚰 管道函数：创建自定义"代理/模型"
-欢迎阅读这份关于在 Open WebUI 中创建**管道**的指南！将管道视为向 Open WebUI **添加**新模型的方式。在本文档中，我们将分解什么是管道、它如何工作，以及如何创建您自己的管道来为 Open WebUI 模型添加自定义逻辑和处理。我们将使用清晰的比喻并详细讲解每个细节，以确保您能全面理解。
-
+# 🚰 管道函数（Pipe Function）：创建自定义"AI 智能体/模型"
+欢迎阅读这份关于在 Open WebUI 中创建**管道（Pipe）**的指南！可以将管道理解为向 Open WebUI **添加**新模型的方式。在本文档中，我们将详细解释管道是什么、它如何工作，以及如何创建你自己的管道来为 Open WebUI 模型添加自定义逻辑和处理。我们将使用清晰的比喻并详细讲解每个细节，确保你能全面理解。
 
 ## 管道简介
 
-想象 Open WebUI 是一个**管道系统**，数据在管道和阀门中流动。在这个比喻中：
+想象 Open WebUI 是一个**智能管道系统**，数据像水流一样在管道和阀门中流动。在这个比喻中：
 
-- **管道**就像**插件**，让您引入新的数据流路径，允许您注入自定义逻辑和处理。
-- **阀门**是管道的**可配置部分**，控制数据如何流经它。
+- **管道（Pipe）**就像**扩展组件**，让你可以引入新的数据流路径，允许你注入自定义逻辑和处理。
+- **阀门（Valves）**是管道的**可配置部分**，用于控制数据如何流动。
 
-通过创建管道，您实际上是在 Open WebUI 框架内打造一个具有您想要的特定行为的自定义模型。
+通过创建管道，你实际上是在 Open WebUI 框架内打造一个具有你所需特定行为的自定义模型。
 
 ---
 
 ## 理解管道结构
 
-让我们从一个基础的、最简单的管道版本开始，以理解其结构：
+让我们从一个基础的管道版本开始，来理解其结构：
 
 ```python
 from pydantic import BaseModel, Field
@@ -33,28 +32,28 @@ class Pipe:
         self.valves = self.Valves()
 
     def pipe(self, body: dict):
-        # 逻辑在这里
-        print(self.valves, body)  # 这将打印配置选项和输入主体
+        # 逻辑在这里 / Logic goes here
+        print(self.valves, body)  # 这将打印配置选项和输入主体 / This will print the configuration options and input body
         return "Hello, World!"
 ```
 
-### 管道类
+### 管道类（Pipe Class）
 
-- **定义**：`Pipe` 类是您定义自定义逻辑的地方。
-- **目的**：作为您的插件的蓝图，决定它在 Open WebUI 中的行为方式。
+- **定义**：`Pipe` 类是你定义自定义逻辑的地方。
+- **目的**：作为你的扩展组件的蓝图，决定它在 Open WebUI 中的行为方式。
 
-### 阀门：配置您的管道
+### 阀门：配置你的管道（Valves: Configuring Your Pipe）
 
 - **定义**：`Valves` 是 `Pipe` 内的嵌套类，继承自 `BaseModel`。
 - **目的**：它包含在使用管道过程中持续存在的配置选项（参数）。
 - **示例**：在上面的代码中，`MODEL_ID` 是一个默认为空字符串的配置选项。
 
-**比喻**：将阀门想象成真实世界管道系统上控制水流的旋钮。在您的管道中，阀门允许用户调整影响数据流动和处理方式的设置。
+**比喻**：把阀门想象成智能水龙头上的调节器。在你的管道中，阀门允许用户调整影响数据流动和处理方式的各种设置。
 
 ### `__init__` 方法
 
 - **定义**：`Pipe` 类的构造方法。
-- **目的**：初始化管道的状态并设置任何必要的组件。
+- **目的**：初始化管道的状态并设置必要的组件。
 - **最佳实践**：保持简单；主要在这里初始化 `self.valves`。
 
 ```python
@@ -64,25 +63,25 @@ def __init__(self):
 
 ### `pipe` 函数
 
-- **定义**：包含您的自定义逻辑的核心函数。
+- **定义**：包含你的自定义逻辑的核心函数。
 - **参数**：
   - `body`：包含输入数据的字典。
-- **目的**：使用您的自定义逻辑处理输入数据并返回结果。
+- **目的**：使用你的自定义逻辑处理输入数据并返回结果。
 
 ```python
 def pipe(self, body: dict):
-    # 逻辑在这里
-    print(self.valves, body)  # 这将打印配置选项和输入主体
+    # 逻辑在这里 / Logic goes here
+    print(self.valves, body)  # 打印配置选项和输入主体 / Print configuration options and input body
     return "Hello, World!"
 ```
 
-**注意**：始终将 `Valves` 放在 `Pipe` 类的顶部，然后是 `__init__`，最后是 `pipe` 函数。这种结构确保了清晰性和一致性。
+**注意**：始终将 `Valves` 放在 `Pipe` 类的顶部，然后是 `__init__`，最后是 `pipe` 函数。这种结构确保了代码的清晰性和一致性。
 
 ---
 
 ## 使用管道创建多个模型
 
-如果您想让您的管道在 Open WebUI 中创建**多个模型**怎么办？您可以通过在 `Pipe` 类中定义 `pipes` 函数或变量来实现这一点。这种设置，非正式地称为**歧管**，允许您的管道代表多个模型。
+如果你想让你的管道在 Open WebUI 中创建**多个模型**怎么办？你可以通过在 `Pipe` 类中定义 `pipes` 函数或变量来实现这一点。这种设置，非正式地称为**歧管（manifold）**，允许你的管道表示多个模型。
 
 以下是实现方法：
 
@@ -104,13 +103,13 @@ class Pipe:
         ]
 
     def pipe(self, body: dict):
-        # 逻辑在这里
-        print(self.valves, body)  # 打印配置选项和输入主体
+        # 逻辑在这里 / Logic goes here
+        print(self.valves, body)  # 打印配置选项和输入主体 / Print configuration options and input body
         model = body.get("model", "")
         return f"{model}: Hello, World!"
 ```
 
-### 解释
+### 说明
 
 - **`pipes` 函数**：
   - 返回字典列表。
@@ -125,7 +124,7 @@ class Pipe:
 
 ## 示例：OpenAI 代理管道
 
-让我们深入一个实际示例，我们将创建一个代理请求到 OpenAI API 的管道。这个管道将从 OpenAI 获取可用模型，并允许用户通过 Open WebUI 与它们交互。
+让我们深入研究一个实际示例，我们将创建一个代理请求到 OpenAI API 的管道。这个管道将从 OpenAI 获取可用模型，并允许用户通过 Open WebUI 与它们交互。
 
 ```python
 from pydantic import BaseModel, Field
@@ -135,15 +134,15 @@ class Pipe:
     class Valves(BaseModel):
         NAME_PREFIX: str = Field(
             default="OPENAI/",
-            description="添加在模型名称前的前缀。",
+            description="添加在模型名称前的前缀 / Prefix to be added before model names",
         )
         OPENAI_API_BASE_URL: str = Field(
             default="https://api.openai.com/v1",
-            description="访问 OpenAI API 端点的基础 URL。",
+            description="访问 OpenAI API 端点的基础 URL / Base URL for accessing OpenAI API endpoints",
         )
         OPENAI_API_KEY: str = Field(
             default="",
-            description="用于验证 OpenAI API 请求的 API 密钥。",
+            description="用于验证 OpenAI API 请求的 API 密钥 / API key for authenticating requests to the OpenAI API",
         )
 
     def __init__(self):
@@ -174,7 +173,7 @@ class Pipe:
                 return [
                     {
                         "id": "error",
-                        "name": "获取模型时出错。请检查您的 API 密钥。",
+                        "name": "获取模型时出错。请检查你的 API 密钥。",
                     },
                 ]
         else:
@@ -192,10 +191,10 @@ class Pipe:
             "Content-Type": "application/json",
         }
 
-        # 从模型名称中提取模型 id
+        # 从模型名称中提取模型 ID / Extract model ID from model name
         model_id = body["model"][body["model"].find(".") + 1 :]
 
-        # 更新主体中的模型 id
+        # 在主体中更新模型 ID / Update model ID in the body
         payload = {**body, "model": model_id}
         try:
             r = requests.post(
@@ -215,9 +214,9 @@ class Pipe:
             return f"错误：{e}"
 ```
 
-### 详细分解
+### 详细解析
 
-#### 阀门配置
+#### 阀门配置（Valves Configuration）
 
 - **`NAME_PREFIX`**：
   - 在 Open WebUI 中显示的模型名称前添加前缀。
@@ -227,39 +226,47 @@ class Pipe:
   - 默认值：`"https://api.openai.com/v1"`。
 - **`OPENAI_API_KEY`**：
   - 用于身份验证的 OpenAI API 密钥。
-  - 默认值：`""` (空字符串；必须提供)。
+  - 默认值：`""` （空字符串；必须提供）。
 
 #### `pipes` 函数
 
 - **目的**：获取可用的 OpenAI 模型并使其在 Open WebUI 中可访问。
 
-- **过程**：
-  1. **检查 API 密钥**：确保提供了 API 密钥。
-  2. **获取模型**：向 OpenAI API 发送 GET 请求以检索可用模型。
-  3. **过滤模型**：返回 `id` 中包含 `"gpt"` 的模型。
-  4. **错误处理**：如果出现问题，返回错误消息。
+- **流程**：
+  1. **检查 API 密钥**：确保提供了有效的 API 密钥。
+  2. **获取模型**：向 OpenAI API 发送 GET 请求以获取可用模型列表。
+  3. **过滤模型**：返回 ID 中包含 `"gpt"` 的模型。
+  4. **错误处理**：如果出现问题，返回用户友好的错误消息。
 
-- **返回格式**：每个模型的包含 `id` 和 `name` 的字典列表。
+- **返回格式**：包含每个模型的 `id` 和 `name` 的字典列表。
 
 #### `pipe` 函数
 
 - **目的**：处理对所选 OpenAI 模型的请求并返回响应。
 
 - **参数**：
-  - `body`：包含请求数据。
-  - `__user__`：包含用户信息（在此示例中未使用，但对于身份验证或日志记录很有用）。
+  - `body`：包含请求数据的字典。
+  - `__user__`：包含用户信息的字典（在此示例中未使用，但对身份验证或日志记录很有用）。
+
+- **流程**：
+  1. **准备请求头**：设置包含 API 密钥和内容类型的请求头。
+  2. **提取模型 ID**：从所选模型名称中提取实际的模型 ID。
+  3. **准备负载**：使用正确的模型 ID 更新请求主体。
+  4. **发送 API 请求**：向 OpenAI API 的聊天补全端点发送 POST 请求。
+  5. **处理流式响应**：如果 `stream` 为 `True`，返回行迭代器。
+  6. **错误处理**：捕获异常并返回错误消息。
 
 ### 扩展代理管道
 
-您可以修改此代理管道以支持其他服务提供商，例如 Anthropic、Perplexity 等，通过调整 API 端点、头信息和逻辑来实现。
+你可以通过调整 API 端点、请求头和 `pipes` 与 `pipe` 函数中的逻辑，来修改这个代理管道以支持其他服务提供商，如 Anthropic、Perplexity 等。
 
 ---
 
-## 使用内部 Open WebUI 函数
+## 使用 Open WebUI 内部函数
 
-有时，您可能希望利用内部 Open WebUI 函数来实现您的管道。您可以直接从 `open_webui` 包导入这些函数。请记住，虽然不太可能，但内部函数可能会因优化目的而发生变化，因此始终参考最新文档。
+有时，你可能想在管道中利用 Open WebUI 的内部函数。你可以直接从 `open_webui` 包中导入这些函数。请注意，虽然可能性不大，但内部函数可能会因优化目的而改变，所以请始终参考最新的文档。
 
-以下是如何使用内部 Open WebUI 函数：
+以下是如何使用 Open WebUI 内部函数：
 
 ```python
 from pydantic import BaseModel, Field
@@ -278,116 +285,116 @@ class Pipe:
         __user__: dict,
         __request__: Request,
     ) -> str:
-        # Use the unified endpoint with the updated signature
+        # 使用更新后签名的统一端点 / Use the unified endpoint with the updated signature
         user = Users.get_user_by_id(__user__["id"])
         body["model"] = "llama3.2:latest"
         return await generate_chat_completion(__request__, body, user)
 ```
 
-### 解释
+### 说明
 
 - **导入**：
-  - `Users` 来自 `open_webui.models.users`：获取用户信息。
-  - `generate_chat_completion` 来自 `open_webui.utils.chat`：使用内部逻辑生成聊天完成。
+  - 从 `open_webui.models.users` 导入 `Users`：用于获取用户信息。
+  - 从 `open_webui.utils.chat` 导入 `generate_chat_completion`：用于使用内部逻辑生成聊天补全。
 
 - **异步 `pipe` 函数**：
   - **参数**：
-    - `body`：输入数据用于模型。
+    - `body`：模型的输入数据。
     - `__user__`：包含用户信息的字典。
-    - `__request__`：来自 FastAPI 的请求对象（需要由 `generate_chat_completion` 使用）。
-  - **过程**：
-    1. **获取用户对象**：使用用户 ID 检索用户对象。
+    - `__request__`：来自 FastAPI 的请求对象（`generate_chat_completion` 需要）。
+  - **流程**：
+    1. **获取用户对象**：使用用户 ID 获取用户对象。
     2. **设置模型**：指定要使用的模型。
-    3. **生成完成**：调用 `generate_chat_completion` 来处理输入并生成输出。
+    3. **生成补全**：调用 `generate_chat_completion` 处理输入并生成输出。
 
-### 重要注意事项
+### 重要说明
 
-- **函数签名**：参考最新 Open WebUI 代码库或文档，获取最准确的函数签名和参数。
-- **最佳实践**：始终优雅地处理异常和错误，以确保用户体验流畅。
+- **函数签名**：参考最新的 Open WebUI 代码库或文档以获取最准确的函数签名和参数。
+- **最佳实践**：始终优雅地处理异常和错误，以确保良好的用户体验。
 
 ---
 
-## 常见问题
+## 常见问题解答
 
-### Q1：为什么应该在 Open WebUI 中使用管道？
+### Q1：为什么要在 Open WebUI 中使用管道？
 
-**A**：管道允许您向 Open WebUI 添加新的“模型”，并为其添加自定义逻辑和处理。它是一个灵活的插件系统，让您可以集成外部 API、自定义模型行为并创建创新功能，而无需更改核心代码库。
+**A**：管道允许你向 Open WebUI 添加具有自定义逻辑和处理的新"模型"。它是一个灵活的扩展系统，让你可以集成外部 API、自定义模型行为，并创建创新功能，而无需修改核心代码库。
 
 ---
 
 ### Q2：什么是阀门，为什么它们很重要？
 
-**A**：阀门是您的管道的可配置参数。它们就像设置或控制，决定您的管道如何运行。通过调整阀门，您可以在不修改底层代码的情况下更改管道的运行方式。
+**A**：阀门是管道的可配置参数。它们就像决定管道如何运行的设置或控制。通过调整阀门，你可以在不修改底层代码的情况下改变管道的行为。
 
 ---
 
 ### Q3：我可以创建没有阀门的管道吗？
 
-**A**：是的，如果您不需要任何持久配置选项，您可以创建一个简单的管道，而无需定义阀门类。但是，包括阀门是一个很好的实践，以确保灵活性和未来扩展性。
+**A**：是的，如果你的管道不需要任何持久配置选项，你可以创建一个没有定义 Valves 类的简单管道。但是，包含阀门是为了灵活性和未来可扩展性的良好实践。
 
 ---
 
-### Q4：如何确保在使用 API 密钥时管道安全？
+### Q4：在使用 API 密钥时，如何确保我的管道安全？
 
-**A**：永远不要将敏感信息（如 API 密钥）硬编码到您的管道中。相反，使用阀门输入和存储 API 密钥。确保您的代码适当地处理这些密钥，并避免日志记录或暴露它们。
+**A**：永远不要将 API 密钥等敏感信息硬编码到管道中。相反，使用阀门来安全地输入和存储 API 密钥。确保你的代码适当地处理这些密钥，避免记录或暴露它们。
 
 ---
 
-### Q5：`pipe` 函数和 `pipes` 函数之间有什么区别？
+### Q5：`pipe` 和 `pipes` 函数有什么区别？
 
 **A**：
 
-- **`pipe` 函数**：主要函数，您使用自定义逻辑处理输入数据并生成输出。它处理单个模型的逻辑。
+- **`pipe` 函数**：处理输入数据并生成输出的主要函数。它处理单个模型的逻辑。
 
-- **`pipes` 函数**：允许您的管道代表多个模型，通过返回模型定义列表来实现。每个模型将单独显示在 Open WebUI 中。
-
----
-
-### Q6：如何处理管道中的错误？
-
-**A**：使用 try-except 块来捕获异常。返回有意义的错误消息或优雅地处理错误，以确保用户了解发生了什么。
+- **`pipes` 函数**：通过返回模型定义列表，允许你的管道表示多个模型。每个模型都将在 Open WebUI 中单独显示。
 
 ---
 
-### Q7：我可以使用外部库来实现我的管道吗？
+### Q6：如何在管道中处理错误？
 
-**A**：是的，您可以根据需要导入和使用外部库。确保任何依赖项都在环境中正确安装和管理。
+**A**：在 `pipe` 和 `pipes` 函数中使用 try-except 块来捕获异常。返回有意义的错误消息或优雅地处理错误，以确保用户了解出错的原因。
+
+---
+
+### Q7：我可以在管道中使用外部库吗？
+
+**A**：是的，你可以根据需要导入和使用外部库。确保在你的环境中正确安装和管理任何依赖项。
 
 ---
 
 ### Q8：如何测试我的管道？
 
-**A**：通过在开发环境中运行 Open WebUI 并从界面中选择自定义模型来测试您的管道。验证您的管道在各种输入和配置下是否按预期工作。
+**A**：通过在开发环境中运行 Open WebUI 并从界面中选择你的自定义模型来测试你的管道。验证你的管道在各种输入和配置下的行为是否符合预期。
 
 ---
 
-### Q9：是否有组织管道代码的最佳实践？
+### Q9：组织管道代码有什么最佳实践吗？
 
-**A**：是的，请遵循以下指南：
+**A**：是的，请遵循以下准则：
 
 - 将 `Valves` 放在 `Pipe` 类的顶部。
 - 在 `__init__` 方法中初始化变量，主要是 `self.valves`。
 - 将 `pipe` 函数放在 `__init__` 方法之后。
-- 使用清晰且描述性的变量名称。
-- 为清晰起见评论代码。
+- 使用清晰和描述性的变量名。
+- 为清晰起见注释你的代码。
 
 ---
 
-### Q10：我可以在哪里找到最新的 Open WebUI 文档？
+### Q10：在哪里可以找到最新的 Open WebUI 文档？
 
-**A**：访问官方 Open WebUI 存储库或文档站点，获取最新信息，包括函数签名、示例和迁移指南（如果发生任何更改）。
+**A**：访问 Open WebUI 官方仓库或文档网站，获取最新信息，包括函数签名、示例和如果发生任何更改的迁移指南。
 
 ---
 
 ## 结论
 
-通过以上内容，您应该对如何在 Open WebUI 中创建和使用管道有一个全面的了解。管道提供了一种强大而灵活的方式来扩展和自定义 Open WebUI 的功能，以满足您的特定需求。无论您是集成外部 API、添加新模型还是注入复杂逻辑，管道都能让您实现这一目标。
+到现在，你应该对如何在 Open WebUI 中创建和使用管道有了深入的理解。管道提供了一种强大的方式来扩展和自定义 Open WebUI 的功能，以满足你的特定需求。无论你是集成外部 API、添加新模型，还是注入复杂逻辑，管道都提供了实现这些目标的灵活性。
 
-请记住：
+记住：
 
-- **使用清晰一致的结构**在您的管道类中。
-- **利用阀门**进行可配置选项。
-- **优雅地处理错误**以提高用户体验。
-- **咨询最新文档**以获取任何更新或更改。
+- **使用清晰一致的结构**编写你的管道类。
+- **利用阀门**进行配置选项。
+- **优雅地处理错误**以改善用户体验。
+- **查阅最新文档**了解任何更新或变更。
 
-祝您编码愉快，并享受使用管道扩展您的 Open WebUI！
+祝你编码愉快，享受使用管道扩展你的 Open WebUI！

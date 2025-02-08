@@ -1,71 +1,71 @@
 ---
 sidebar_position: 0
-title: "🚧 服务器连接问题解决指南"
+title: "🚧 服务器连接问题"
 ---
 
-我们将帮助你解决各种连接问题，确保系统正常运行。以下是针对不同场景的详细解决方案，包括Ollama本地服务器和Hugging Face等外部服务器的常见连接问题。
+我们将帮助你完成所有设置并确保系统正常运行。下面是针对不同场景的分步指南，用于解决与 Ollama 和 Hugging Face 等外部服务器的常见连接问题。
 
-## 🌟 Ollama服务器连接问题
+## 🌟 连接到 Ollama 服务器
 
-### 🚀 Open WebUI无法连接到Ollama
+### 🚀 从 Open WebUI 访问 Ollama
 
-如果你发现Open WebUI无法连接到Ollama，很可能是因为Ollama没有监听允许外部连接的网络接口。让我们按步骤解决这个问题：
+无法从 Open WebUI 连接到 Ollama？这可能是因为 Ollama 未监听允许外部连接的网络接口。让我们按以下步骤解决：
 
-1. **配置Ollama网络监听** 🎧：
-   将`OLLAMA_HOST`设置为`0.0.0.0`，让Ollama监听所有网络接口。
+1. **配置 Ollama 网络监听** 🎧：
+   将 `OLLAMA_HOST` 设置为 `0.0.0.0`，使 Ollama 监听所有可用的网络接口。
 
-2. **检查环境变量**：
-   确保在你的部署环境中正确配置了`OLLAMA_HOST`变量。
+2. **更新环境变量**：
+   确保在部署环境中正确配置了 `OLLAMA_HOST` 变量。
 
-3. **重启Ollama服务**🔄：
-   配置修改后需要重启服务才能生效。
+3. **重启 Ollama 服务**🔄：
+   配置更改后需要重启服务才能生效。
 
-💡 完成设置后，请通过访问WebUI界面验证Ollama是否已经可以正常连接。
+💡 完成设置后，请访问 WebUI 界面验证 Ollama 是否可以正常连接。
 
-更多关于Ollama配置的详细信息，请参考[Ollama官方文档](https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux)。
+如需了解更多 Ollama 配置详情，请参阅 [Ollama 官方文档](https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux)。
 
-### 🐳 Docker环境连接错误
+### 🐳 Docker 连接错误
 
-如果在Docker环境中无法访问Ollama，可能是因为WebUI容器无法与主机上的Ollama服务器通信。解决方案如下：
+如果在访问 Ollama 时遇到连接错误，可能是因为 WebUI Docker 容器无法与主机上运行的 Ollama 服务器建立通信。解决方法如下：
 
-1. **修改网络配置** 🛠️：
-   在Docker运行命令中添加`--network=host`参数，这样容器就能直接使用主机的网络。
+1. **调整网络配置** 🛠️：
+   在 Docker 运行命令中添加 `--network=host` 参数，这将允许容器直接使用主机网络。
 
-2. **注意端口变化**：
-   使用host网络模式时，内部服务端口会从3000变为8080。
+2. **端口变更说明**：
+   注意内部服务端口会从 3000 变更为 8080。
 
-**Docker运行命令示例**：
+**Docker 运行命令示例**：
 ```bash
 docker run -d --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
-🔗 执行上述命令后，你可以通过`http://localhost:8080`访问WebUI。
+🔗 执行上述命令后，你可以通过 `http://localhost:8080` 访问 WebUI。
 
-## 🔒 Hugging Face的SSL连接问题
+## 🔒 Hugging Face SSL 连接问题
 
-遇到SSL证书错误？这可能与Hugging Face服务器有关。解决步骤如下：
+遇到 SSL 错误？这可能与 Hugging Face 服务器有关。解决步骤如下：
 
-1. **检查服务状态**：
-   首先确认Hugging Face服务器是否存在已知问题或维护。
+1. **检查 Hugging Face 服务状态**：
+   首先确认是否存在已知的服务中断或系统问题。
 
-2. **更换访问节点**：
-   如果官方服务器无法访问，可以在Docker命令中切换到镜像节点。
+2. **更换服务端点**：
+   如果 Hugging Face 服务不可用，可以在 Docker 命令中更换连接端点。
 
-**解决连接问题的Docker命令示例**：
+**处理连接问题的 Docker 命令示例**：
 ```bash
 docker run -d -p 3000:8080 -e HF_ENDPOINT=https://hf-mirror.com/ --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-## 🍏 MacOS系统上的Podman配置
+## 🍏 MacOS 系统上的 Podman 配置
 
-如果你在MacOS上使用Podman，需要特别注意以下配置：
+在 MacOS 上使用 Podman？请按以下步骤确保连接正常：
 
-1. **启用主机网络回环**：
-   运行命令时添加`--network slirp4netns:allow_host_loopback=true`参数。
+1. **启用主机回环（Host Loopback）**：
+   在运行命令中添加 `--network slirp4netns:allow_host_loopback=true` 参数。
 
-2. **配置Ollama访问地址**：
-   将`OLLAMA_BASE_URL`设置为`http://host.containers.internal:11434`。
+2. **配置 OLLAMA_BASE_URL**：
+   将地址设置为 `http://host.containers.internal:11434`。
 
-**Podman运行命令示例**：
+**Podman 运行命令示例**：
 ```bash
 podman run -d --network slirp4netns:allow_host_loopback=true -p 3000:8080 -e OLLAMA_BASE_URL=http://host.containers.internal:11434 -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```

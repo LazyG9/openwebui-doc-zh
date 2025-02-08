@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: "⏱️ 快速开始指南"
+title: "⏱️ 快速上手"
 ---
 
 import Tabs from '@theme/Tabs';
@@ -21,140 +21,140 @@ import PythonUpdating from './tab-python/PythonUpdating.md';
 
 <TopBanners />
 
-:::info **关于用户角色和隐私的重要说明：**
+:::info **关于用户角色和隐私的重要提示：**
 
-- **管理员创建：** 在 Open WebUI 上创建的第一个账户将获得**管理员特权**，可以控制用户管理和系统设置。
-- **用户注册：** 后续注册的用户初始状态为**待审核**状态，需要等待管理员审核通过后才能正常访问系统。
-- **隐私和数据安全：** **所有数据**，包括登录信息，都**完全存储**在您的本地设备上。Open WebUI 确保**严格的数据保密性**，不会发送任何外部请求，全面保障您的隐私和安全。
-- **所有模型默认均为私有。** 只有通过群组共享或手动设置为公开的模型才能被其他人访问。若模型被分配给特定群组，则仅该群组成员可见。若模型被设置为公开，则该实例中的所有用户都可以访问。
+- **管理员创建：** Open WebUI 上创建的第一个账户将获得**管理员权限**，可以控制用户管理和系统设置。
+- **用户注册：** 后续注册的用户初始状态为**待批准**，需要管理员批准才能访问。
+- **隐私和数据安全：** **所有数据**（包括登录信息）都**本地保存**在您的设备上。Open WebUI 确保**严格的保密性**，**不会发送外部请求**，以增强隐私和安全性。
+  - **所有模型默认为私有。** 模型必须通过群组共享或设为公开才能被访问。如果模型被分配给某个群组，只有该群组的成员才能看到它。如果模型设为公开，实例中的任何人都可以看到它。
 
 :::
 
-请根据您的需求选择以下安装方式：
+在下方选择您的首选安装方式：
 
-- **Docker：** **官方推荐的安装方式，适合绝大多数用户**
-- **Python：** 适合资源受限的环境或希望手动配置的用户
-- **Kubernetes：** 适合需要大规模部署和容器编排的企业级用户
+- **Docker：** **官方支持并推荐大多数用户使用**
+- **Python：** 适用于低资源环境或想要手动设置的用户
+- **Kubernetes：** 适用于需要扩展和编排的企业部署
 
 
 <Tabs>
-    <TabItem value="docker" label="Docker">
-        <Tabs>
-            <TabItem value="docker" label="Docker">
-                <div className='mt-5'>
-                    <ManualDocker />
-                    <DockerUpdating />
-                </div>
-            </TabItem>
+  <TabItem value="docker" label="Docker">
+    <Tabs>
+      <TabItem value="docker" label="Docker">
+        <div className='mt-5'>
+          <ManualDocker />
+          <DockerUpdating />
+        </div>
+      </TabItem>
 
-            <TabItem value="compose" label="Docker Compose">
-                <div className='mt-5'>
-                    <DockerCompose />
-                </div>
-            </TabItem>
+      <TabItem value="compose" label="Docker Compose">
+        <div className='mt-5'>
+          <DockerCompose />
+        </div>
+      </TabItem>
 
-            <TabItem value="podman" label="Podman">
-                <div className='mt-5'>
-                    <Podman />
-                </div>
-            </TabItem>
+      <TabItem value="podman" label="Podman">
+        <div className='mt-5'>
+          <Podman />
+        </div>
+      </TabItem>
 
-            <TabItem value="swarm" label="Docker Swarm">
-                <div className='mt-5'>
-                    <DockerSwarm />
-                </div>
-            </TabItem>
-        </Tabs>
+      <TabItem value="swarm" label="Docker Swarm">
+        <div className='mt-5'>
+          <DockerSwarm />
+        </div>
+      </TabItem>
+    </Tabs>
 
-    </TabItem>
-    <TabItem value="python" label="Python">
-        <Tabs>
-            <TabItem value="uv" label="uv">
-                <div className='mt-5'>
-                    <Uv />
-                </div>
-                <PythonUpdating />
-            </TabItem>
-
-
-            <TabItem value="conda" label="Conda">
-                <div className='mt-5'>
-                    <Conda />
-                </div>
-                <PythonUpdating />
-            </TabItem>
-
-            <TabItem value="venv" label="Venv">
-                <div className='mt-5'>
-                    <Venv />
-                </div>
-                <PythonUpdating />
-
-            </TabItem>
+  </TabItem>
+  <TabItem value="python" label="Python">
+    <Tabs>
+      <TabItem value="uv" label="uv">
+        <div className='mt-5'>
+          <Uv />
+        </div>
+        <PythonUpdating />
+      </TabItem>
 
 
-            <TabItem value="development" label="Development">
-                <div className='mt-5'>
-                    <h3>Development Setup</h3>
-                    <p>
-                        For developers who want to contribute, check the Development Guide in <a href="/getting-started/advanced-topics">Advanced Topics</a>.
-                    </p>
-                </div>
-            </TabItem>
+      <TabItem value="conda" label="Conda">
+        <div className='mt-5'>
+          <Conda />
+        </div>
+        <PythonUpdating />
+      </TabItem>
+
+      <TabItem value="venv" label="Venv">
+        <div className='mt-5'>
+          <Venv />
+        </div>
+        <PythonUpdating />
+
+      </TabItem>
 
 
-        </Tabs>
-    </TabItem>
-
-    <TabItem value="kubernetes" label="Kubernetes">
-        <Tabs>
-            <TabItem value="helm" label="Helm">
-                <Helm />
-            </TabItem>
-
-            <TabItem value="kustomize" label="Kustomize">
-                <Kustomize />
-            </TabItem>
-        </Tabs>
-    </TabItem>
+      <TabItem value="development" label="Development">
+        <div className='mt-5'>
+          <h3>开发环境配置</h3>
+          <p>
+            对于想要贡献代码的开发者，请查看<a href="/getting-started/advanced-topics">进阶主题</a>中的开发指南。
+          </p>
+        </div>
+      </TabItem>
 
 
-    <TabItem value="third-party" label="Third Party">
-        <Tabs>
-            <TabItem value="pinokio-computer" label="Pinokio.computer">
-                ### Pinokio.computer Installation
+    </Tabs>
+  </TabItem>
 
-                For installation via Pinokio.computer, please visit their website:
+  <TabItem value="kubernetes" label="Kubernetes">
+    <Tabs>
+      <TabItem value="helm" label="Helm">
+        <Helm />
+      </TabItem>
 
-                [https://pinokio.computer/](https://pinokio.computer/)
+      <TabItem value="kustomize" label="Kustomize">
+        <Kustomize />
+      </TabItem>
+    </Tabs>
+  </TabItem>
 
-                Support for this installation method is provided through their website.
-            </TabItem>
-        </Tabs>
 
-        ### Additional Third-Party Integrations
+  <TabItem value="third-party" label="Third Party">
+    <Tabs>
+      <TabItem value="pinokio-computer" label="Pinokio.computer">
+        ### Pinokio.computer 安装
 
-        *(Add information about third-party integrations as they become available.)*
-    </TabItem>
+        通过 Pinokio.computer 安装，请访问他们的网站：
+
+        [https://pinokio.computer/](https://pinokio.computer/)
+
+        此安装方式的支持通过他们的网站提供。
+      </TabItem>
+    </Tabs>
+
+    ### 其他第三方集成
+
+    *（随着第三方集成的可用性增加而添加相关信息。）*
+  </TabItem>
 </Tabs>
 
-## 下一步
+## 后续步骤
 
-安装完成后，您可以通过以下地址访问：
+安装完成后，访问：
 
-- [http://localhost:3000](http://localhost:3000) 访问 OpenWebUI
-- 如果您使用 Python 部署，请访问 [http://localhost:8080/](http://localhost:8080/)
+- [http://localhost:3000](http://localhost:3000) 访问 Open WebUI。
+- 或在使用 Python 部署时访问 [http://localhost:8080/](http://localhost:8080/)。
 
-现在您已经可以开始使用 OpenWebUI 了！
+现在您可以开始使用 Open WebUI 了！
 
-## 配合 Ollama 使用 OpenWebUI
-如果您计划将 OpenWebUI 与 Ollama 搭配使用，建议您查看我们的 [Ollama 使用指南](/getting-started/quick-start/starting-with-ollama)，了解如何通过 Open WebUI 高效管理您的 Ollama 实例。
+## 将 Open WebUI 与 Ollama 一起使用
+如果您正在将 Open WebUI 与 Ollama 一起使用，请务必查看我们的 [Ollama 入门指南](/getting-started/quick-start/starting-with-ollama)，了解如何使用 Open WebUI 管理您的 Ollama 实例。
 
 ## 加入我们的社区
 
-遇到问题或需要帮助？欢迎加入我们友好的社区：
+需要帮助？有问题？加入我们的社区：
 
-- [Open WebUI Discord 社区](https://discord.gg/5rJgQTnV4s)
-- [GitHub 问题反馈](https://github.com/open-webui/open-webui/issues)
+- [Open WebUI Discord](https://discord.gg/5rJgQTnV4s)
+- [GitHub Issues](https://github.com/open-webui/open-webui/issues)
 
-在这里，您可以第一时间了解最新功能、获取使用技巧和重要公告！
+获取最新功能、故障排除提示和公告！
