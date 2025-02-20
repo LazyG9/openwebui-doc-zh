@@ -25,7 +25,11 @@ import { SponsorList } from "@site/src/components/SponsorList";
 
 ![Open WebUI 演示](/images/demo.gif)
 
-## Docker 快速上手指南 🐳
+:::tip
+**想了解[企业版方案](https://docs.openwebui.com/enterprise)？** – **[即刻咨询我们的销售团队！](mailto:sales@openwebui.com)**
+
+获取**增强型功能特性**，包括**自定义主题与品牌定制**、**服务级别协议（SLA）支持**、**长期支持版本（LTS）**以及**更多特性**！
+:::
 
 **如果您的电脑上已安装 Ollama**，请运行以下命令：
 
@@ -44,17 +48,17 @@ docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gatew
 这种安装方式将 Open WebUI 和 Ollama 打包在同一个容器镜像中，只需一条命令即可完成部署。请根据您的硬件配置选择合适的命令：
 
 - **GPU 版本**：
-  如果您想使用 GPU 加速，请运行：
+如果您想使用 GPU 加速，请运行：
 
-  ```bash
-  docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
+```bash
+docker run -d -p 3000:8080 --gpus=all -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
 - **CPU 版本**：
-  如果您的设备没有 GPU，请运行：
+如果您的设备没有 GPU，请运行：
 
-  ```bash
-  docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
+```bash
+docker run -d -p 3000:8080 -v ollama:/root/.ollama -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:ollama
   ```
 
 这两个命令都会自动完成 Open WebUI 和 Ollama 的安装，让您可以快速开始使用。
@@ -104,13 +108,13 @@ Open WebUI 提供两种主要的安装方式：使用 `uv` 运行时管理器或
 根据您的操作系统选择对应的安装命令：
 
 - **macOS/Linux**：
-  ```bash
-  curl -LsSf https://astral.sh/uv/install.sh | sh
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
 
 - **Windows**：
-  ```powershell
-  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
   ```
 
 #### 2. 运行 Open WebUI
@@ -118,15 +122,16 @@ Open WebUI 提供两种主要的安装方式：使用 `uv` 运行时管理器或
 安装完 `uv` 后，启动 Open WebUI 非常简单。请使用以下命令，注意设置 `DATA_DIR` 环境变量以保护您的数据：
 
 - **macOS/Linux**：
-  ```bash
-  DATA_DIR=~/.open-webui uvx --python 3.11 open-webui@latest serve
+```bash
+DATA_DIR=~/.open-webui uvx --python 3.11 open-webui@latest serve
   ```
 
 - **Windows**：
-  ```powershell
-  $env:DATA_DIR="C:\open-webui\data"; uvx --python 3.11 open-webui@latest serve
+```powershell
+$env:DATA_DIR="C:\open-webui\data"; uvx --python 3.11 open-webui@latest serve
   ```
 
+## Docker 快速上手指南 🐳
 ### 使用 `pip` 安装
 
 如果您选择使用 Python 的 `pip` 包管理器安装 Open WebUI，**我们强烈建议您使用 `uv` 或 `conda` 等 Python 环境管理工具**，这样可以更好地管理依赖并避免冲突。
@@ -135,16 +140,16 @@ Open WebUI 提供两种主要的安装方式：使用 `uv` 运行时管理器或
 
 1. **安装步骤**：
 
-   打开终端，运行：
-   ```bash
-   pip install open-webui
+打开终端，运行：
+```bash
+pip install open-webui
    ```
 
 2. **启动服务**：
 
-   安装完成后，执行：
-   ```bash
-   open-webui serve
+安装完成后，执行：
+```bash
+open-webui serve
    ```
 
 ### 版本更新

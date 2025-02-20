@@ -1,5 +1,5 @@
 ---
-sidebar_position: 310 
+sidebar_position: 310
 title: "📦 导出和导入数据库"
 ---
 
@@ -13,13 +13,13 @@ title: "📦 导出和导入数据库"
 
 从当前 Open WebUI 实例导出数据库的步骤：
 
-1. **使用 `docker cp` 复制数据库文件**：  
+1. **使用 `docker cp` 复制数据库文件**：
    `webui.db` 文件存储在容器的 `/app/backend/data` 目录中。使用以下命令将其复制到本地计算机：
    ```bash
    docker cp open-webui:/app/backend/data/webui.db ./webui.db
    ```
 
-2. **将导出文件传输至新服务器**：  
+2. **将导出文件传输至新服务器**：
    您可以使用 **FileZilla** 或其他文件传输工具将 `webui.db` 文件传输到新服务器。
 
    :::info
@@ -32,19 +32,19 @@ title: "📦 导出和导入数据库"
 
 将 `webui.db` 文件传输到新服务器后，请执行以下步骤：
 
-1. **在新服务器上部署 Open WebUI**：  
+1. **在新服务器上部署 Open WebUI**：
    按照[🚀 入门指南](/getting-started)的说明，使用 Docker 容器部署并启动 Open WebUI。启动完成后，在执行导入操作前先停止容器：
    ```bash
    docker stop open-webui
    ```
 
-2. **使用 `docker cp` 将数据库文件导入容器**：  
+2. **使用 `docker cp` 将数据库文件导入容器**：
    假设导出的 `webui.db` 文件在当前目录，执行以下命令将其复制到容器中：
    ```bash
    docker cp ./webui.db open-webui:/app/backend/data/webui.db
    ```
 
-3. **重启 Open WebUI 容器**：  
+3. **重启 Open WebUI 容器**：
    启动容器以使用新导入的数据库：
    ```bash
    docker start open-webui
